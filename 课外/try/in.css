@@ -129,3 +129,95 @@ nav ul.navigation-menu li:hover ul li:nth-child(3) {
         opacity: 1;
     }
 }
+
+
+
+element.style {}
+
+@media (max-width: 640px) {
+    .baner {
+        padding: 2em 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .baner {
+        padding: 3em 0;
+    }
+}
+
+@media (max-width: 991px) {
+    .baner {
+        padding: 3em 0 4em;
+    }
+}
+
+@media (max-width: 1080px) {
+    .baner {
+        padding: 3em 0 6em;
+    }
+}
+
+/* @media (max-width: 640px) .baner {
+    padding: 3em 0;
+} */
+/* 
+@media (max-width: 991px) .baner {
+    padding: 3em 0 4em;
+} */
+/* 
+@media (max-width: 1080px) .baner {
+    padding: 3em 0 6em;
+} */
+
+.baner {
+    padding: 3em 0 8em;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+用户代理样式表 div {
+    display: block;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto-Regular';
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+
+html {
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}

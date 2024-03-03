@@ -1,0 +1,155 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+a {
+  color: #3285ff;
+  font-size: 18px;
+  margin-top: 20px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.deploy {
+  background-color: #9c32ff;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.connect {
+  background-color: #fff;
+  width: 140px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #3285ff;
+}
+
+.display {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.index {
+  width: 17.5%;
+  margin-right: 2.5%;
+  border-right: solid;
+  display: flex;
+  flex-direction: column;
+}
+
+.information {
+  width: 75%;
+  height: 70vh;
+  margin-left: 2.5%;
+}
+
+.data {
+  background-color: #ffffff;
+  height: 30%;
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.dataCard {
+  width: 28%;
+  height: 95%;
+  padding-left: 20px;
+  border-style: solid;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #dddddd;
+}
+
+.dataLabel {
+  color: #3285ff;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.dataNumber {
+  margin-top: 50px;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.love {
+  color: red;
+  font-size: 18px;
+}
+
+.formCard{
+  background-color: #ffffff;
+  height: 40%;
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 16px;
+  font-weight: 600;
+}
+form{
+  width: 100%;
+}
+.inputCard{
+  width: 100%;
+  display:flex;
+  flex-direction: row;
+}
+.inputLabel{
+  width: 10%;
+  font-size: 20px;
+  margin-right: 5%;
+}
+input{
+  width: 80%;
+  height: 30px;
+  margin-top: 15px;
+  border-radius: 10px;
+  border-style: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-color: #3285ff;
+  border-style: solid;
+}
+.deployButton{
+  margin-top: 20px;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  height: 40px;
+  color: #fff;
+  background-color: #3285ff;
+  border-color: #3285ff;
+  border-radius: 20px;
+  margin: none;
+}

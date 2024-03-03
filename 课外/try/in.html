@@ -2,39 +2,77 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>只是菜单</title>
-    <link href="in.css" rel="stylesheet" type="text/css">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var bnm = document.getElementById("bnm");
+            bnm.onclick = function () {
+                // alert("hh");
+                // document在页面查询
+                var mz = document.getElementById("mz");
+                alert(mz.innerHTML);
+            }
+            $('#jhg').click(function () {
+                var uname = $('#pok').val();
+                var unima = $('#pol').val();
+                $.ajax({
+                    type: 'post',
+                    url: '',
+                    data: {
+                        pok: uname,
+                        pol: unima,
+
+                    },
+                    success: function (res) {
+                        console.log(res);
+
+                    }
+                })
+
+            })
+        }
+    </script>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul class="navigation-menu">
-                <li>
-                    <a href="#">首页</a>
-                </li>
-                <li>
-                    <a href="#">产品分类</a>
-                </li>
 
-                <li><a href="#">狗用品</a>
-                    <!-- 二级菜单 -->
-                    <ul class="menu-1">
-                        <li>
-                            <a href="#">首页</a>
-                        </li>
-                        <li>
-                            <a href="#">产品分类</a>
-                        </li>
-                    </ul>
-                </li>
+    <fo>
+        <table border="2">
+            <tr>
+                <td>名字</td><input type="text" name="pnumber">
+                <td>性别</td>
+                <td>年龄</td>
+            </tr>
+            <tr>
+                <td>小猫</td>
+                <td>男</td>
+                <td>233</td>
+            </tr>
+        </table>
 
-            </ul>
-        </nav>
-    </header>
+    </fo rm>
+    <table border="2">
+        <tr>
+            <td id="mz">名字</td>
+            <td>性别</td>
+            <td>年龄</td>
+        </tr>
+        <tr>
+            <td>小猫</td>
+            <td>男</td>
+            <td>233</td>
+        </tr>
+    </table>
+    <form action="http://192.168.31.179:3004/one" method="post">
+        手机号：<input type="text" name="pnumber" id="pok"><br>
+        密码框：<input type="text" name="password" id="pol"><br>
+        <input type="submit" id="jhg" value="登录">
+
+    </form>
+    <button id="bnm">按钮</button>
+
 </body>
 
 </html>

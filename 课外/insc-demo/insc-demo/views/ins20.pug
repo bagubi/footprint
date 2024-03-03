@@ -1,0 +1,125 @@
+doctype html  
+html  
+    head  
+        title insctraders
+        link(rel='stylesheet', href='/stylesheets/index.css')
+        link(rel='stylesheet', href='/stylesheets/ins20.css')
+        script(src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js")
+        script(src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js")
+        script(src="/javascripts/abi.js")  
+    body  
+    div.header
+        h1 insctraders
+        div.connect(onclick="ConnectWallet()")#Address Connect Wallet
+    div.display
+        div.index
+            a(href="/") Overview 
+            a(href="/ins20") INS20
+        div.information
+            div.head
+                h2 INS20
+            table.ins20
+                thead
+                    tr.ins20TR
+                        td.ins20TD Name 
+                        td.ins20TD Total Supply
+                        td.ins20TD Single Limits
+                        td.ins20TD Remind Amount
+                        td.ins20TD Action
+                tbody 
+                    each ins20 in ins20s 
+                        tr.ins20TR 
+                            td.ins20TD=ins20.tick_name
+                            td.ins20TD=ins20.total_supply
+                            td.ins20TD=ins20.single_limits
+                            td.ins20TD=ins20.remind_amount
+                            td.ins20TD.mint(onclick="Mint()" id=ins20.id) Mint
+    script. 
+        let accounts = [];
+        const sdk = new MetaMaskSDK.MetaMaskSDK({
+        dappMetadata: {
+            name: "Pure JS example",
+            url: window.location.host,
+        },
+        logging: {
+                sdk: false,
+            }
+        });
+        
+        //-- 实例化Web3
+        web3 = new Web3(web3.currentProvider);
+        const contract = new web3.eth.Contract(abi, '0xbbaeC697BdB118245a96d30c1aC7eD5cFE099E61');
+
+        //-- 连接钱包
+        async function ConnectWallet() {
+            accounts = await ethereum
+                .request({
+                    method: 'eth_requestAccounts',
+                    params: [],
+                })
+            document.getElementById("Address").innerHTML = accounts[0].substring(0,6)+"..."+accounts[0].substring(36,42);
+            //-- 传递accounts给后端并写入数据库，标记用户数量的增加
+            fetch('/api/accounts', {  
+                method: 'POST',  
+                headers: {  
+                    'Content-Type': 'application/x-www-form-urlencoded'  
+                },  
+                body: 'accounts=' + encodeURIComponent(accounts[0])  
+            })  
+            .then(response => response.json())  
+            .then(data => {  
+                console.log(data);   
+            })  
+            .catch((error) => {  
+                console.error('Error:', error);  
+            });
+        }
+        var serverData = !{JSON.stringify(ins20s)};
+        //-- 铸造铭文
+        async function Mint(){
+            if(accounts.length == 0){
+                alert("Please Connect Your MetaMask");
+            }else{
+                var index = event.target.id-4;
+                var res = await insc_mint(index);
+
+                var data = {
+                    index: index+4,
+                    single_limits: serverData[index].single_limits
+                }   
+                //- // 使用fetch API发送POST请求  
+                fetch('/api/mint', {  
+                    method: 'POST',  
+                    headers: {  
+                        'Content-Type': 'application/x-www-form-urlencoded'  
+                    },  
+                    body: 'data=' + encodeURIComponent(data)  
+                })  
+                .then(response => response.json())  
+                .then(data => {  
+                    console.log(data);    
+                })  
+                .catch((error) => {  
+                    console.error('Error:', error);  
+                });
+                alert("Inscription mint successful, the txhash is: " + res);
+            }
+        }
+        
+        //-- 调用交易的同步函数
+        async function insc_mint(index){
+            console.log(serverData[index].tick_name);
+            const data = contract.methods.mint(serverData[index].tick_name).encodeABI();
+            res = await ethereum.request({
+                method: 'eth_sendTransaction',
+                params: [
+                    {
+                        from: accounts[0],
+                        to: '0xbbaeC697BdB118245a96d30c1aC7eD5cFE099E61',
+                        value: '0x0',
+                        data: data
+                    }
+                ]
+            })
+            return res;
+        }
