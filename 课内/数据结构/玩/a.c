@@ -1,26 +1,22 @@
 #include <stdio.h>
-#include <string.h>
-struct a
-{
-    /* data */
-    int bookNumber;
-    int stock;
-    float price;
-    int priority;
-};
-main()
 
+int main()
 {
-    void changeStock(struct BookInfo oneBook, int stk)
+    /* 局部变量定义 */
+    int a = 100;
+
+    /* 检查布尔条件 */
+    if (a < 20)
     {
-        oneBook.stock = stk;
+        /* 如果条件为真，则输出下面的语句 */
+        printf("a 小于 20\n");
     }
-    void changePrice(struct BookInfo oneBook, int price)
+    else
     {
-        oneBook.price = price;
+        /* 如果条件为假，则输出下面的语句 */
+        printf("a 大于 20\n");
     }
-    void changeStock(struct BookInfo oneBook, int priority)
-    {
-        oneBook.priority = priority;
-    }
+    printf("a 的值是 %d\n", a);
+
+    return 0;
 }
