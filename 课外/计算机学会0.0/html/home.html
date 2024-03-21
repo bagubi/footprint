@@ -12,13 +12,98 @@
     <link rel="shortcut icon" href="ico地址" type="image/x-icon">
 
     <!-- css -->
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="..\CSS\home.css">
     <!-- js -->
-    <script src=""></script>
+    <script src="..\JS\home.js"></script>
 </head>
 
 <body>
+    <!-- 导航栏 -->
+    <header>
+        <h1>信息工程学院计算机学会</h1>
+        <nav>
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#about">学会介绍</a></li>
+                <li><a href="#events">活动资讯</a></li>
+                <li><a href="#members">成员风采</a></li>
+                <li><a href="#join">加入我们</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- 轮播图 -->
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="image1.jpg" style="width:100%">
+        </div>
 
+        <div class="mySlides fade">
+            <img src="image2.jpg" style="width:100%">
+        </div>
+        <div class="mySlides fade">
+            <img src="image3.jpg" style="width:100%">
+        </div>
+        <!-- 添加更多图片 -->
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <!-- 根据图片数量添加更多点 -->
+    </div>
+
+    <script src="script.js"></script>
+
+    <section id="about">
+        <h2>学会介绍</h2>
+        <p>这里是学会的简介...</p>
+    </section>
+
+    <section id="events">
+        <h2>活动资讯</h2>
+        <ul>
+            <li>
+                <h3>活动名称</h3>
+                <p>活动时间：XXXX年XX月XX日</p>
+                <p>活动内容：...</p>
+                <button onclick="registerEvent()">报名参加</button>
+            </li>
+            <!-- 更多活动项 -->
+        </ul>
+    </section>
+
+    <section id="members">
+        <h2>成员风采</h2>
+        <ul>
+            <li>
+                <img src="member1.jpg" alt="成员1">
+                <h3>成员姓名</h3>
+                <p>成员简介...</p>
+            </li>
+            <!-- 更多成员项 -->
+        </ul>
+    </section>
+
+    <section id="join">
+        <h2>加入我们</h2>
+        <p>欢迎加入我们的社团...</p>
+        <button onclick="joinClub()">申请入会</button>
+    </section>
+
+    <section id="contact">
+        <h2>联系我们</h2>
+        <p>联系电话：XXX-XXXX-XXXX</p>
+        <p>邮箱地址：example@email.com</p>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
