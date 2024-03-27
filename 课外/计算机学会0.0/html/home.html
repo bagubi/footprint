@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="..\CSS\home.css">
     <!-- js -->
     <script src="..\JS\home.js"></script>
+    <script src="..\JS\script.js"></script>
 </head>
 
 <body>
@@ -25,6 +26,7 @@
             <ul>
                 <li><a href="#">首页</a></li>
                 <li><a href="#about">学会介绍</a></li>
+                <li><a href="#news">新闻动态</a></li>
                 <li><a href="#events">活动资讯</a></li>
                 <li><a href="#members">成员风采</a></li>
                 <li><a href="#join">加入我们</a></li>
@@ -33,37 +35,37 @@
         </nav>
     </header>
     <!-- 轮播图 -->
+
     <div class="slideshow-container">
-        <div class="mySlides fade">
-            <img src="image1.jpg" style="width:100%">
+        <div class="slide" style="background-image: url('../images/图片1.png');"></div>
+        <div class="slide" style="background-image: url('../images/图片2.png');"></div>
+        <div class="slide" style="background-image: url('../images/4564.png');"></div>
+        <!-- 导航点 -->
+        <div class="slideshow-navigation">
+            <button class="slideshow-nav-button" data-slide="0">1</button>
+            <button class="slideshow-nav-button" data-slide="1">2</button>
+            <button class="slideshow-nav-button" data-slide="2">3</button>
         </div>
-
-        <div class="mySlides fade">
-            <img src="image2.jpg" style="width:100%">
-        </div>
-        <div class="mySlides fade">
-            <img src="image3.jpg" style="width:100%">
-        </div>
-        <!-- 添加更多图片 -->
-
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
 
-    <br>
-
-    <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <!-- 根据图片数量添加更多点 -->
-    </div>
-
-    <script src="script.js"></script>
-
-    <section id="about">
-        <h2>学会介绍</h2>
-        <p>这里是学会的简介...</p>
+    <!-- 新闻栏 -->
+    <section class="news-section" id="news">
+        <h1>最新新闻</h1>
+        <div class="news-container">
+            <article class="news-item">
+                <img src="news-image-1.jpg" alt="新闻图片 1" class="news-image">
+                <h2 class="news-title">新闻标题 1</h2>
+                <p class="news-summary">新闻摘要或简短描述...</p>
+                <a href="news-article-1.html" class="news-link">阅读更多</a>
+            </article>
+            <article class="news-item">
+                <img src="news-image-2.jpg" alt="新闻图片 2" class="news-image">
+                <h2 class="news-title">新闻标题 2</h2>
+                <p class="news-summary">新闻摘要或简短描述...</p>
+                <a href="javascript:alert('你学啥专业来着？')" class="news-link">阅读更多</a>
+            </article>
+            <!-- 添加更多新闻条目 -->
+        </div>
     </section>
 
     <section id="events">
@@ -81,29 +83,50 @@
 
     <section id="members">
         <h2>成员风采</h2>
-        <ul>
-            <li>
-                <img src="member1.jpg" alt="成员1">
-                <h3>成员姓名</h3>
-                <p>成员简介...</p>
-            </li>
-            <!-- 更多成员项 -->
-        </ul>
+        <div class="team-members">
+            <div class="member">
+                <img src="member1.jpg" alt="成员1照片">
+                <h3>成员1</h3>
+                <p>成员1的职位和简介</p>
+            </div>
+
+            <div class="member">
+                <img src="member2.jpg" alt="成员2照片">
+                <h3>成员2</h3>
+                <p>成员2的职位和简介</p>
+            </div>
+
+            <div class="member">
+                <img src="member3.jpg" alt="成员3照片">
+                <h3>成员3</h3>
+                <p>成员3的职位和简介</p>
+            </div>
+
+            <!-- 可以继续添加更多成员 -->
+        </div>
     </section>
 
     <section id="join">
         <h2>加入我们</h2>
-        <p>欢迎加入我们的社团...</p>
+        <p>欢迎加入我们的学会...</p>
         <button onclick="joinClub()">申请入会</button>
+    </section>
+    <!-- 空间 -->
+    <section id="space">
+        <div>
+
+        </div>
     </section>
 
     <section id="contact">
         <h2>联系我们</h2>
-        <p>联系电话：XXX-XXXX-XXXX</p>
-        <p>邮箱地址：example@email.com</p>
+        <div class="contact-info">
+            <p class="phone-number">联系电话：XXX-XXXX-XXXX</p>
+            <p class="email-address">邮箱地址：example@email.com</p>
+        </div>
     </section>
 
-    <script src="script.js"></script>
+
 </body>
 
 </html>
