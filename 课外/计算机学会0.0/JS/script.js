@@ -41,4 +41,4 @@ slideButtons.forEach(button => {
 setInterval(nextSlide, 3000); // 每3秒切换到下一张  
 
 // 添加前进和后退按钮（如果需要的话）
-// document.querySelector('#next-btn').addEventListener('
+//document.querySelector('#next-btn').addEventListener('')
