@@ -16,6 +16,7 @@
     <!-- js -->
     <script src="..\JS\home.js"></script>
     <script src="..\JS\script.js"></script>
+
 </head>
 
 <body>
@@ -35,19 +36,17 @@
         </nav>
     </header>
     <!-- 轮播图 -->
-
-    <div class="slideshow-container">
-        <div class="slide" style="background-image: url('../images/图片1.png');"></div>
-        <div class="slide" style="background-image: url('../images/图片2.png');"></div>
-        <div class="slide" style="background-image: url('../images/4564.png');"></div>
-        <!-- 导航点 -->
-        <div class="slideshow-navigation">
-            <button class="slideshow-nav-button" data-slide="0">1</button>
-            <button class="slideshow-nav-button" data-slide="1">2</button>
-            <button class="slideshow-nav-button" data-slide="2">3</button>
+    <template>
+        <div class="block">
+            <span class="demonstration">默认 Hover 指示器触发</span>
+            <el-carousel height="150px">
+                <el-carousel-item v-for="item in 4" :key="item">
+                    <h3 class="small">{{ item }}</h3>
+                </el-carousel-item>
+            </el-carousel>
         </div>
-    </div>
 
+    </template>
     <!-- 新闻栏 -->
     <section class="news-section" id="news">
         <h1>最新新闻</h1>
@@ -66,65 +65,74 @@
             </article>
             <!-- 添加更多新闻条目 -->
         </div>
-    </section>
 
-    <section id="events">
-        <h2>活动资讯</h2>
-        <ul>
-            <li>
-                <h3>活动名称</h3>
-                <p>活动时间：XXXX年XX月XX日</p>
-                <p>活动内容：...</p>
-                <button onclick="registerEvent()">报名参加</button>
-            </li>
-            <!-- 更多活动项 -->
-        </ul>
-    </section>
+        <h1>文件上传</h1>
+        <form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <button type="submit">上传文件</button>
+        </form>
 
-    <section id="members">
-        <h2>成员风采</h2>
-        <div class="team-members">
-            <div class="member">
-                <img src="member1.jpg" alt="成员1照片">
-                <h3>成员1</h3>
-                <p>成员1的职位和简介</p>
-            </div>
+</html>
 
-            <div class="member">
-                <img src="member2.jpg" alt="成员2照片">
-                <h3>成员2</h3>
-                <p>成员2的职位和简介</p>
-            </div>
+</section>
 
-            <div class="member">
-                <img src="member3.jpg" alt="成员3照片">
-                <h3>成员3</h3>
-                <p>成员3的职位和简介</p>
-            </div>
+<section id="events">
+    <h2>活动资讯</h2>
+    <ul>
+        <li>
+            <h3>活动名称</h3>
+            <p>活动时间：XXXX年XX月XX日</p>
+            <p>活动内容：...</p>
+            <button onclick="registerEvent()">报名参加</button>
+        </li>
+        <!-- 更多活动项 -->
+    </ul>
+</section>
 
-            <!-- 可以继续添加更多成员 -->
+<section id="members">
+    <h2>成员风采</h2>
+    <div class="team-members">
+        <div class="member">
+            <img src="member1.jpg" alt="成员1照片">
+            <h3>成员1</h3>
+            <p>成员1的职位和简介</p>
         </div>
-    </section>
 
-    <section id="join">
-        <h2>加入我们</h2>
-        <p>欢迎加入我们的学会...</p>
-        <button onclick="joinClub()">申请入会</button>
-    </section>
-    <!-- 空间 -->
-    <section id="space">
-        <div>
-
+        <div class="member">
+            <img src="member2.jpg" alt="成员2照片">
+            <h3>成员2</h3>
+            <p>成员2的职位和简介</p>
         </div>
-    </section>
 
-    <section id="contact">
-        <h2>联系我们</h2>
-        <div class="contact-info">
-            <p class="phone-number">联系电话：XXX-XXXX-XXXX</p>
-            <p class="email-address">邮箱地址：example@email.com</p>
+        <div class="member">
+            <img src="member3.jpg" alt="成员3照片">
+            <h3>成员3</h3>
+            <p>成员3的职位和简介</p>
         </div>
-    </section>
+
+        <!-- 可以继续添加更多成员 -->
+    </div>
+</section>
+
+<section id="join">
+    <h2>加入我们</h2>
+    <p>欢迎加入我们的学会...</p>
+    <button onclick="joinClub()">申请入会</button>
+</section>
+<!-- 空间 -->
+<section id="space">
+    <div>
+
+    </div>
+</section>
+
+<section id="contact">
+    <h2>联系我们</h2>
+    <div class="contact-info">
+        <p class="phone-number">联系电话：XXX-XXXX-XXXX</p>
+        <p class="email-address">邮箱地址：example@email.com</p>
+    </div>
+</section>
 
 
 </body>
