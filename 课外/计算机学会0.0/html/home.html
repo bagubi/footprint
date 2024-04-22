@@ -16,6 +16,67 @@
     <!-- js -->
     <script src="..\JS\home.js"></script>
     <script src="..\JS\script.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .carousel-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            vertical-align: top;
+        }
+
+        .carousel-pagination {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .pagination-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination-dot.active {
+            background-color: #555;
+        }
+    </style>
 
 </head>
 
@@ -36,17 +97,24 @@
         </nav>
     </header>
     <!-- 轮播图 -->
-    <template>
-        <div class="block">
-            <span class="demonstration">默认 Hover 指示器触发</span>
-            <el-carousel height="150px">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <h3 class="small">{{ item }}</h3>
-                </el-carousel-item>
-            </el-carousel>
+    <div class="carousel-container">
+        <div class="slides">
+            <div class="slide">
+                <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/800x400?text=Slide+2" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Slide 3">
+            </div>
         </div>
-
-    </template>
+        <div class="carousel-pagination">
+            <span class="pagination-dot active"></span>
+            <span class="pagination-dot"></span>
+            <span class="pagination-dot"></span>
+        </div>
+    </div>
     <!-- 新闻栏 -->
     <section class="news-section" id="news">
         <h1>最新新闻</h1>
@@ -133,8 +201,30 @@
         <p class="email-address">邮箱地址：example@email.com</p>
     </div>
 </section>
+<script> const slides = document.querySelector('.slides');
+    const paginationDots = document.querySelectorAll('.pagination-dot');
+    let currentIndex = 0;
 
+    function showSlide(index) {
+        slides.style.transform = `translateX(-${index * 100}%)`;
+        paginationDots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+    }
 
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % paginationDots.length;
+        showSlide(currentIndex);
+    }
+
+    setInterval(nextSlide, 5000);
+
+    paginationDots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+            currentIndex = i;
+            showSlide(currentIndex);
+        });
+    });</script>
 </body>
 
 </html>
