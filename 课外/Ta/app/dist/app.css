@@ -1038,7 +1038,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: url("../../assets/images/post/微信图片_20240422192348.jpg") center center no-repeat;
+  background: url("../../images/post/微信图片_20240422192348.jpg") center center no-repeat;
   background-size: cover;
 }
 
@@ -1053,7 +1053,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: url("../../assets/images/post/Cocktails\ ONLY.jpg") center center no-repeat;
+  background: url("../../cybox/assets/images/post/Cocktails ONLY.jpg") center center no-repeat;
   background-size: cover;
   opacity: 0.5;
 }
@@ -1069,7 +1069,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: url("../../assets/images/post/20\(1\).jpg") center center no-repeat;
+  background: url("../../images/post/20(1).jpg") center center no-repeat;
   background-size: cover;
   box-shadow: 0 40px 4px 0 rgba(0, 0, 0, 0.25);
   opacity: 0.7;
