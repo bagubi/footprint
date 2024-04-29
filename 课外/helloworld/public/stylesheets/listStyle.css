@@ -1,0 +1,31 @@
+.listInfo{
+    width: 100%;
+    text-align: center;
+    color: #777777;
+    line-height: 40px;
+}
+.listTR{
+    color:#000000;
+}
+.listName{
+    width:10%;
+}
+.listST{
+    width:30%;
+}
+.listTS{
+    width: 20%;
+}
+.listProgress{
+    width: 10%;
+}
+.listMF{
+    width: 20%;
+}
+.listAction{
+    width: 10%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #3285ff;
+    border-radius: 10px;
+}

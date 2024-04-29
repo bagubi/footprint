@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  div.header
+    h1=title
+    div.connect(onclick="ConnectWallet()") Connect Wallet
+  div.display
+    div.index
+      a(href="/") Overview 
+      a(href="list") PRC20 List 
+      a(href="assets") Assets 
+      a(href="market",style="color:#777777") Marketplace (Coming Soon) 
+    div.information
+      h2 Overview
+      div.data
+        div.dataCard
+          p.dataLabel Total Inscriptions
+          p.dataNumber 1,000,000,000
+        div.dataCard
+          p.dataLabel Total Addresses
+          p.dataNumber 1,000,000,000
+        div.dataCard
+          p.dataLabel Total Transactions
+          p.dataNumber 1,000,000,000
+

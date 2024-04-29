@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本网页结构</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <h1 id="title">网站标题</h1>
+    </header>
+    <nav id="navbar">
+        <a href="#">首页</a>
+        <a href="#">关于我们</a>
+        <a href="#">联系我们</a>
+    </nav>
+    <main id="mainContent">
+        <h2 id="welcomeTitle">欢迎来到我们的网站</h2>
+        <p id="mainText">这里是网站的主要内容。您可以在这里添加文本、图片和其他内容。</p>
+    </main>
+    <footer id="footer">
+        <p id="copyright">版权所有 &copy; 2022 网站名称</p>
+    </footer>
+    <script>
+        document.getElementById("header").style.backgroundColor = "#4CAF50";
+        document.getElementById("navbar").style.backgroundColor = "#4CAF50";
+        document.getElementById("mainContent").style.backgroundColor = "#FFF";
+        document.getElementById("footer").style.backgroundColor = "#4CAF50";
+    </script>
+</body>
+
+</html>
