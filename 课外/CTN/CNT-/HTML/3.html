@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动图示例</title>
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <img id="gif" src="1.gif" alt="动图">
+    <script>
+        let gif = document.getElementById('gif');
+        let frameIndex = 0;
+        let frames = gif.getElementsByTagName('img');
+
+        function updateFrame() {
+            frameIndex = (frameIndex + 1) % frames.length;
+            gif.src = frames[frameIndex].src;
+        }
+
+        setInterval(updateFrame, 100); // 每100毫秒更新一帧
+    </script>
+</body>
+
+</html>
