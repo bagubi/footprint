@@ -1,0 +1,3 @@
+win+r:services.msc{可启动或停止mysql}
+开：net start mysql80
+关：net stop mysql80
