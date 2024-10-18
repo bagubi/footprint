@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="06e9e265-6ec4-4c55-8e8d-8844689a6b60" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/../honey/H1/src/com/bagubi/hallo/abc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/beautyeye_lnf.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javax_servlet_api_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_49.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_20.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_26.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/tupian.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/tupian___2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/beautyeye_lnf.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javax.servlet-api-3.1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/mysql-connector-java-5.1.49.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/mysql-connector-java-8.0.20.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/mysql-connector-java-8.0.26.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/tupian.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/lin.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/JFrame/AdminBookAdd.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/JFrame/AdminBookEdit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/JFrame/AdminMenuFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/JFrame/LoginFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/JFrame/RegFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/JFrame/UserMenuFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/dao/BdetailDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/dao/BookDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/dao/BorrowDetailDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/dao/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/model/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/model/BookType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/model/BorrowDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/utils/DbUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/utils/ValidCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/utils/toolUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/tupian/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/tupian/adBG2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/tupian/adBG3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/tupian/adBG4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/tupian/bg2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/tupian/bg3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/tupian/regBG.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lin/tupian/uBG.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myBookManager.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../honey/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../honey/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/CTN/CNT-/000.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/CTN/CNT-/1-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/CTN/CNT-/1.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/CTN/CNT-/19999.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/CTN/CNT-/hi.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/CTN/CNT-/阿巴.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/T/Thallo" beforeDir="false" afterPath="$PROJECT_DIR$/../../../课外/T/Thallo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/lats-web-develop" beforeDir="false" afterPath="$PROJECT_DIR$/../../../课外/lats-web-develop" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/try/1.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../课外/try/1.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/try/er.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../课外/try/er.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/try/hhh/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/try/hhh/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/try/hhh/bin/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/try/hhh/src/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/try/hhh/src/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/try/字面量类型.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/前端周报.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../课外/珠峰/~$036 区块链技术应用赛项赛题第1套.docx" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../../../../JAVA/JAVAJDK/lib/src.zip!/java.base/java/lang/ClassLoader.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$PROJECT_DIR$/../../../../../JAVA/JAVAJDK/lib/src.zip!/java.base/java/lang/IllegalAccessError.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$PROJECT_DIR$/../../../../../JAVA/JAVAJDK/lib/src.zip!/java.base/java/security/SecureClassLoader.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/lin/src/cn/itcast/bookmanager/JFrame/RegFrm.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2iMcxUAYi16fz9AnSWnK533KxKN" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/足迹/footprint/课内/JAVA/myBookManager/lin/tupian",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "settings.qodana",
+    "vue.rearranger.settings.migration": "true",
+    "应用程序.LoginFrm.executor": "Run",
+    "应用程序.RegFrm (1).executor": "Run",
+    "应用程序.RegFrm (2).executor": "Run",
+    "应用程序.RegFrm.executor": "Run"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora_aws"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\足迹\footprint\课内\JAVA\myBookManager\lin\tupian" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\足迹\footprint\课内\JAVA\myBookManager\lin\tupian" />
+    </key>
+  </component>
+  <component name="RunManager" selected="应用程序.LoginFrm">
+    <configuration name="LoginFrm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.itcast.bookmanager.JFrame.LoginFrm" />
+      <module name="lin" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.itcast.bookmanager.JFrame.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegFrm (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.itcast.bookmanager.JFrame.RegFrm" />
+      <module name="lin" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.itcast.bookmanager.JFrame.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegFrm (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="RegFrm" />
+      <module name="lin" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegFrm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.itcast.bookmanager.JFrame.RegFrm" />
+      <module name="lin" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.itcast.bookmanager.JFrame.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.LoginFrm" />
+        <item itemvalue="应用程序.RegFrm" />
+        <item itemvalue="应用程序.RegFrm (2)" />
+        <item itemvalue="应用程序.RegFrm (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="06e9e265-6ec4-4c55-8e8d-8844689a6b60" name="更改" comment="" />
+      <created>1719304133624</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1719304133624</updated>
+      <workItem from="1719304134977" duration="25932000" />
+      <workItem from="1719361096083" duration="9603000" />
+      <workItem from="1719833733717" duration="2191000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalAccessError" package="java.lang" />
+          <option name="timeStamp" value="4" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
