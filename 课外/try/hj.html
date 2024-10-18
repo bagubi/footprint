@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <title>Data Fetching</title>
+        <style>
+        .data-container {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+        <div class="data-container">
+                <table id="dataTable">
+                        <!-- 表头在这里添加 -->
+                    </table>
+            </div>
+
+       
+    <script>
+        var apiEndpoint = "http://192.168.31.179:3001/one";
+
+        fetch(apiEndpoint)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // 假设数据中有一个名为'inscripowner'的字段，我们依据此字段排序
+                data.sort((a, b) => a.inscripowner - b.total);
+
+                var dataTable = document.getElementById('dataTable');
+                // 插入表头
+                var thead = document.createElement('thead');
+                var keys = Object.keys(data[0]);
+                var headRow = document.createElement('tr');
+                keys.forEach(key => {
+                    var th = document.createElement('th');
+                    th.textContent = key;
+                    headRow.appendChild(th);
+                });
+                thead.appendChild(headRow);
+                dataTable.appendChild(thead);
+
+                // 插入表体
+                var tbody = document.createElement('tbody');
+                data.forEach(item => {
+                    var tr = document.createElement('tr');
+                    keys.forEach(key => {
+                        var td = document.createElement('td');
+                        td.textContent = item[key];
+                        tr.appendChild(td);
+                    });
+                    tbody.appendChild(tr);
+                });
+    

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="192.168.179:3001/one" method="POST"> 需要使用form来发送请求
+        <input type="text" name="username" id="">
+        <input type="password" name="userpassword">
+        <input type="submit" value="登陆">
+    </form>
+</body>
+<script>
+
+
+    const http = require('http')
+    http.createServer((req, res) => {
+        if (req.method == 'POST') { // 判断是否是POST请求
+            let strData = '' // 设置传来的数据
+            req.on('data', chunk => { // 通过监听data数据来不断的添加，因为post请求数据大小不一，不是一次性发送的，而是一部分一部分的传输，所以我们需要不断的监听传来的数据进行赋值，直到监听到了end事件
+                strData += chunk.toString() // 因为传来的都是二进制所以每次需要转换一下。
+            })
+            req.on('end', () => { // 监听到end表示已经传输完成
+                console.log('data: ', strData) // 在终端输出来看看
+                res.end(strData) // 还可以将获取到的数据返回
+            })
+        }
+    }).listen(5000, () => {
+        console.log('项目开启成功')
+    })
+    // 第2 
+    //引用模块
+    const express = require('express');
+    // 创建对象
+    var app = express();
+
+    // post请求的两种解析方式
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }))
+    // 设置静态目录
+    app.use(express.static(__dirname + "/public"))
+    //get请求   定义了接口/login
+    // app.get("/login", (req, res) => {
+    //     console.log();
+    //     res.json({
+    //         code: 1000,
+    //         msg: "get-成功",
+    //         name: req.query.name,
+    //         psw: req.query.psw
+    //     })
+    // })
+    //post请求
+    app.post("/register", (req, res) => {
+        console.log();
+        res.json({
+            code: 1000,
+            msg: "post-成功",
+            name: req.body.name,
+            psw: req.body.psw
+        })
+    })
+    //监听服务端口
+    app.listen(3001, () => {
+        console.log("3001服务启动");
+    })
+
+
+</script>
+
+</html>
