@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Example</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <h1>获取服务器数据</h1>
+    <button id="fetchData">点击获取数据</button>
+    <div id="loading" style="display: none;">加载中...</div>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('fetchData').addEventListener('click', function () {
+            // 显示加载提示
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').innerHTML = '';
+
+            // 创建 XMLHttpRequest 对象
+            var xhr = new XMLHttpRequest();
+
+            // 配置请求
+            xhr.open('GET', '/json/data.json', true);
+
+            // 设置响应类型
+            xhr.responseType = 'json';
+
+            // 设置请求完成后的回调函数
+            xhr.onload = function () {
+                // 隐藏加载提示
+                document.getElementById('loading').style.display = 'none';
+
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // 请求成功
+                    var data = xhr.response;
+                    document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+                } else {
+                    // 请求失败
+                    document.getElementById('result').innerHTML = '请求失败: ' + xhr.status;
+                }
+            };
+
+            // 设置请求错误的回调函数
+            xhr.onerror = function () {
+                // 隐藏加载提示
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('result').innerHTML = '请求失败: 网络错误';
+            };
+
+            // 发送请求
+            xhr.send();
+        });
+    </script>
+</body>
+
+</html>
