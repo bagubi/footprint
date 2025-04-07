@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+<!--    资源文件-->
+<!--    使用XML配置的方式完成Spring AOP入门程序-->
+<!--    AopTest测试类-->
+<!--    BusinessService目标类-->
+<!--    LoggingAspect切面类-->
+    <!-- 定义目标对象 -->
+    <bean id="businessService" class="com.hhyz.BusinessService"/>
+
+    <!-- 定义切面 -->
+    <bean id="loggingAspect" class="com.hhyz.LoggingAspect"/>
+
+    <!-- 配置AOP -->
+    <aop:config>
+        <aop:aspect id="logging" ref="loggingAspect">
+            <aop:pointcut id="businessServiceOperation" expression="execution(* com.hhyz.BusinessService.*(..))"/>
+            <aop:before method="beforeAdvice" pointcut-ref="businessServiceOperation"/>
+            <aop:after method="afterAdvice" pointcut-ref="businessServiceOperation"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
