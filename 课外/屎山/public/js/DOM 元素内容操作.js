@@ -6,3 +6,5 @@ nodeValue;
 outerHTML;
 outerText;
 data;
+// b插到a的末尾
+a.appendChild(b);
