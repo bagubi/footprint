@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main.java.com.example.mapper.BookMapper">
+    <!-- 插入图书 -->
+    <insert id="insert">
+        INSERT INTO book (name, author, price)
+        VALUES (#{name}, #{author}, #{price})
+    </insert>
+    <!-- 更新价格 -->
+    <update id="updatePrice">
+        UPDATE book
+        SET price = #{price}
+        WHERE id = #{id}
+    </update>
+    <!-- 根据ID查询图书 -->
+    <select id="selectById" resultType="main.java.com.example.entity.Book">
+        SELECT id, name, author, price FROM book
+        WHERE id = #{id}
+    </select>
+    <!-- 动态SQL：按价格区间查询 -->
+    <select id="selectByPriceRange" resultType="main.java.com.example.entity.Book">
+        SELECT id, name, author, price FROM book
+        <where>
+            <if test="minPrice != null and maxPrice != null">
+                price BETWEEN #{minPrice} AND #{maxPrice}
+            </if>
+        </where>
+    </select>
+
+</mapper>

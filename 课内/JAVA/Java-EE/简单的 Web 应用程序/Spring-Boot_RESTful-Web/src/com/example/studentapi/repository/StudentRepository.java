@@ -1,4 +1,8 @@
-package main.java.com.example.studentapi.repository;
+// StudentRepository.java
+package com.example.studentapi.repository;
 
-public class StudentRepository {
+import com.example.studentapi.model.Student;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StudentRepository extends JpaRepository<Student, Long> {
 }

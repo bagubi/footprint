@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UNICODE" ?>
+<topo version="1.3.00.100">
+    <devices>
+        <dev id="198D3C20-5435-4f07-B58D-611B5641450F" name="PC1" poe="0" model="PC" settings=" -simpc_ip 0.0.0.0  -simpc_mask 0.0.0.0  -simpc_gateway 0.0.0.0  -simpc_mac 54-89-98-EF-53-F9  -simpc_mc_dstip 0.0.0.0  -simpc_mc_dstmac 00-00-00-00-00-00  -simpc_dns1 0.0.0.0  -simpc_dns2 0.0.0.0  -simpc_ipv6 ::  -simpc_prefix 128  -simpc_gatewayv6 ::  -simpc_dhcp_state 0  -simpc_dhcpv6_state 0  -simpc_dns_auto_state 0  -simpc_igmp_version 1  -simpc_group_ip_start 0.0.0.0  -simpc_src_ip_start 0.0.0.0  -simpc_group_num 0  -simpc_group_step 0  -simpc_src_num 0  -simpc_src_step 0  -simpc_type MODE_IS_INCLUDE " system_mac="54-89-98-EF-53-F9" com_port="0" bootmode="0" cx="522.000000" cy="318.000000" edit_left="549" edit_top="372">
+            <slot number="slot17" isMainBoard="1">
+                <interface sztype="Ethernet" interfacename="Ethernet" count="1" />
+            </slot>
+        </dev>
+        <dev id="A1791B19-C36F-4364-9064-AFAE4C8D3EBC" name="R1" poe="0" model="Router" settings="" system_mac="54-89-98-44-05-56" com_port="2000" bootmode="0" cx="484.000000" cy="162.000000" edit_left="511" edit_top="216">
+            <slot number="slot17" isMainBoard="1">
+                <interface sztype="Ethernet" interfacename="Ethernet" count="2" />
+                <interface sztype="Ethernet" interfacename="GE" count="4" />
+                <interface sztype="Serial" interfacename="Serial" count="4" />
+            </slot>
+        </dev>
+        <dev id="D7992483-8A4C-496d-8D72-35E7E26450C9" name="R2" poe="0" model="Router" settings="" system_mac="54-89-98-D5-06-C6" com_port="2001" bootmode="0" cx="186.000000" cy="166.000000" edit_left="213" edit_top="220">
+            <slot number="slot17" isMainBoard="1">
+                <interface sztype="Ethernet" interfacename="Ethernet" count="2" />
+                <interface sztype="Ethernet" interfacename="GE" count="4" />
+                <interface sztype="Serial" interfacename="Serial" count="4" />
+            </slot>
+        </dev>
+        <dev id="2C84D500-D62E-4c6a-AECE-4742963DFB96" name="PC2" poe="0" model="Router" settings="" system_mac="54-89-98-50-56-4E" com_port="2002" bootmode="0" cx="121.000000" cy="319.000000" edit_left="148" edit_top="373">
+            <slot number="slot17" isMainBoard="1">
+                <interface sztype="Ethernet" interfacename="Ethernet" count="2" />
+                <interface sztype="Ethernet" interfacename="GE" count="4" />
+                <interface sztype="Serial" interfacename="Serial" count="4" />
+            </slot>
+        </dev>
+    </devices>
+    <lines>
+        <line srcDeviceID="D7992483-8A4C-496d-8D72-35E7E26450C9" destDeviceID="A1791B19-C36F-4364-9064-AFAE4C8D3EBC">
+            <interfacePair lineName="Serial" srcIndex="6" srcBoundRectIsMoved="1" srcBoundRect_X="256.179871" srcBoundRect_Y="192.420410" srcOffset_X="-18.000000" srcOffset_Y="-22.000000" tarIndex="6" tarBoundRectIsMoved="1" tarBoundRect_X="467.820129" tarBoundRect_Y="189.579590" tarOffset_X="-45.000000" tarOffset_Y="-25.000000" />
+        </line>
+        <line srcDeviceID="D7992483-8A4C-496d-8D72-35E7E26450C9" destDeviceID="2C84D500-D62E-4c6a-AECE-4742963DFB96">
+            <interfacePair lineName="Copper" srcIndex="2" srcBoundRectIsMoved="1" srcBoundRect_X="196.114578" srcBoundRect_Y="232.745697" srcOffset_X="-1.000000" srcOffset_Y="11.000000" tarIndex="2" tarBoundRectIsMoved="0" tarBoundRect_X="164.885422" tarBoundRect_Y="306.254303" tarOffset_X="0.000000" tarOffset_Y="0.000000" />
+        </line>
+        <line srcDeviceID="A1791B19-C36F-4364-9064-AFAE4C8D3EBC" destDeviceID="198D3C20-5435-4f07-B58D-611B5641450F">
+            <interfacePair lineName="CTL" srcIndex="0" srcBoundRectIsMoved="0" srcBoundRect_X="521.220276" srcBoundRect_Y="230.956924" srcOffset_X="0.000000" srcOffset_Y="0.000000" tarIndex="0" tarBoundRectIsMoved="0" tarBoundRect_X="538.779724" tarBoundRect_Y="303.043060" tarOffset_X="0.000000" tarOffset_Y="0.000000" />
+        </line>
+    </lines>
+    <shapes />
+    <txttips />
+</topo>

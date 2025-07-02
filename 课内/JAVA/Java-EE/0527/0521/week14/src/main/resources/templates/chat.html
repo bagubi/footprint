@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>在线聊天系统</title>
     <link rel="stylesheet" th:href="@{/css/chat.css}"> <!-- 引入CSS文件 -->
+    <script th:src="@{/js/sockjs.min.js}" ></script>
+    <script th:src="@{/js/stomp.min.js}" ></script>
 </head>
 <body>
 <div class="chat-container">
@@ -12,11 +14,40 @@
         <!-- 聊天消息将显示在这里 -->
     </div>
     <div class="input-area">
-        <input type="text" id="message-input" placeholder="请输入消息..." />
-        <button id="send-button">发送</button>
+        <input type="text" id="messageInput" placeholder="请输入消息..." />
+        <button onclick="sendMessage()">发送</button>
     </div>
 </div>
+<script>
+    let stompClient = null;
 
-<script src="script.js"></script> <!-- 引入JavaScript文件 -->
+    function connect() {
+        const socket = new SockJS('http://192.168.0.8:8060/ws-chat');
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, (frame) => {
+            stompClient.subscribe('/topic/messages', (message) => {
+                showMessage(JSON.parse(message.body));
+            });
+        });
+    }
+    function sendMessage() {
+        const messageInput = document.getElementById('messageInput');
+        const message = {
+            content: messageInput.value,
+            sender: 'User' + Math.floor(Math.random()*1000) // 随机用户名
+        };
+        stompClient.send("/app/chat", {}, JSON.stringify(message));
+        messageInput.value = '';
+    }
+    function showMessage(message) {
+        const div = document.createElement('div');
+        div.innerHTML = `<b>${message.sender}:</b> ${message.content}`;
+        document.getElementById('chat-box').appendChild(div);
+    }
+
+    // 初始化连接
+    window.onload = connect;
+</script>
 </body>
 </html>

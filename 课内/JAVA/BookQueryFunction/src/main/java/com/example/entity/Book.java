@@ -1,4 +1,4 @@
-package main.java.com.example;
+package main.java.com.example.entity;
 
 public class Book {
     private int id;

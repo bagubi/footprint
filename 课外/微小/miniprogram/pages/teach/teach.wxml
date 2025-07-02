@@ -1,0 +1,32 @@
+<!--pages/teach/teach.wxml-->
+<h1>hello {{name}}</h1>
+<!-- 组件、控制属性和关键字 都需要 在双引号内 -->
+<!-- 使用 hidden 控制显示 --hidden:"true"隐藏 -->
+<text class="abcd" hidden="{{flag==123 ? true:false}}">pages/teach/teach.wxml</text>
+
+<!-- 条件判断 -->
+<view wx:if="{{flag == 123}}">符合条件的内容1</view>
+<view wx:elif="{{flag>1234}}">符合条件的内容2</view>
+<view wx:else>不符合条件的内容</view>
+
+<!-- 图片展示 -->
+<image src="../../images/t图/下载.jpg"></image>
+
+<!-- 表达式拼接 -->
+<text>{{'a + b + a + "b" === ' + a + b + a + "b"}}</text>
+<view id="{{id1}}" wx:if="{{condition}}">
+  <h1>你的名字：{{name}}</h1>
+  <input class="abcd" style="height: 100rpx;background-color: bisque;flex-grow: 1;"></input>
+</view>
+
+<!-- 按钮样式 绑定 -->
+<button style="color: {{color}};">确认</button>
+<!-- 列表渲染 改item、index-->
+<view wx:for="{{list}}" wx:key="id" wx:for-item="it" wx:for-index="ind">
+    <!-- 修改前的数组从0开始的序号 -->
+    {{index}}
+  {{ind}}
+  {{item.name}}
+  <!-- 被修改后的内容变量名，修改方法wx:for-item="it" -->
+  <text id="{{it.id}}"> {{it.name}}</text>
+</view>
