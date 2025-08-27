@@ -1,11 +1,24 @@
-name_list = ['Alice', 'Bob', 'Charlie']
-# while True:
-#     name = input('请输入用户名：')
-#     # 判断用户名是否存在于列表中
-#     if name in name_list:
-#         print('欢迎回来，' + name + '！')
-#     else:
-#         name_list.append(name)
-#         print('欢迎，' + name + '！')
-#         print('当前用户列表：', name_list)
-#         break
+import pulp
+
+# 创建问题实例（最大化问题）
+prob = pulp.LpProblem("Production_Optimization", pulp.LpMaximize)
+
+# 定义变量（下限为0）
+x1 = pulp.LpVariable("x1", lowBound=0)
+x2 = pulp.LpVariable("x2", lowBound=0)
+
+# 定义目标函数
+prob += 3 * x1 + 5 * x2, "Total Profit"
+
+# 添加约束条件
+prob += 4 * x1 + 2 * x2 <= 80, "Material A"
+prob += x1 + 3 * x2 <= 60, "Material B"
+
+# 求解问题
+prob.solve()
+
+# 输出结果
+print("Status:", pulp.LpStatus[prob.status])
+print("Optimal Solution:")
+print(f"x1 = {x1.varValue}, x2 = {x2.varValue}")
+print("Max Profit =", pulp.value(prob.objective))

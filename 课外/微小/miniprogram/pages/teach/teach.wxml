@@ -13,20 +13,34 @@
 <image src="../../images/t图/下载.jpg"></image>
 
 <!-- 表达式拼接 -->
+<text>a={{a}}</text>
 <text>{{'a + b + a + "b" === ' + a + b + a + "b"}}</text>
 <view id="{{id1}}" wx:if="{{condition}}">
   <h1>你的名字：{{name}}</h1>
-  <input class="abcd" style="height: 100rpx;background-color: bisque;flex-grow: 1;"></input>
+  <input id="username" 
+  placeholder="请输入用户名" 
+  bindfocus="onInputFocus" 
+  bindblur="onInputBlur"  class="abcd" style="height: 100rpx;background-color: bisque;flex-grow: 1;"></input>
 </view>
 
 <!-- 按钮样式 绑定 -->
-<button style="color: {{color}};">确认</button>
+<button id="Sure" data-hi="hello" bindtap="onClickSure" style="color: {{color}};">确认</button>
+<!-- 界面交互API -->
+<!-- 1.显示信息提示框 -->
+<button bind:tap="showInfoToast">显示信息提示框</button>
+<!-- 2.显示对话框 -->
+<button bindtap="showDialog">显示对话框</button>
+<!-- 3.显示loading提示框 -->
+<button bindtap="showLoading">显示Loading提示框</button>
 <!-- 列表渲染 改item、index-->
-<view wx:for="{{list}}" wx:key="id" wx:for-item="it" wx:for-index="ind">
-    <!-- 修改前的数组从0开始的序号 -->
-    {{index}}
-  {{ind}}
-  {{item.name}}
-  <!-- 被修改后的内容变量名，修改方法wx:for-item="it" -->
-  <text id="{{it.id}}"> {{it.name}}</text>
+ <!-- 被修改后的内容变量名，修改方法wx:for-item="it" -->
+ <view class="list-container">
+  <view wx:for="{{list}}" wx:key="id" wx:for-item="it" wx:for-index="ind" class="list-item">
+    <!-- 原始 index 和修改后的 ind 对比 -->
+    <text class="original-index">{{index}}</text>
+    <text class="custom-index">{{ind}}</text>
+    <text class="item-name">{{it.name}}</text>
+    <!-- 显示文本 -->
+    <text class="item-detail" id="{{it.id}}"> {{it.name}} </text>
+  </view>
 </view>

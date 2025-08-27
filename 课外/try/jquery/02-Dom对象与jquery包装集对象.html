@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./jquery-3.7.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"> 
+        你好
+    </div>
+<!-- 
+    Dom对象：通过js方式获取的元素对象（document）
+    Jquery对象: 通过jquery方式获取的元素对象,返回的是jQuery包装集。 
+-->
+    <script>
+         // Dom对象  
+
+        var app = document.getElementById('app');
+        console.log(app);
+        var apps = document.getElementsByTagName('app');
+        console.log(apps);
+
+        // jQuery对象 
+
+        $(function () {
+            // 获取元素对象
+            var $app = $('#app');
+            // 获取元素对象属性
+            var appText = $app.text();
+            console.log(appText);
+            // 获取元素对象属性
+            var appHtml = $app.html();
+            console.log(appHtml);
+            // 获取元素对象属性
+            var appAttr = $app.attr('id');
+        })
+    </script>
+</body>
+</html>
