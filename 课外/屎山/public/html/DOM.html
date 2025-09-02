@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="block1">样式处理</div>
+    <p>hello</p>
+    <p class="item">元素之间的关系获取</p>
+    <p>jquery</p>
+    <p>javascript</p>
+    <div id="block2">
+        <h3>喜羊羊大战哥斯拉</h3>
+    </div>
+
+
+    <script type="text/javascript">
+        var block1 = document.getElementById('block1');
+        console.log(block1);
+        block1.textContent = 'js设置的内容';
+
+        // var contents = document.getElementsByTagName('p'); 
+        var contents = document.querySelectorAll('p');
+        console.log(contents)
+        var textArr = [
+            'js设置内容1',
+            'js设置内容2',
+            'js设置内容3',
+
+        ];
+
+        for (var i = 0; i < contents.length; i++) {
+            contents[i].textContent = textArr[i];
+        }
+        // 1.元素之间的关系获取
+        // 通过元素获取其兄弟元素、父元素、子元素
+        var secondItem = document.querySelector('.item');
+        secondItem.textContent = '??';
+        //<!-- .item前 -->
+        secondItem.previousElementSibling.textContent = '.item前面';
+        //<!-- .item后 -->
+        secondItem.nextElementSibling.textContent = '.item后面';
+
+        var container = secondItem.parentNode;//获取父元素
+        console.log(container)
+        // container.textContent = 'container内容';
+        var children = container.children;  //获取所有子元素
+
+        // 2.样式处理
+        var block1 = document.getElementById('block1');
+        block1.style.backgroundColor = 'red';
+        block1.style.color = 'white';
+        block1.style.fontSize = '20px';
+
+        block1.className = 'active'; //直接覆盖类名
+        block1.classList.add('active'); //添加类名
+        // block.classList.remove('active'); //删除类名
+
+        // 3.文本处理
+        var block2 = document.getElementById('block2');
+        block2.innerHTML = '<h3>js设置的文本喜羊羊内容</h3>';
+
+        // 4.事件处理
+        block1.onclick = function () {
+            block1.style.backgroundColor = 'blue';
+            alert('事件处理');//弹窗会被覆盖，两个弹窗只会显示最后那个
+        }
+        block2.addEventListener('click', function () {
+            block2.style.backgroundColor = 'yellow';
+            alert('suprise!');
+        })
+        block2.addEventListener('click', function () {
+            block2.style.backgroundColor = 'green';//这个会覆盖上一个
+            alert('suprise again!');//弹窗不会被覆盖
+        })
+    </script>
+</body>
+
+</html>

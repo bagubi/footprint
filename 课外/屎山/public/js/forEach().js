@@ -9,3 +9,8 @@ var array = [1, 2, "白龙马"];
 array.forEach(function (item, index, arr) {
   console.log("索引—— " + index + "   hello！" + item);
 });
+
+// 结果：
+// 索引—— 0   hello！1
+// 索引—— 1   hello！2
+// 索引—— 2   hello！白龙马

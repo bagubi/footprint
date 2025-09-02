@@ -44,3 +44,18 @@ console.log(pig);
 delete pig.age;
 delete pig.dance;
 console.log(pig);
+
+//=====================
+// 动态查看对象的所有属性
+// 对对象属性进行批量操作
+//=====================
+var obj = { 
+  name: "why",
+  age: 18,
+  height: 1.88,
+};
+for (var key in obj) {
+  // 会打印每个属性的键名和对应的值
+  // obj[key] 使用方括号语法动态访问对象属性
+  console.log(key, obj[key]);
+}

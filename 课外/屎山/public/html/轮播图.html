@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图示例</title>
+    <style>
+        /* 轮播图容器 */
+        .carousel-container {
+            width: 600px;
+            height: 400px;
+            margin: 50px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 图片容器 */
+        .carousel-images {
+            display: flex;
+            /* 这里平滑过渡 */
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-image {
+            width: 600px;
+            height: 400px;
+            flex-shrink: 0;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        .dots-container {
+            text-align: center;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel-container">
+        <div class="carousel-images">
+            <img src="/课外\屎山\image\1297318.jpg" class="carousel-image" alt="Image 1">
+            <img src="/课外\屎山\image\1360708.jpeg" class="carousel-image" alt="Image 2">
+            <img src="/课外\屎山\image\1346314.jpeg" class="carousel-image" alt="Image 3">
+            <img src="/课外\屎山\image\1298767.jpg" class="carousel-image" alt="Image 4">
+        </div>
+        <button class="carousel-btn prev-btn">&lt;</button>
+        <button class="carousel-btn next-btn">&gt;</button>
+        <div class="dots-container">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+        </div>
+    </div>
+
+    <script>
+        class Carousel {
+            constructor(container) {
+                // 初始化轮播图组件
+                this.container = container;
+
+                // 获取所有需要操作的DOM元素引用
+                this.images = container.querySelector('.carousel-images');
+                this.imageItems = container.querySelectorAll('.carousel-image');
+                this.prevBtn = container.querySelector('.prev-btn');
+                this.nextBtn = container.querySelector('.next-btn');
+                this.dots = container.querySelectorAll('.dot');
+
+                // 设置初始索引和图片总数
+                this.currentIndex = 0;
+                this.imageCount = this.imageItems.length;
+
+                // 调用初始化方法
+                this.init();
+            }
+
+            init() {
+                // 绑定事件
+                this.prevBtn.addEventListener('click', () => this.prev());
+                this.nextBtn.addEventListener('click', () => this.next());
+
+                // 绑定圆点点击事件
+                this.dots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        const index = parseInt(dot.getAttribute('data-index'));
+                        this.goTo(index);
+                    });
+                });
+
+                // 自动播放
+                this.autoPlay();
+            }
+
+            updateUI() {
+                // 更新图片位置
+                const translateX = -this.currentIndex * 600;
+                this.images.style.transform = `translateX(${translateX}px)`;
+
+                // 更新圆点状态
+                this.dots.forEach((dot, index) => {
+                    if (index === this.currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            // 切换到下一张图片
+            next() {
+                this.currentIndex = (this.currentIndex + 1) % this.imageCount;
+                this.updateUI();
+                this.resetAutoPlay();
+            }
+            // 切换到上一张图片
+            prev() {
+                this.currentIndex = (this.currentIndex - 1 + this.imageCount) % this.imageCount;
+                this.updateUI();
+                this.resetAutoPlay();
+            }
+            // 跳转到指定图片
+            goTo(index) {
+                this.currentIndex = index;
+                this.updateUI();
+                this.resetAutoPlay();
+            }
+            // 更新界面显示状态
+            autoPlay() {
+                this.autoPlayInterval = setInterval(() => {
+                    this.next();
+                }, 3000);
+            }
+            // 自动播放功能
+            resetAutoPlay() {
+                clearInterval(this.autoPlayInterval);
+                this.autoPlay();
+            }
+        }
+
+        // 初始化轮播图
+        document.addEventListener('DOMContentLoaded', () => {
+            const carouselContainer = document.querySelector('.carousel-container');
+            new Carousel(carouselContainer);
+        });
+    </script>
+</body>
+
+</html>
