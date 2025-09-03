@@ -1,12 +1,16 @@
-try:
-    num = int(input("请输入一个数字: "))
-    result = 10 / num
-    print(f"结果是: {result}")
-except ValueError:
-    print("输入的不是有效数字")
-except ZeroDivisionError:
-    print("不能除以零")
-except Exception as e:
-    print(f"发生了未知错误: {e}")
-finally:
-    print("程序执行完毕")
+import functools
+
+def example_func(a, b, c, d=10):
+    return a + b + c + d
+
+# 创建偏函数
+partial_func = functools.partial(example_func, 1, 2, d=20)
+
+# 查看偏函数的信息
+print("函数名称:", partial_func.func.__name__)
+print("固定的位置参数:", partial_func.args)
+print("固定的关键词参数:", partial_func.keywords)
+
+# 调用偏函数
+result = partial_func(3)  # 相当于 example_func(1, 2, 3, d=20)
+print("结果:", result)  # 输出: 26
