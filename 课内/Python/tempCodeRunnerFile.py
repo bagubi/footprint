@@ -1,16 +1,20 @@
-import functools
-
-def example_func(a, b, c, d=10):
-    return a + b + c + d
-
-# 创建偏函数
-partial_func = functools.partial(example_func, 1, 2, d=20)
-
-# 查看偏函数的信息
-print("函数名称:", partial_func.func.__name__)
-print("固定的位置参数:", partial_func.args)
-print("固定的关键词参数:", partial_func.keywords)
-
-# 调用偏函数
-result = partial_func(3)  # 相当于 example_func(1, 2, 3, d=20)
-print("结果:", result)  # 输出: 26
+def plot_time_statistics(arrival_times, full_times):
+    # 水流到达时间分布直方图
+    plt.figure(figsize=(12, 5))
+    
+    plt.subplot(1, 2, 1)
+    times = list(arrival_times.values())
+    plt.hist([t for t in times if t < float('inf')], bins=20, alpha=0.7)
+    plt.xlabel('水流到达时间（分钟）')
+    plt.ylabel('节点数量')
+    plt.title('节点水流到达时间分布')
+    
+    plt.subplot(1, 2, 2)
+    fill_times = list(full_times.values())
+    plt.hist([t for t in fill_times if t < float('inf')], bins=20, alpha=0.7, color='orange')
+    plt.xlabel('巷道充满时间（分钟）')
+    plt.ylabel('巷道数量')
+    plt.title('巷道充满时间分布')
+    
+    plt.tight_layout()
+    plt.show()
