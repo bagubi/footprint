@@ -1,9 +1,18 @@
-var express = require('express');
-var router = express.Router();
+// routes/index.js
+const express = require('express');
+const router = express.Router();
+const ResponseHandler = require('../util/responseHandler');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+// 健康检查和其他通用路由
+router.get('/', (req, res) => {
+  res.send('API 服务器正在运行');
+});
+
+router.get('/health', (req, res) => {
+  ResponseHandler.success(res, {
+    timestamp: new Date().toISOString(),
+    status: 'healthy'
+  }, '服务正常运行');
 });
 
 module.exports = router;
