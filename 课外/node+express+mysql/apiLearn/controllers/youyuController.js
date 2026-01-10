@@ -112,6 +112,64 @@ class YouyuController {
             ResponseHandler.error(res, error, '删除失败');
         }
     }
+
+    // 新增：获取文章列表，支持按分类筛选
+    static async getArticles(req, res, next) {
+        try {
+            const { cate_id, type, page = 1, pageSize = 10 } = req.query;
+
+            const filter = {};
+            if (cate_id) filter.cate_id = cate_id;
+            if (type) filter.type = type;
+            if (page) filter.page = parseInt(page);
+            if (pageSize) filter.pageSize = parseInt(pageSize);
+
+            // 获取文章列表
+            const articles = await new Promise((resolve, reject) => {
+                YouyuModel.getArticles(filter, (err, result) => {
+                    if (err) reject(err);
+                    else resolve(result);
+                });
+            });
+
+            // 如果没有文章且有分类参数，返回空数组而不是notFound
+            if (articles.length === 0 && (filter.cate_id || filter.type)) {
+                ResponseHandler.success(res, {
+                    list: [],
+                    pagination: {
+                        page: filter.page,
+                        pageSize: filter.pageSize,
+                        total: 0,
+                        totalPages: 0
+                    }
+                }, '未找到符合条件的文章');
+                return;
+            }
+
+            // 获取总数
+            const countResult = await new Promise((resolve, reject) => {
+                YouyuModel.getArticleCount(filter, (err, result) => {
+                    if (err) reject(err);
+                    else resolve(result);
+                });
+            });
+
+            const total = countResult[0].total;
+            const totalPages = Math.ceil(total / filter.pageSize);
+
+            ResponseHandler.success(res, {
+                list: articles,
+                pagination: {
+                    page: filter.page,
+                    pageSize: filter.pageSize,
+                    total: total,
+                    totalPages: totalPages
+                }
+            }, '获取文章列表成功');
+        } catch (error) {
+            ResponseHandler.error(res, error, '获取文章列表失败');
+        }
+    }
 }
 
 module.exports = YouyuController;
