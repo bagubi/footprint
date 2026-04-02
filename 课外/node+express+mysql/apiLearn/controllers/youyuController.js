@@ -1,10 +1,10 @@
-//获取分类
+//获取分类（后端）
 // controllers/youyuController.js
 const YouyuModel = require('../models/youyuModel');
 const ResponseHandler = require('../util/responseHandler');
-
+// 1. 控制器名称：YouyuController
 class YouyuController {
-    // 获取所有记录
+    // 获取所有记录：异步处理 (async/await)
     static async getAll(req, res, next) {
         try {
             const data = await new Promise((resolve, reject) => {

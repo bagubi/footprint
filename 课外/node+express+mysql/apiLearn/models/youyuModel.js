@@ -1,4 +1,5 @@
 // models/youyuModel.js
+//数据访问层（后端）
 const dbConfig = require('../util/dbconfig');
 
 class YouyuModel {
