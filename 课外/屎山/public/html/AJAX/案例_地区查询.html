@@ -56,13 +56,19 @@
                 //.value是获取输入框的值
                 const pName = document.querySelector('.form-control').value;
                 const cName = document.querySelector('.city').value;
+                //简写需要修改的地方1
+                // const pname = document.querySelector('.form-control').value;
+                // const cname = document.querySelector('.city').value;
 
                 //3. 基于axios请求地区列表数据
                 axios({
                     url: 'http://hmajax.itheima.net/api/area',
                     params: {
+                        //pname和cname是后端定义的参数名（不可改），pName和cName是前端获取的输入值（可改，如果前后端参数名一致，可省略）
                         pname: pName,
                         cname: cName
+                        //简写需要修改的地方2
+                        // pname,cname
                     }
                 }).then(result => {
                     //获取数据，并渲染到控制台（检查）
