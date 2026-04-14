@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例1</title>
+    // 引入bootstrap库
+    <link href="https://labfile.oss.aliyuncs.com/courses/9203/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bs-body-bg: #fff;
+            font-size: 15px;
+        }
+
+        /* 前缀 --bs- 表明它是 Bootstrap 的内置 CSS 变量。 */
+        body {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <image src="/课外/屎山/image/案例_地区查询.jpeg" alt="题目">
+        <p>完整：http://hmajax.itheima.net/api/area?pname=北京&cname=北京市</p>
+        <br><br>
+        <div class="container">
+            <form id="editForm" class="rom">
+                <!-- 输入省份名字 -->
+                <div class="mb-3 col">
+                    <label class="form-label">省份</label>
+                    <input type="text" value="北京" class="form-control" name="province" placeholder="请输入省份">
+                </div>
+                <!-- 输入城市名字 -->
+                <div class="mb-3 col">
+                    <label class="form-label">城市</label>
+                    <input type="text" value="北京市" class="form-control city" name="city" placeholder="请输入城市">
+                </div>
+            </form>
+            <button id="fetchData" class="btn btn-primary sel-btn">点击查询</button>
+            <p>地区列表：</p>
+            <ul class="list-group">
+                <!-- 示例地区 -->
+                <li class="list-group-item">东城区</li>
+            </ul>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            // 目标：根据省份和城市名字，查询地区列表
+            //1.查询按钮-点击事件
+            document.querySelector('.sel-btn').addEventListener('click', () => {
+                console.log('点击了查询按钮')
+                //2.获取输入的省份和城市名字
+                //.value是获取输入框的值
+                const pName = document.querySelector('.form-control').value;
+                const cName = document.querySelector('.city').value;
+
+                //3. 基于axios请求地区列表数据
+                axios({
+                    url: 'http://hmajax.itheima.net/api/area',
+                    params: {
+                        pname: pName,
+                        cname: cName
+                    }
+                }).then(result => {
+                    //获取数据，并渲染到控制台（检查）
+                    console.log(result.data.list)
+                    //接收到list
+                    const list = result.data.list
+                    console.log(list)
+                    //4.数组映射=>map()=>li标签字符串
+                    let theLi = list.map(areaName => `<li class="list-group-item">${areaName}</li>`).join('')
+                    console.log(theLi)
+                    //渲染到页面
+                    document.querySelector('.list-group').innerHTML = theLi;
+                })
+            })
+
+
+        </script>
+
+</body>
+
+</html>

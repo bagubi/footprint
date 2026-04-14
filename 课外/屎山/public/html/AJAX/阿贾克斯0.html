@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Example</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    // 引入axios库
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>获取服务器数据（js实现：XMLHttpRequest（原生底层））</h1>
+    <button id="fetchData">点击获取数据</button>
+    <div id="loading" style="display: none;">加载中...</div>
+    <div id="result"></div>
+    <p>
+        <strong>AJAX</strong> 是异步的 JS 和 XML 的缩写，是一种在不重新加载整个页面的情况下与服务器交换数据并更新部分网页的技术。
+        就是使用 <strong>XMLHttpRequest</strong> 对象与服务器通讯。<dr>
+            <strong>怎么用AJAX？</strong>1.先使用axios库，与服务器进行数据通信<dr>
+                2.再学XMLHttpRequest对象的使用（了解AJAX底层原理），发送HTTP请求到服务器，并处理服务器的响应<dr>
+    </p>
+
+    <h1>获取服务器数据（axios实现）</h1>
+    <button id="fetchDataAxios">点击获取数据</button>
+    <div id="loadingAxios" style="display: none;">加载中...</div>
+    <div id="resultAxios"></div>
+
+    <script>
+
+        // 使用XMLHttpRequest获取数据
+        document.getElementById('fetchData').addEventListener('click', function () {
+            // 显示加载提示
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').innerHTML = '';
+
+            // 创建 XMLHttpRequest 对象
+            var xhr = new XMLHttpRequest();
+
+            // 配置请求
+            xhr.open('GET', '/json/data.json', true);
+
+            // 设置响应类型
+            xhr.responseType = 'json';
+
+            // 设置请求完成后的回调函数
+            xhr.onload = function () {
+                // 隐藏加载提示
+                document.getElementById('loading').style.display = 'none';
+
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // 请求成功
+                    var data = xhr.response;
+                    document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+                } else {
+                    // 请求失败
+                    document.getElementById('result').innerHTML = '请求失败: ' + xhr.status;
+                }
+            };
+
+            // 设置请求错误的回调函数
+            xhr.onerror = function () {
+                // 隐藏加载提示
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('result').innerHTML = '请求失败: 网络错误';
+            };
+
+            // 发送请求
+            xhr.send();
+        });
+        // 使用axios获取数据
+        document.getElementById('fetchDataAxios').addEventListener('click', function () {
+            // 显示加载提示
+            document.getElementById('loadingAxios').style.display = 'block';
+            document.getElementById('resultAxios').innerHTML = '';
+
+            // 使用axios（自己写的后端）发送GET请求
+            axios.get('/json/data.json')
+                .then(function (response) {
+                    // 隐藏加载提示
+                    document.getElementById('loadingAxios').style.display = 'none';
+                    // 显示结果
+                    document.getElementById('resultAxios').innerHTML = JSON.stringify(response.data, null, 2);
+                })
+                .catch(function (error) {
+                    // 隐藏加载提示
+                    document.getElementById('loadingAxios').style.display = 'none';
+                    // 显示错误信息
+                    document.getElementById('resultAxios').innerHTML = '请求失败: ' + error.message;
+                });
+            ////axios语法
+            // axios({
+            //     url: '目标资源地址'
+            // }).then((result) => {
+            //     //对服务器返回的数据做后续处理
+            // });
+
+            // 使用axios获取省份列表数据
+            axios({
+                url: 'http://hmajax.itheima.net/api/province'
+            }).then((result) => {
+                //好习惯：多打印，确认属性名
+                console.log(result)
+                console.log(result.data.list)
+                //对服务器返回的数据做后续处理
+                document.getElementById('resultAxios').innerHTML = result.data.list.join('<br>');
+            });
+        });
+        //
+    </script>
+</body>
+
+</html>

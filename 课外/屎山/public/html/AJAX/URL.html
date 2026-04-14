@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL</title>
+    // 引入axios库
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <q>什么是URL：统一资源定位符</q>
+    <h6>URL结构</h6>
+    <q>协议：//域名/资源路径</q>
+    <h6>URL查询参数</h6>
+    <q>URL查询参数：?参数名1=参数值1&参数名2=参数值2</q>
+    <h6>URL查询参数的封装</h6>
+    <p></p>
+    <script>
+        //axios-查询参数
+        //语法：使用axios提供的params选项来设置查询参数
+        //示例：
+        // axios({
+        //     url: '目标资源地址',
+        //     params: {
+        //         参数名1: 参数值1,
+        //         参数名2: 参数值2
+        //     }
+        // }).then(result => {
+        //     //处理结果
+        // })
+
+        axios({
+            url: 'http://hmajax.itheima.net/api/city',
+            params: {
+                pname: '河北省'
+            }
+        }).then(result => {
+            //处理结果
+            console.log(result.data.list)
+            document.querySelector('p').innerHTML = result.data.list.join('<br>');
+        })
+    </script>
+</body>
+
+</html>
