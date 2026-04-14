@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用请求方法</title>
+    // 引入axios库
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <p>请求方法：对服务器资源，要执行的操作</p>
+    <image src="/课外/屎山/image/常用的请求方法.png" alt="题目"></image>
+    <p>
+        <strong>url</strong>：请求的资源地址<br>
+        <strong>method</strong>：请求的方法，GET可以省略（不区分大小写）<br>
+        <strong>params</strong>：请求的参数（查询参数）<br>
+        <strong>data</strong>：提交资源
+    </p>
+    <h6>题目</h6>
+    <image src="/课外/屎山/image/案例_数据提交-注册账号.png" alt="题目"></image>
+    <button id="fetchData" class="btn btn-primary sel-btn">点击注册</button>
+    <script>
+        // 格式
+        // axios({
+        //     url: '目标资源地址',
+        //     method: '请求方法',
+        //     data: {
+        //         参数名: 值
+        //     }
+        // }).then(result => {
+        //     //处理结果
+        // })
+        document.querySelector('#fetchData').addEventListener('click', () => {
+            axios({
+                url: 'http://hmajax.itheima.net/api/register',
+                //请求方法
+                method: 'POST',
+                //提交数据
+                data: {
+                    username: 'itheima8',
+                    password: '123456'
+                }
+            }).then(result => {
+                //处理结果
+                console.log(result)
+                //正确响应时
+                console.log(result.data.message)
+                //错误响应时
+                console.log(result.response.data.message)
+            })
+            //检查是否注册成功去result.response.data.message
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios的错误处理</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h6>axios的错误处理</h6>
+    <p>场景：再次注册相同的账号，会遇到报错信息</p>
+    <button id="fetchData" class="btn btn-primary sel-btn">点击注册</button>
+    <script>
+        //格式
+        // axios({
+        //     //请求选项
+        // }).then(result => {
+        //     //处理结果
+        // }).catch(error => {
+        //     //处理错误
+        // })
+        //目标：点击按钮，通过axios提交用户和密码，完成注册。
+        //示例需求：使用axios错误处理语法，拿到报错信息，弹框反馈给用户；
+        document.querySelector('#fetchData').addEventListener('click', () => {
+            axios({
+                url: 'http://hmajax.itheima.net/api/register',
+                method: 'POST',
+                data: {
+                    username: 'itheima8',
+                    password: '123456'
+                }
+            }).then(result => {
+                //处理结果(成功时)
+                console.log(result)
+            }).catch(error => {
+                //处理错误（失败时）
+                console.error(error)
+                console.log(error.response.data.message)
+                alert(error.response.data.message)
+
+            })
+        })
+    </script>
+</body>
+
+</html>
