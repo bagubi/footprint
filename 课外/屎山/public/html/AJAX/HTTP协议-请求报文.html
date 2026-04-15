@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>请求报文</title>
+</head>
+
+<body>
+    <p>HTTP协议：规定了浏览器发送请求和服务器响应的<strong>格式</strong><br><br>
+        请求报文:浏览器发送给服务器的内容<br><br>
+        1.第1行的请求行：请求方法，URL，协议(GET /index.html HTTP/1.1)<br><br>
+        2.第2行到第11行的请求头：以键值对的格式携带的附加信息，比如<strong>Content-Type</strong>:application/json(是本次浏览器携带的文件类型)<br><br>
+        3.空行：分隔请求头，空行之后的是发送给服务器的资源<br><br>
+        4.请求体：浏览器发送给服务器的资源（比如提交的表单数据）<br><br>
+        在F12=>网络=>Fetch/XHR=>查看源代码（标头看请求头；载荷看请求体）
+    </p>
+
+</body>
+
+</html>
