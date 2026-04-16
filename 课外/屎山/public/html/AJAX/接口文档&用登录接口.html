@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>接口文档</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <p>
+        <strong>接口文档:</strong>描述接口的文章(后端给的)<br><br>
+        <strong>接口:</strong>使用AJAX和服务器通讯时，使用URL，请求方式，以及参数。<br><br>
+        <strong>黑马的接口文档:</strong>https://s.apifox.cn/apidoc/docs-site/1937884/api-49760215
+    </p>
+    <button id="ajaxLogin1">点击登录</button>
+    <script>
+        //目标：点击按钮，通过AJAX提交用户名和密码，完成登录
+        document.querySelector('#ajaxLogin1').addEventListener('click', () => {
+            axios({
+                url: 'https://hmajax.itheima.net/api/login',
+                method: 'POST',
+                data: {
+                    username: 'itheima8',
+                    password: '123456'
+                }
+            }).then(result => {
+                console.log(result.data.message)
+                alert(result.data.message)
+            }).catch(error => {
+                alert(error.response.data.message)
+            })
+        })
+    </script>
+    </script>
+</body>
+
+</html>
