@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    // 引入axios库
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body onsubmit="return false;" onkeydown="if(event.key==='Enter') event.preventDefault();">
+    <img src="/课外/屎山/image/图片上传.png" alt="" style="width: 65%; height: 900px; float: left;">
+    <h3 style="margin-left: 1520px;">
+        图片上传<br>
+        1. 获取图片文件对象<br>
+        2. 使用 FormData 携带图片文件<br>
+        3. 提交表单数据(form-data)到服务器，使用图片 url 网址
+    </h3>
+    <div onsubmit="return false;">
+        <input type="file" id="upload">
+        <img src="" alt="" class="my-img">
+    </div>
+    <script>
+        document.addEventListener('submit', e => {
+            e.preventDefault();
+            console.log('阻止了表单提交！');
+        });
+        // 获取图片文件对象
+        var upload = document.getElementById('upload').addEventListener('change', e => {
+            console.log('页面即将刷新/关闭！');
+            //获取图片文件
+            console.log(e.target.files[0]); // 输出选择的文件
+            // var file = this.files[0]; // 获取选择的文件对象
+            const formData = new FormData(); // 创建 FormData 对象
+            formData.append('img', e.target.files[0]); // 将文件添加到 FormData 中，[键名/参数名]为 'image'
+
+            // // 使用 axios 发送 POST 请求上传图片
+            axios({
+                url: 'http://localhost:3000/api/uploadimg',
+                method: 'POST',
+                data: formData
+            }).then(res => {
+                console.log(res); // 输出服务器响应
+                //取出图片URL网址，用img标签加载显示
+                console.log('上传成功:', res.data.url);
+                document.querySelector('.my-img').src = res.data.url; // 将服务器返回的图片 URL 设置为 img 标签的 src 属性
+            }).catch(err => {
+                console.error('上传失败:', err);
+            });
+        });
+
+    </script>
+</body>
+
+
+</html>
