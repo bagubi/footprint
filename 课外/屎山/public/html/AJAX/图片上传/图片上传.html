@@ -4,54 +4,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    // 引入axios库
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline';">
+    <title>图片上传系统</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        * {
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .left-img {
+            width: 65%;
+            height: auto;
+            max-height: 900px;
+            object-fit: contain;
+        }
+
+        .right-panel {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .upload-area {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .my-img {
+            margin-top: 20px;
+            max-width: 100%;
+            max-height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.loading {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body onsubmit="return false;" onkeydown="if(event.key==='Enter') event.preventDefault();">
-    <img src="/课外/屎山/image/图片上传.png" alt="" style="width: 65%; height: 900px; float: left;">
-    <h3 style="margin-left: 1520px;">
-        图片上传<br>
-        1. 获取图片文件对象<br>
-        2. 使用 FormData 携带图片文件<br>
-        3. 提交表单数据(form-data)到服务器，使用图片 url 网址
-    </h3>
-    <div onsubmit="return false;">
-        <input type="file" id="upload">
-        <img src="" alt="" class="my-img">
-    </div>
-    <script>
-        document.addEventListener('submit', e => {
-            e.preventDefault();
-            console.log('阻止了表单提交！');
-        });
-        // 获取图片文件对象
-        var upload = document.getElementById('upload').addEventListener('change', e => {
-            console.log('页面即将刷新/关闭！');
-            //获取图片文件
-            console.log(e.target.files[0]); // 输出选择的文件
-            // var file = this.files[0]; // 获取选择的文件对象
-            const formData = new FormData(); // 创建 FormData 对象
-            formData.append('img', e.target.files[0]); // 将文件添加到 FormData 中，[键名/参数名]为 'image'
+    <div class="container">
+        <img src="../../../../image/图片上传.png" alt="示例图" class="left-img">
+        <div class="right-panel">
+            <h3>图片上传步骤：</h3>
+            <ol>
+                <li>获取图片文件对象</li>
+                <li>使用 FormData 携带图片文件</li>
+                <li>提交表单数据(form-data)到服务器，使用图片 url 网址</li>
+            </ol>
 
-            // // 使用 axios 发送 POST 请求上传图片
+            <div class="upload-area">
+                <input type="file" id="upload" accept="image/*">
+                <div id="status" class="status"></div>
+                <img src="" alt="预览图" class="my-img" id="preview">
+                <button id="clearBtn" style="display: none;">清除图片</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // 获取元素(不重要
+        const uploadInput = document.getElementById('upload');
+        const statusDiv = document.getElementById('status');
+        const previewImg = document.getElementById('preview');
+        const clearBtn = document.getElementById('clearBtn');
+
+        // 清除按钮(不重要
+        clearBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadInput.value = '';
+            previewImg.src = '';
+            previewImg.style.display = 'none';
+            clearBtn.style.display = 'none';
+            statusDiv.innerHTML = '';
+            statusDiv.className = 'status';
+            showStatus('已清除，可以重新选择图片', '');
+            return false;
+        });
+
+        // 文件上传 - 单一事件监听器
+        uploadInput.addEventListener('change', function (e) {
+            console.log('文件选择事件触发，文件为：', e.target.files[0]);
+
+            // 1.获取文件
+            const file = e.target.files[0];
+
+            console.log('选择的文件:', file.name, '大小:', (file.size / 1024).toFixed(2), 'KB');
+
+            // 本地预览(不重要
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImg.src = e.target.result;
+                previewImg.style.display = 'block';
+                clearBtn.style.display = 'inline-block';
+            };
+            reader.readAsDataURL(file);
+
+            // 显示加载状态
+            showStatus('正在上传中...', 'loading');
+
+            // 2.创建 FormData----------------------------------
+            const formData = new FormData();
+            formData.append('img', file);
+
+            // 3.使用 axios 发送请求-----------------------------
             axios({
                 url: 'http://localhost:3000/api/uploadimg',
                 method: 'POST',
-                data: formData
+                data: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             }).then(res => {
-                console.log(res); // 输出服务器响应
-                //取出图片URL网址，用img标签加载显示
-                console.log('上传成功:', res.data.url);
-                document.querySelector('.my-img').src = res.data.url; // 将服务器返回的图片 URL 设置为 img 标签的 src 属性
+                console.log('服务器响应:', res.data);
+
+                // 上传成功，更新预览图-------------------------
+                previewImg.src = res.data.url;
+                showStatus(`✅ 上传成功！图片地址：${res.data.url}`, 'success');
+                console.log('上传成功，图片URL:', res.data.url);
+
             }).catch(err => {
                 console.error('上传失败:', err);
             });
+
+            return false;
         });
 
+        // 显示状态信息（不重要
+        function showStatus(message, type) {
+            statusDiv.innerHTML = message;
+            statusDiv.className = `status ${type || ''}`;
+            console.log(`[${type || 'INFO'}]`, message);
+        }
+
+        // 页面加载完成
+        showStatus('请选择图片文件上传（已完全禁用页面刷新）', '');
+        console.log('✅ 防刷新机制已完全启用');
     </script>
 </body>
-
 
 </html>
