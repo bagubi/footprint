@@ -6,14 +6,14 @@ const fs = require("fs");
 //     //err为错误对象，成功时为null
 // });
 // //3.读取格式
-// fs.readFile("文件路径", (err, data) => {
+// fs.readFile("文件路径", "utf8", (err, data) => {
 //     //”读取“后的回调函数
 //     //err为错误对象，成功时为null
 //     //data为读取到的数据，为Buffer对象
 // });
 // 例子
 //写入
-fs.writeFile("./fs.txt", "Hello, fs!", err => {
+fs.writeFile("fs.txt", "Hello, fs!", err => {
     if (err) {
         console.error(err);
     } else {
@@ -21,10 +21,10 @@ fs.writeFile("./fs.txt", "Hello, fs!", err => {
     }
 });
 //读取
-fs.readFile("./fs.txt", "utf8", (err, data) => {
-    if (err) {
-        console.error(err);
-    } else {
-        console.log(data);
-    }
+fs.readFile("fs.txt", (err, data) => {
+    if (err) console.error(err);
+    // data为读取到的buffer 16进制数据，.toString()转换为字符串
+    else console.log(data);
+    console.log(data.toString());
+
 });
