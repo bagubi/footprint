@@ -1,0 +1,2 @@
+  //加到package.json；表示所有 .js 文件都被当作 ES 模块（ESM） 处理
+  "type": "module",
