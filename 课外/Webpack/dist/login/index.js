@@ -1,0 +1,1 @@
+(()=>{"use strict";document.getElementById("loginForm").addEventListener("submit",e=>{e.preventDefault();const o=document.getElementById("phone").value,t=document.getElementById("password").value;(e=>11===e.length)(o)?t.length<6?console.log("密码至少6位"):(console.log("手机号:",o),console.log("密码:",t),alert("登录成功（演示）！")):console.log("手机号格式不正确！必须是11位数字")})})();
