@@ -62,9 +62,27 @@ import './login.css';
 
 //如果用bootstrap等第三方库
 //npm i bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 //6.优化-提取css文件
 //6.1安装插件：npm i mini-css-extract-plugin --save-dev （不能和style-loader一起使用）
 //6.2在webpack.config.js中引入插件并配置
 
+//7.优化-压缩css文件
+//7.1安装插件：npm i css-minimizer-webpack-plugin --save-dev
+//7.2在webpack.config.js中引入插件并配置（生产环境推荐）
+
+//8.打包less代码
+//8.1新建less代码（设置背景图）并引入到src/login/index.js中
+import './index.less';
+//8.2安装loader：npm i less less-loader --save-dev
+//8.3在webpack.config.js中配置loader
+
+//9.打包图片
+//9.1新建图片并引入到src/login/index.js中
+//9.2在webpack.config.js中配置loader（webpack5内置asset模块）
+//注意： js 中引入本地图片资源要用 import 方式（如果是网络图片http地址，字符串可以直接写）
+import logo from './assets/logo.png';
+const img1 = document.createElement('img');
+img1.src = logo;
+document.querySelector('.login-container').appendChild(img1);
