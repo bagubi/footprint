@@ -92,6 +92,7 @@ document.querySelector('.login-container').appendChild(img1);
 //10.1 使用npm 下载axios库：npm i axios
 //10.2 准备并修改 utils 工具包源代码导出实现函数
 //10.3 导入并编写逻辑弹幕，打包后运行观察效果
+
 import myAxios from '../utils/request.js';
 import { myAlert } from '../utils/alert.js';
 document.getElementById('loginForm').addEventListener('submit', (e) => {
@@ -125,6 +126,17 @@ document.getElementById('loginForm').addEventListener('submit', (e) => {
     }).then(res => {
         myAlert(true, '登录成功！');
     }).catch(err => {
-        myAlert(false, err.response.data.message || '登录失败！');
+        const errorMessage = err?.response?.data?.message || err?.message || '登录失败！';
+        myAlert(false, errorMessage);
     });
 });
+
+
+//11.使用webpack-dev-server开发服务器热更新
+//11.1安装开发服务器：npm i webpack-dev-server --save-dev
+//11.2在package.json中设置为开发模式，配置添加启动命令："dev": "webpack serve"
+//11.3执行启动命令：npm run dev（要自动弹出浏览器加--open）
+//注意：1.webpack-dev-server借助http模块创建8080默认web服务
+//注意：2.webpack-dev-server默认拿public文件夹作为静态资源目录打开到浏览器，如果要修改，在webpack.config.js中配置
+//可以直接自己拼接访问 dist 目录下的内容
+console.log(观察页面是否有自动打包更新);

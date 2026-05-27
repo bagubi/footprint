@@ -23,8 +23,8 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 //只能有一个module.exports
 module.exports = {
-    // 指定构建模式（development 或 production），可被环境变量覆盖
-    mode: devMode ? 'development' : 'production',
+    // 11.指定构建模式（development 开发模式 或 production），可被环境变量覆盖
+    mode: 'development',
     // 入口文件
     entry: path.resolve(__dirname, 'src/login/index.js'),
     // path.resolve()方法将路径或路径片段解析为绝对路径
@@ -125,5 +125,6 @@ module.exports = {
             new CssMinimizerPlugin(),
         ],
     },
+
 
 }
