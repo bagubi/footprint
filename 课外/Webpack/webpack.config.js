@@ -13,6 +13,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 7.优化-压缩css文件（要配合MiniCssExtractPlugin.loader 使用）
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
+// 判断开发模式（用于设置 mode、是否使用 style-loader 等）
+const devMode = process.env.NODE_ENV !== 'production';
+
 
 // webpack 配置文件，建在根目录
 
@@ -20,6 +23,8 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 //只能有一个module.exports
 module.exports = {
+    // 指定构建模式（development 或 production），可被环境变量覆盖
+    mode: devMode ? 'development' : 'production',
     // 入口文件
     entry: path.resolve(__dirname, 'src/login/index.js'),
     // path.resolve()方法将路径或路径片段解析为绝对路径

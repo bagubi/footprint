@@ -28,28 +28,28 @@ import { checkPhone, checkCode } from '../utils/check.js';
 
 //3.2 JS代码
 // src/login/index.js（修正版）
-document.getElementById('loginForm').addEventListener('submit', (e) => {
-    e.preventDefault();
+// document.getElementById('loginForm').addEventListener('submit', (e) => {
+//     e.preventDefault();
 
-    const phone = document.getElementById('phone').value;
-    const password = document.getElementById('password').value;
+//     const phone = document.getElementById('phone').value;
+//     const password = document.getElementById('password').value;
 
-    // 校验手机号
-    if (!checkPhone(phone)) {
-        console.log('手机号格式不正确！必须是11位数字');
-        return;
-    }
+//     // 校验手机号
+//     if (!checkPhone(phone)) {
+//         console.log('手机号格式不正确！必须是11位数字');
+//         return;
+//     }
 
-    // 简单校验密码非空（或可加长度限制）
-    if (password.length < 6) {
-        console.log('密码至少6位');
-        return;
-    }
+//     // 简单校验密码非空（或可加长度限制）
+//     if (password.length < 6) {
+//         console.log('密码至少6位');
+//         return;
+//     }
 
-    console.log('手机号:', phone);
-    console.log('密码:', password);
-    alert('登录成功（演示）！');
-});
+//     console.log('手机号:', phone);
+//     console.log('密码:', password);
+//     alert('登录成功（演示）！');
+// });
 
 //4.使用插件自动生成html文件并引入打包后的js文件
 //4.1安装插件：npm i html-webpack-plugin --save-dev
@@ -86,3 +86,45 @@ import logo from './assets/logo.png';
 const img1 = document.createElement('img');
 img1.src = logo;
 document.querySelector('.login-container').appendChild(img1);
+
+
+//10.完成登录功能
+//10.1 使用npm 下载axios库：npm i axios
+//10.2 准备并修改 utils 工具包源代码导出实现函数
+//10.3 导入并编写逻辑弹幕，打包后运行观察效果
+import myAxios from '../utils/request.js';
+import { myAlert } from '../utils/alert.js';
+document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const phone = document.getElementById('phone').value;
+    const password = document.getElementById('password').value;
+    const btn = document.querySelector('button[type="submit"]');
+
+    // 校验手机号
+    if (!checkPhone(phone)) {
+        myAlert(false, '手机号格式不正确！必须是11位数字');
+        console.log('手机号格式不正确！必须是11位数字');
+        return;
+    }
+
+    // 简单校验密码非空（或可加长度限制）
+    if (!checkCode(password)) {
+        myAlert(false, '密码至少6位');
+        console.log('密码至少6位');
+        return;
+    }
+
+    console.log('手机号:', phone);
+    console.log('密码:', password);
+    myAxios({
+        url: '/login',
+        method: 'post',
+        data: { mobile: phone, code: password },
+
+    }).then(res => {
+        myAlert(true, '登录成功！');
+    }).catch(err => {
+        myAlert(false, err.response.data.message || '登录失败！');
+    });
+});

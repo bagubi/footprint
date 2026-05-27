@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT Token 认证演示 - 前端</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+
+        .data-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border-left: 4px solid #007bff;
+        }
+
+        .token-info {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            font-size: 12px;
+            word-break: break-all;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>JWT Token 认证演示</h2>
+
+        <!-- 登录表单 -->
+        <div id="loginForm">
+            <h3>登录</h3>
+            <div class="form-group">
+                <label>用户名:</label>
+                <input type="text" id="username" placeholder="例如: 张三" value="张三">
+            </div>
+            <div class="form-group">
+                <label>密码:</label>
+                <input type="password" id="password" placeholder="任意密码" value="123456">
+            </div>
+            <button onclick="login()">登录</button>
+            <div id="loginMessage"></div>
+        </div>
+
+        <!-- 登录后显示的内容（初始隐藏） -->
+        <div id="userPanel" style="display: none;">
+            <h3>用户面板</h3>
+            <p>欢迎, <span id="userName"></span>!</p>
+
+            <button onclick="fetchUserProfile()">获取个人资料</button>
+            <button onclick="fetchOrders()">获取订单列表</button>
+            <button class="logout-btn" onclick="logout()">退出登录</button>
+
+            <div id="responseData" class="data-area">
+                <strong>返回数据:</strong><br>
+                <span id="dataContent">暂无数据</span>
+            </div>
+        </div>
+
+        <!-- Token 信息显示（调试用） -->
+        <div id="tokenInfo" class="token-info" style="display: none;">
+            <strong>当前 Token:</strong><br>
+            <span id="tokenValue"></span>
+        </div>
+    </div>
+
+    <script>
+        // ==================== 配置 ====================
+        // 后端 API 地址（请根据你的后端实际地址修改）
+        const API_BASE_URL = 'http://localhost:3000/api';  // 假设后端运行在 3000 端口
+
+        // ==================== 辅助函数 ====================
+
+        // 保存 Token 到 localStorage
+        function saveToken(token) {
+            localStorage.setItem('userToken', token);
+            console.log('Token 已保存:', token);
+        }
+
+        // 从 localStorage 获取 Token
+        function getToken() {
+            return localStorage.getItem('userToken');
+        }
+
+        // 删除 Token（退出登录）
+        function removeToken() {
+            localStorage.removeItem('userToken');
+            console.log('Token 已删除');
+        }
+
+        // 检查是否已登录
+        function isLoggedIn() {
+            return getToken() !== null;
+        }
+
+        // 解码 Token 获取用户信息（仅用于展示，实际验证在后端）
+        function decodeToken(token) {
+            try {
+                const payloadBase64 = token.split('.')[1];
+                const payload = JSON.parse(atob(payloadBase64));
+                return payload;
+            } catch (error) {
+                console.error('Token 解码失败:', error);
+                return null;
+            }
+        }
+
+        // 显示登录界面
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('userPanel').style.display = 'none';
+        }
+
+        // 显示用户界面
+        function showUserPanel(userInfo) {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('userPanel').style.display = 'block';
+            document.getElementById('userName').innerText = userInfo?.username || '用户';
+
+            // 显示 Token 信息（仅调试用）
+            const token = getToken();
+            if (token) {
+                document.getElementById('tokenInfo').style.display = 'block';
+                document.getElementById('tokenValue').innerText = token;
+            }
+        }
+
+        // 显示响应数据
+        function showResponseData(data) {
+            document.getElementById('dataContent').innerHTML = JSON.stringify(data, null, 2);
+        }
+
+        // ==================== 核心 API 调用 ====================
+
+        // 1. 登录接口 - 获取 Token
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('loginMessage');
+
+            messageDiv.innerHTML = '登录中...';
+            messageDiv.className = '';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.token) {
+                    // 登录成功：保存 Token
+                    saveToken(data.token);
+
+                    // 解码 Token 获取用户信息（可选，用于显示）
+                    const userInfo = decodeToken(data.token);
+
+                    messageDiv.innerHTML = '登录成功！';
+                    messageDiv.className = 'success';
+
+                    // 显示用户面板
+                    showUserPanel(userInfo);
+                } else {
+                    // 登录失败
+                    messageDiv.innerHTML = data.message || '登录失败，请检查用户名和密码';
+                    messageDiv.className = 'error';
+                }
+            } catch (error) {
+                console.error('登录请求失败:', error);
+                messageDiv.innerHTML = '网络错误，请确保后端服务已启动';
+                messageDiv.className = 'error';
+            }
+        }
+
+        // 2. 通用的请求函数 - 自动带上 Token
+        async function authFetch(url, options = {}) {
+            const token = getToken();
+
+            if (!token) {
+                throw new Error('未登录，请先登录');
+            }
+
+            // 在请求头中加入 Token
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,  // 关键：把 Token 放在 Authorization 头
+                ...options.headers
+            };
+
+            const response = await fetch(`${API_BASE_URL}${url}`, {
+                ...options,
+                headers
+            });
+
+            // 如果返回 401 未授权，说明 Token 失效或无效
+            if (response.status === 401) {
+                removeToken();  // 清除无效的 Token
+                showLoginForm(); // 跳转到登录页
+                throw new Error('登录已过期，请重新登录');
+            }
+
+            return response;
+        }
+
+        // 3. 获取用户资料（需要 Token）
+        async function fetchUserProfile() {
+            showResponseData({ status: '加载中...' });
+
+            try {
+                const response = await authFetch('/profile');
+                const data = await response.json();
+                showResponseData(data);
+            } catch (error) {
+                showResponseData({ error: error.message });
+            }
+        }
+
+        // 4. 获取订单列表（需要 Token）
+        async function fetchOrders() {
+            showResponseData({ status: '加载中...' });
+
+            try {
+                const response = await authFetch('/orders');
+                const data = await response.json();
+                showResponseData(data);
+            } catch (error) {
+                showResponseData({ error: error.message });
+            }
+        }
+
+        // 5. 退出登录 - 删除本地 Token
+        function logout() {
+            removeToken();
+            showLoginForm();
+            showResponseData({ message: '已退出登录' });
+            document.getElementById('tokenInfo').style.display = 'none';
+        }
+
+        // ==================== 页面初始化 ====================
+        // 检查是否有保存的 Token，如果有则自动登录
+        function checkAutoLogin() {
+            const token = getToken();
+            if (token) {
+                const userInfo = decodeToken(token);
+                if (userInfo) {
+                    showUserPanel(userInfo);
+                } else {
+                    // Token 无效，清除
+                    removeToken();
+                    showLoginForm();
+                }
+            } else {
+                showLoginForm();
+            }
+        }
+
+        // 页面加载时执行
+        checkAutoLogin();
+
+        // 控制台输出提示
+        console.log(`
+        ========================================
+        JWT 前端演示已启动
+        
+        功能说明：
+        1. 登录后，Token 会保存在 localStorage 中
+        2. 每次请求会自动在 Header 中带上 Token
+        3. 退出登录会删除本地的 Token
+        
+        注意：需要配合后端服务器使用！
+        后端 API 地址: ${API_BASE_URL}
+        ========================================
+        `);
+    </script>
+</body>
+
+</html>
