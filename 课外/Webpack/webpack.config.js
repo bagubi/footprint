@@ -5,16 +5,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // 作用：将 CSS 从 JS 中提取到独立的 .css 文件（生产环境推荐）
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// 判断当前是否为开发环境
+// 13.3判断当前是否为开发环境
 // process.env.NODE_ENV 是 Node.js 环境变量
 // 如果不是 'production'（生产环境），则 devMode 为 true（即开发模式）
 // const devMode = process.env.NODE_ENV !== 'production';
+//配合：
+
+// module: {
+//     //模块加载规则
+//     rules: [
+//         //打包css文件
+//         {
+//             test: /\.css$/i,    //匹配以.css结尾的文件（/i 忽略大小写）
+//             // use: ['style-loader', 'css-loader'],    //使用style-loader和css-loader
+//             //这行要改
+//             use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader'],    //使用MiniCssExtractPlugin.loader和css-loader（生产环境推荐）
+//         },
+//如果不用devMode就写成下面这样
+
 
 // 7.优化-压缩css文件（要配合MiniCssExtractPlugin.loader 使用）
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-// 判断开发模式（用于设置 mode、是否使用 style-loader 等）
-const devMode = process.env.NODE_ENV !== 'production';
 
 
 // webpack 配置文件，建在根目录
@@ -24,7 +36,12 @@ const devMode = process.env.NODE_ENV !== 'production';
 //只能有一个module.exports
 module.exports = {
     // 11.指定构建模式（development 开发模式 或 production），可被环境变量覆盖
-    mode: 'development',
+    //设置方式1：在webpack.config.js中设置mode: 'development'或'mode: 'production'，默认值为production
+    //设置方式2：在package.json的scripts里"dev": "webpack server --mode=development"，"build": "webpack --mode=production"
+    //package.json里设置的命令行优先级高于webpack.config.js里的mode配置项
+    // （推荐使用命令行设置）
+    // mode: 'development',
+
     // 入口文件
     entry: path.resolve(__dirname, 'src/login/index.js'),
     // path.resolve()方法将路径或路径片段解析为绝对路径
@@ -50,7 +67,8 @@ module.exports = {
         }),
         // 提取css到文件夹，和style-loader不能一起使用
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
+            //只能写相对路径，不能写拼接路径
+            filename: './login/index.css',
         }),//生成css文件
     ],
     // 模块加载器(让webpack能够处理非js文件)
@@ -61,8 +79,9 @@ module.exports = {
             {
                 test: /\.css$/i,    //匹配以.css结尾的文件（/i 忽略大小写）
                 // use: ['style-loader', 'css-loader'],    //使用style-loader和css-loader
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],    //使用MiniCssExtractPlugin.loader和css-loader（生产环境推荐）
+                use: [process.env.NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader'],    //使用MiniCssExtractPlugin.loader和css-loader（生产环境推荐）
             },
+
             // 打包sass/scss代码
             // {
             //     // 匹配所有 .sass、.scss、.css 文件（/i 表示忽略大小写）
@@ -89,7 +108,9 @@ module.exports = {
                 test: /\.less$/i,
                 use: [
                     // 提取为独立 CSS 文件
-                    MiniCssExtractPlugin.loader,
+                    // MiniCssExtractPlugin.loader,
+                    //升级成支持环境切换
+                    process.env.NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
                     // 将 CSS 代码注入到 HTML 页面（后
                     //不能和 MiniCssExtractPlugin.loader 一起使用（生产环境推荐）
                     // 'style-loader',

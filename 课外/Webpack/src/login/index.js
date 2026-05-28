@@ -140,3 +140,41 @@ document.getElementById('loginForm').addEventListener('submit', (e) => {
 //注意：2.webpack-dev-server默认拿public文件夹作为静态资源目录打开到浏览器，如果要修改，在webpack.config.js中配置
 //可以直接自己拼接访问 dist 目录下的内容
 console.log(观察页面是否有自动打包更新);
+
+
+//12.打包模式设置
+// development: 调试代码，实时加载，不压缩，包含完整的错误信息和调试工具（快）
+// production: 生产环境，压缩代码，去除调试工具和错误信息，优化性能（小）
+
+// 设置方式:
+
+// 1.在webpack.config.js中配置
+// module.exports = {
+// ... ...
+// mode: 'development',
+// ... ...
+// };
+
+// 2.在package.json中配置："build": "webpack --mode production"(优先级高)
+// 3.执行打包命令：npm run build
+
+
+//13.打包模式的应用
+//需求：在开发模式下用 stylw-loader 内嵌更快，在生产模式下提取css代码
+//方案1：webpack.config.js配置导出函数，但是局限性大（只接受两种模式）
+//方案2：借助cross-env(跨平台通用)包命令，设置参数区分环境
+/**
+ *
+ * "scripts": {
+ *   "dev": "cross-env NODE_ENV=development webpack --mode=development",
+ *   "build": "cross-env NODE_ENV=production webpack --mode=production"
+ *  }
+ *
+ * */
+
+//运行	npm run dev （方便调试） 只有 JS文件  使用 style-loader  打包到内存看不出来
+//运行	npm run build  (性能优化)  独立 .css 文件 使用 MiniCssExtractPlugin.loader
+//方案3:配置不同的webpack.config.js(适用多种模型差异性较大的情况)
+
+//14.前端-注入环境变量(根据不同的环境变量，注入不同的值)
+//

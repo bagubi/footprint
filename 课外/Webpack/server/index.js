@@ -1,14 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const JWT_SECRET = 'your_jwt_secret_here';
-
-// 简单内存用户示例（生产不要这样做）
+// 测试账号
 const users = [
     { mobile: '13800138000', password: '123456' }
 ];
@@ -28,8 +25,10 @@ app.post('/login', (req, res) => {
         return res.status(401).json({ message: '手机号或密码错误' });
     }
 
-    const token = jwt.sign({ mobile: user.mobile }, JWT_SECRET, { expiresIn: '2h' });
-    res.json({ token, user: { mobile: user.mobile } });
+    res.json({
+        token: 'fake_token_' + Date.now(),
+        user: { mobile: user.mobile }
+    });
 });
 
-app.listen(3000, () => console.log('示例后端运行在 http://127.0.0.1:3000'));
+app.listen(3000, () => console.log('后端运行在 http://127.0.0.1:3000'));
