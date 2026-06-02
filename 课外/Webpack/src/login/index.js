@@ -83,9 +83,17 @@ import './index.less';
 //9.2在webpack.config.js中配置loader（webpack5内置asset模块）
 //注意： js 中引入本地图片资源要用 import 方式（如果是网络图片http地址，字符串可以直接写）
 import logo from './assets/logo.png';
-const img1 = document.createElement('img');
-img1.src = logo;
-document.querySelector('.login-container').appendChild(img1);
+// 添加前检查是否已存在 logo 图片
+const container = document.querySelector('.login-container');
+// 添加前检查是否已存在 logo 图片
+const existingLogo = document.querySelector('.login-container img.logo-img');
+if (!existingLogo) {
+    const img1 = document.createElement('img');
+    img1.src = logo;
+    img1.classList.add('logo-img');  // 添加类名便于识别
+    img1.alt = 'Logo';
+    document.querySelector('.login-container').appendChild(img1);
+}
 
 
 //10.完成登录功能
@@ -139,7 +147,7 @@ document.getElementById('loginForm').addEventListener('submit', (e) => {
 //注意：1.webpack-dev-server借助http模块创建8080默认web服务
 //注意：2.webpack-dev-server默认拿public文件夹作为静态资源目录打开到浏览器，如果要修改，在webpack.config.js中配置
 //可以直接自己拼接访问 dist 目录下的内容
-console.log(观察页面是否有自动打包更新);
+console.log('观察页面是否有自动打包更新');
 
 
 //12.打包模式设置
@@ -177,4 +185,37 @@ console.log(观察页面是否有自动打包更新);
 //方案3:配置不同的webpack.config.js(适用多种模型差异性较大的情况)
 
 //14.前端-注入环境变量(根据不同的环境变量，注入不同的值)
-//
+//需求:前端项目中,开发模式下打印语句生效,生产模式下console.log失效
+//问题:cross-env设置的只在Node,js中生效,前端代码无法访问process.env.NODE_ENV
+//解决:使用 webpack.DefinePlugin (是webpack内置插件)
+
+// const webpack = require('webpack');
+// module.exports = {
+//     // ... ...
+//     plugins: [
+//         //...
+//         new webpack.DefinePlugin({
+//             //key 是注入到打包后的前端JS代码中作为全局变量
+//             //value 是注入的值，必须是字符串（如果是其他类型需要转换成字符串）
+//             //（在corss-env 注入在node.js中的环境变量）
+//             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+//         })
+//     ]
+// };
+
+//一般放顶部
+if (process.env.NODE_ENV === 'production') {
+    //生产模式下重写console.log函数，使其失效
+    console.log = function () { };
+}
+console.log('开发模式可见，生成模式下失效');
+
+
+//15.开发环境调错-source map
+//source map:可以追踪error和warning在初始代码的位置
+//在webpack.config.js中配置devtool: 'source-map'（生产环境推荐）
+console.warning('警告：观察source map效果');
+
+
+//16.解析别名 alias
+//解析别名：配置模块如何解析

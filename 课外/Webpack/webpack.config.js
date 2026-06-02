@@ -27,14 +27,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 7.优化-压缩css文件（要配合MiniCssExtractPlugin.loader 使用）
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
+//14.前端注入环境变量
+const webpack = require('webpack');
 
 
-// webpack 配置文件，建在根目录
-
-//找包->下包->配置->试运行
-
-//只能有一个module.exports
-module.exports = {
+//15.开发环境调错-source map(!!!!!!仅用于开发环境)
+const config = {
     // 11.指定构建模式（development 开发模式 或 production），可被环境变量覆盖
     //设置方式1：在webpack.config.js中设置mode: 'development'或'mode: 'production'，默认值为production
     //设置方式2：在package.json的scripts里"dev": "webpack server --mode=development"，"build": "webpack --mode=production"
@@ -45,6 +43,9 @@ module.exports = {
     // 入口文件
     entry: path.resolve(__dirname, 'src/login/index.js'),
     // path.resolve()方法将路径或路径片段解析为绝对路径
+
+
+
 
     // 输出文件
     output: {
@@ -65,11 +66,19 @@ module.exports = {
             filename: path.resolve(__dirname, 'dist/login/index.html'),//输出文件
             template: path.resolve(__dirname, 'public/login.html'),//模板文件
         }),
+
         // 提取css到文件夹，和style-loader不能一起使用
         new MiniCssExtractPlugin({
             //只能写相对路径，不能写拼接路径
             filename: './login/index.css',
         }),//生成css文件
+
+        //14.前端注入环境变量
+        new webpack.DefinePlugin({
+            //key 是注入到打包后的前端JS代码中作为全局变量
+            //value 是注入的值，必须是字符串（在corss-env 注入在node.js中的环境变量）
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        })
     ],
     // 模块加载器(让webpack能够处理非js文件)
     module: {
@@ -149,3 +158,16 @@ module.exports = {
 
 
 }
+//开发环境下使用 source map 选项
+if (process.env.NODE_ENV === 'development') {
+    config.devtool = 'inline-source-map'; // 开发环境推荐使用 inline-source-map，生产环境推荐使用 source-map
+}
+
+
+
+// webpack 配置文件，建在根目录
+
+//找包->下包->配置->试运行
+
+//只能有一个module.exports
+module.exports = config;

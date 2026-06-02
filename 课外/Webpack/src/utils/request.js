@@ -1,6 +1,6 @@
 import axios from 'axios'
 //10.2 axios 公共配置
-//基地址
+//基地址（可以用注入，只写一套代码可在开发和上线自动用不同的URL）
 axios.defaults.baseURL = 'http://127.0.0.1:3000'
 
 //添加请求拦截器
