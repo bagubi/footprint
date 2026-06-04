@@ -31,6 +31,12 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
 
 
+
+
+// webpack 配置文件，建在根目录---------------------------------------------------
+
+//找包->下包->配置->试运行
+
 //15.开发环境调错-source map(!!!!!!仅用于开发环境)
 const config = {
     // 11.指定构建模式（development 开发模式 或 production），可被环境变量覆盖
@@ -65,6 +71,8 @@ const config = {
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, 'dist/login/index.html'),//输出文件
             template: path.resolve(__dirname, 'public/login.html'),//模板文件
+            // //17.生产模式下使用cdn引入的地址
+            useCdn: process.env.NODE_ENV === 'production'
         }),
 
         // 提取css到文件夹，和style-loader不能一起使用
@@ -155,19 +163,39 @@ const config = {
             new CssMinimizerPlugin(),
         ],
     },
+    // 16.解析
+    resolve: {
+        //别名
+        alias: {
+            '@': path.resolve(__dirname, 'src'),
 
-
+        }
+    }
 }
+
+//----------生产环境 CDN，开发环境本地打包----------
+
 //开发环境下使用 source map 选项
 if (process.env.NODE_ENV === 'development') {
     config.devtool = 'inline-source-map'; // 开发环境推荐使用 inline-source-map，生产环境推荐使用 source-map
+
+}
+
+//17 .CDN
+if (process.env.NODE_ENV === 'production') {
+    // 外部扩展（让webpack 防止 import 的包被打包进来）
+    config.externals = {
+        //key 是import from 语句后面的字符串
+        //value 是 CDN 引入的库在全局作用域中暴露的变量名（例如，CDN 引入的 axios 库会暴露一个全局变量 axios）
+
+        'bootstrap': 'bootstrap',
+        // 告诉 webpack 在生产环境中，axios 模块不需要被打包，而是从 CDN 引入
+        'axios': 'axios',
+    };
 }
 
 
 
-// webpack 配置文件，建在根目录
-
-//找包->下包->配置->试运行
 
 //只能有一个module.exports
 module.exports = config;

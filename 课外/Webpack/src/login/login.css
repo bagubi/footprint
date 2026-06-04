@@ -18,6 +18,14 @@ body {
     margin-bottom: 20px;
 }
 
+.login-container {
+    img.logo-img {
+        display: block;
+        width: 100px;
+        margin: 0 auto 20px;
+    }
+}
+
 input {
     width: 100%;
     padding: 10px;

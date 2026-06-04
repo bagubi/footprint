@@ -55,6 +55,7 @@ import { checkPhone, checkCode } from '../utils/check.js';
 //4.1安装插件：npm i html-webpack-plugin --save-dev
 //4.2在webpack.config.js中引入插件并配置
 
+
 //5.使用loader加载css文件
 //5.1把css引入js文件中：import './style.css';
 import './login.css';
@@ -64,19 +65,23 @@ import './login.css';
 //npm i bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
 
+
 //6.优化-提取css文件
 //6.1安装插件：npm i mini-css-extract-plugin --save-dev （不能和style-loader一起使用）
 //6.2在webpack.config.js中引入插件并配置
 
+
 //7.优化-压缩css文件
 //7.1安装插件：npm i css-minimizer-webpack-plugin --save-dev
 //7.2在webpack.config.js中引入插件并配置（生产环境推荐）
+
 
 //8.打包less代码
 //8.1新建less代码（设置背景图）并引入到src/login/index.js中
 import './index.less';
 //8.2安装loader：npm i less less-loader --save-dev
 //8.3在webpack.config.js中配置loader
+
 
 //9.打包图片
 //9.1新建图片并引入到src/login/index.js中
@@ -214,8 +219,53 @@ console.log('开发模式可见，生成模式下失效');
 //15.开发环境调错-source map
 //source map:可以追踪error和warning在初始代码的位置
 //在webpack.config.js中配置devtool: 'source-map'（生产环境推荐）
-console.warning('警告：观察source map效果');
+console.warn('警告：观察source map效果');
 
 
 //16.解析别名 alias
-//解析别名：配置模块如何解析
+//解析别名：配置模块如何解析，创建 import 或 require 的别名，来确保模块引入变得更简单
+//例如：import checkPhone from '../../utils/check.js';（相对路径）
+//配置别名后：import { checkPhone } from '@/utils/check.js';（绝对路径，@代表src目录）
+
+//在webpack.config.js中配置resolve.alias
+// const config = {
+//     //解析
+//     resolve: {
+//         //别名
+//         alias: {
+//             '@': path.resolve(__dirname, 'src'),
+
+//         }
+//     }
+// }
+
+import youAxios from '@/utils/request.js';
+console.log(youAxios);
+
+
+//17.优化-生产模式下使用CDN
+//CDN:内容分发网络，是指一组分布在各个地区的服务器，将静态资源托管在CDN上，-----------访问速度更快------
+//需求：开发模式使用本地资源，生产模式使用CDN资源
+
+//17.1 在html中引入第三方的CDN地址并用模板语法判断
+// <% if (process.env.NODE_ENV === 'production') { %>
+//     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+// <% } %>
+//比如要引入axios库，可以在html中添加以下代码：
+// <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.3.6/axios.min.js"></script>
+// <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.8/css/bootstrap-grid.min.css" rel="stylesheet"></link>
+
+//17.2 配置webpack 中 externals（外部扩展）告诉webpack哪些模块不需要打包，直接从CDN引入
+
+
+
+//18.wedpack 多页面打包
+
+
+//19.打包发布文章页面
+
+
+//20.优化-分割公共代码
+
+
+//21.总结

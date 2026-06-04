@@ -4,3 +4,4 @@ node_modules/
 # 忽略 IDE 配置文件（可选）
 .vscode/
 
+.dist/
