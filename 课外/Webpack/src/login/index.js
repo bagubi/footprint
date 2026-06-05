@@ -259,13 +259,59 @@ console.log(youAxios);
 
 
 
-//18.wedpack 多页面打包
+//18.wedpack 多页面打包<<<未实现
+//下载form-serializer库：npm i form-serializer
+
+//配置webpack.config.js多入口和多页面的设置
+// const config = {
+//     entry: {
+//         '模块名1'：path.resolve(__dirname, 'src/模块名1.js'),
+//         '模块名2'：path.resolve(__dirname, 'src/模块名2.js'),
+//     },
+//     output: {
+//         path: path.resolve(__dirname, 'dist'),
+//         filename: './[name]/index.js',
+//     },
+//     plugins: [
+//         new HtmlWebpackPlugin({
+//             template: './public/页面1.html',//模板文件
+//             filename: '模块名1.html',//输出文件
+//             chunks: ['模块名1'],
+//         }),
+//         new HtmlWebpackPlugin({
+//             template: './public/页面2.html',//模板文件
+//             filename: '模块名2.html',//输出文件
+//             chunks: ['模块名2'],
+//         })
+//     ]
+
+// }
 
 
-//19.打包发布文章页面
+//19.打包发布文章页面<<<未实现
+// uppkg.com/form-serializer@0.7.2/index.js(免费CDN网站)
 
 
-//20.优化-分割公共代码
+//20.优化-分割公共代码<<<未实现
+//用webpack.config.js的spliceChunks分割功能
+// const config = {
+//     optimization: {
+//         splitChunks: {
+//             chunks: 'all',//分割所有模块（默认只分割异步模块）
+//             cancheGroups: {//分隔组
+//                 commons: { //抽取公共模块
+//                     minSize: 0,//所有模块动态移入的都分割分析
+//                     minChunks: 2//最小引用数
+//                     reuseExistingChunk: true,//当前chunk包含已从主bundle中拆分出的模块，则它将被重用
+//                     name(nodule, chunks, cacheGroupKey) { //分离出模块名文件
+//                         const allChunksNames = chunks.map((item) => item.name).join('~');//模块名1~模块名2
+//                         return `./js/${allChunksNames}`//输出到dist目录下位置
+//                     }
+//                 }
+//             }
+//         }
+//     }
 
+// }
 
 //21.总结
