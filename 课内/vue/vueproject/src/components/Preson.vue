@@ -1,12 +1,19 @@
+//在组件文件夹中
 <template>
-    <div class="Person">
-        <h2>{{ name }}</h2>
-        <h2>{{ age }}</h2>
-        <h2>{{ addroute }}</h2>
-        <button @click="changeName">修改名字</button>
-        <button @click="changeAge">修改年龄</button>
-        <button @click="showTel">查看联系方式</button>
-    </div>
+  <!-- html 代码 -->
+  <div class="Person">
+    <h2>{{ name }}</h2>
+    <h2>{{ age }}</h2>
+    <h2>{{ addroute }}</h2>
+    <!-- 
+    @：是 v-on: 的简写
+    click：DOM 的点击事件
+    ="..."：事件触发时要执行的代码 
+    -->
+    <button @click="changeName">修改名字</button>
+    <button @click="changeAge">修改年龄</button>
+    <button @click="showTel">查看联系方式</button>
+  </div>
 </template>
 <!---------------------- 写一个组件 ----------------------->
 <!-- 到10 -->
@@ -35,10 +42,15 @@ export default {
     //         alert(this.tel);
     //     }
     // },
+
+    //VUE3
     setup() {
+        //数据
+        //setup函数中没有this,是undefined
         let name = '张三';
         let age = 25;
         let tel = '13800138000';
+
         function changeName(){
             name= '李四';
             console.log(name);
@@ -65,25 +77,30 @@ export default {
 </script> -->
 <!-- 一个插件便于组件命名npm i vite-plugin-vue-setup-extend -D -->
 <script setup lang="ts" name="bagubi">
+// JS或TS
+
 // VUE3组合式API
-let name = '张三';
+let name = "张三";
 let age = 25;
-let tel = '13800138000';
-let addroute ="北京"
-        function changeName(){
-            name= '李四';
-            console.log(name);
-        }
-        function changeAge(){
-            age +=1;
-            console.log(age);
-        }
-        function showTel() {
-            alert(tel);
-        }
+let tel = "13800138000";
+let addroute = "北京";
+function changeName() {
+  name = "李四";
+  console.log(name);
+}
+function changeAge() {
+  age += 1;
+  console.log(age);
+}
+function showTel() {
+  alert(tel);
+}
 </script>
+
+
 <style scoped>
+/* CSS 样式 */
 .Person {
-    background-color: sandybrown;
+  background-color: sandybrown;
 }
 </style>
