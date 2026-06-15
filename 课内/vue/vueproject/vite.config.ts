@@ -3,10 +3,10 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+//指定组件名字的插件
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 //是整个工程的配置文件，安装插件，配置代理。
-
 
 // https://vitejs.dev/config/
 export default defineConfig({

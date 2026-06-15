@@ -15,7 +15,7 @@
     <button @click="showTel">查看联系方式</button>
   </div>
 </template>
-<!---------------------- 写一个组件 ----------------------->
+<!-------------- -------- 写一个组件 ----------------------->
 <!-- 到10 -->
 <!-- <script  lang="ts">
 export default {
@@ -44,6 +44,9 @@ export default {
     // },
 
     //VUE3
+    //data和methods合并为setup函数，他们可以同时存在
+    // setup不能用this,但是data和methods可以用this
+    // setup不能读取data和methods中的数据，但data和methods中的数据可以读取setup中的数据
     setup() {
         //数据
         //setup函数中没有this,是undefined
@@ -75,27 +78,48 @@ export default {
     },
 };
 </script> -->
-<!-- 一个插件便于组件命名npm i vite-plugin-vue-setup-extend -D -->
-<script setup lang="ts" name="bagubi">
-// JS或TS
 
+
+<!-- 一个插件便于组件命名npm i vite-plugin-vue-setup-extend -D -->
+ <!-- 原本要写---用来定义组件名字,用了上面这个就不用了
+ <script>
+  export default {
+    name: "bagubi",
+  },
+ } 
+ </script>
+ -->
+<script setup lang="ts" name="bagubi">
+// 在这里写JS或TS
+// 有了 setup 这个语法糖可以不用写 setup 和 return 了
 // VUE3组合式API
-let name = "张三";
-let age = 25;
+
+
+// <!-- 11.基本类型的响应式数据 -->
+//  <!-- VUE3有两个可以定义响应式数据 ref & reactive 
+//  ref() 函数可以定义一个响应式数据，
+//  reactive() 函数可以定义一个对象，对象中的属性也可以是响应式数据 -->
+import { ref } from "vue";
+//哪个是响应式就给哪个加 ref() 就完事了
+
+let name = ref("张三");
+let age = ref(25);
 let tel = "13800138000";
 let addroute = "北京";
 function changeName() {
-  name = "李四";
-  console.log(name);
+  name.value = "李四";
+  console.log(name.value);
 }
 function changeAge() {
-  age += 1;
-  console.log(age);
+  age.value += 1;
+  console.log(age.value);
 }
 function showTel() {
   alert(tel);
 }
 </script>
+
+
 
 
 <style scoped>
