@@ -15,12 +15,14 @@
     <button @click="showTel">查看联系方式</button>
   </div> -->
   <div class="Person"> 
-    <h2>一件{{shirt.brand}}衬衫的价格是{{shirt.price}}镑</h2>
+    <!-- 这里是在14课后注释掉 -->
+    <!-- <h2>一件{{shirt.brand}}衬衫的价格是{{shirt.price}}镑</h2>
     <button @click="changePrice">修改衣服的价格</button>
     <button @click="changeShirt">修改衣服</button>
     <br>
     <h2>当前求和为：{{ sum }}</h2>
-    <button @click="changeSum">点我sum+1</button>
+    <button @click="changeSum">点我sum+1</button> -->
+    
     <!-- <h2>游戏列表：</h2>
     <ul> -->
        <!-- v-for="变量 in 数组" -->
@@ -28,6 +30,13 @@
     </ul>
     <button @click="changeGameName">修改第一个游戏名字</button> -->
 
+    <div class="person">
+      <h2>名字：{{person.name}}</h2>
+      <h2>年龄：{{person.age}}</h2>
+      <button @click="changeName">修改名字</button>
+      <button @click="changeAge">修改年龄</button>
+      <!-- 注：按Alt键可以选择多个东西 -->
+    </div>
 
   </div>
 
@@ -142,9 +151,9 @@ import { ref } from "vue";
 import { reactive } from "vue";
 // 被reactive包裹后不是单纯的原对象，是响应式对象，也是proxy对象了（不重要）
 
-//数据
-let shirt = reactive({ brand: "李宁", price: 100 })
-let sum = ref(0)
+//数据（14后注）
+// let shirt = reactive({ brand: "李宁", price: 100 })
+// let sum = ref(0)
 //reactive里面不止可以包裹对象，还可以包裹数组，不能包裹基本类型
 // let games = reactive([
 //   { id: 1, name: '原神' },
@@ -163,22 +172,68 @@ let sum = ref(0)
 //   { id: 5, name: 'LOL' },
 
 // ])
-//方法
-function changePrice(){ 
-shirt.price += 10;
-}
-//修改游戏名字方法
-// function changeGameName(){
-//   games.value[0].name = '绝区零'
+
+//方法（14后注）
+// function changePrice(){
+// shirt.price += 10;
 // }
-function changeSum(){
-  sum.value += 1;
+// //修改游戏名字方法
+// // function changeGameName(){
+// //   games.value[0].name = '绝区零'
+// // }
+
+// function changeSum(){
+//   sum.value += 1;
+// }
+// function changeShirt() {
+//   //注意这个，reactive的对象修改要用这种方法
+//   Object.assign(shirt, { brand: '耐克', price: 200 })
+//   //但是ref的对象修改要用这种方法
+//   // shirt.value = { brand: '耐克(用ref改的)', price: 250 }
+// }
+//15.数据
+let person = reactive({
+  name: '张三',
+  age: 25,
+})
+//15
+import { toRefs } from "vue";
+//知道就好:toRefs()一个一个取
+import { toRef } from "vue";
+let nl = toRef(person, 'name');
+console.log(nl);
+
+
+// 《《《《《《《《在外面写这个
+// let { name, age } = person;
+
+//这句话的意思是下面两句：
+// let name = person.name;
+// let age = person.age;
+
+//要用toRefs()包裹,里面的name和age是ref响应式数据,他顺便把person.name和person.age也改了
+let { name, age } = toRefs(person);
+//方法
+function changeName() {
+  //直接修改 reactive 对象属性 → 响应式更新
+  person.name = '李四'
+
+  //里面写这个，是没用的》》》》》》》
+  // name = '王五'
+
+  //用toRefs()包裹的，修改 toRefs 解构出的 ref → 同步更新 person.name
+  name.value = '王五'
+
+  console.log(name, person.name, name.value);
+  // 输出是：
+  // RefImpl {value: "王五", __v_isRef: true}
+  // "王五"
+  // "王五"
+  // 他顺便把person.name也改了
 }
-function changeShirt() {
-  //注意这个，reactive的对象修改要用这种方法
-  Object.assign(shirt, { brand: '耐克', price: 200 })
-  //但是ref的对象修改要用这种方法
-  // shirt.value = { brand: '耐克(用ref改的)', price: 250 }
+function changeAge() {
+  person.age += 1
+  console.log(age,person.age, age.value);
 }
 </script>
 
