@@ -16,14 +16,19 @@
   </div> -->
   <div class="Person"> 
     <h2>一件{{shirt.brand}}衬衫的价格是{{shirt.price}}镑</h2>
-    <button @click="changePrice">修改汽车的价格</button>
+    <button @click="changePrice">修改衣服的价格</button>
+    <button @click="changeShirt">修改衣服</button>
     <br>
-    <h2>游戏列表：</h2>
-    <ul>
+    <h2>当前求和为：{{ sum }}</h2>
+    <button @click="changeSum">点我sum+1</button>
+    <!-- <h2>游戏列表：</h2>
+    <ul> -->
        <!-- v-for="变量 in 数组" -->
-      <li v-for="game in games" :key="game.id">{{game.name}}</li>
+      <!-- <li v-for="game in games" :key="game.id">{{game.name}}</li>
     </ul>
-    <button @click="changeGameName">修改第一个游戏名字</button>
+    <button @click="changeGameName">修改第一个游戏名字</button> -->
+
+
   </div>
 
 
@@ -110,10 +115,11 @@ export default {
 
 // <!-- 11.基本类型的响应式数据 -->
 //  <!-- VUE3有两个可以定义响应式数据 ref & reactive
-//  ref() 函数可以定义一个响应式数据，
+//  ref() 函数可以定义一个响应式数据、对象
 //  reactive() 函数可以定义一个对象，对象中的属性也可以是响应式数据 -->
-// import { ref } from "vue";
+import { ref } from "vue";
 // //哪个是基本类型响应式就给哪个加 ref() 就完事了
+
 
 // let name = ref("张三");
 // let age = ref(25);
@@ -121,6 +127,7 @@ export default {
 // let addroute = "北京";
 // function changeName() {
 //   name.value = "李四";
+// //ref()在JS层面要碰到数据要.value
 //   console.log(name.value);
 // }
 // function changeAge() {
@@ -134,22 +141,44 @@ export default {
 //12:reactive创建_对象类型的响应式数据
 import { reactive } from "vue";
 // 被reactive包裹后不是单纯的原对象，是响应式对象，也是proxy对象了（不重要）
-let shirt = reactive({ brand: "李宁", price: 100 })
-//reactive里面不止可以包裹对象，还可以包裹数组
-let games = reactive([
-  { id: 1, name: '原神' },
-  { id: 2, name: 'DNF' },
-  { id: 3, name: 'CSGO' },
-  { id: 4, name: 'NF' },
-  { id: 5, name: 'LOL' },
 
-])
+//数据
+let shirt = reactive({ brand: "李宁", price: 100 })
+let sum = ref(0)
+//reactive里面不止可以包裹对象，还可以包裹数组，不能包裹基本类型
+// let games = reactive([
+//   { id: 1, name: '原神' },
+//   { id: 2, name: 'DNF' },
+//   { id: 3, name: 'CSGO' },
+//   { id: 4, name: 'NF' },
+//   { id: 5, name: 'LOL' },
+
+// ])
+
+// let games = ref([
+//   { id: 1, name: '原神' },
+//   { id: 2, name: 'DNF' },
+//   { id: 3, name: 'CSGO' },
+//   { id: 4, name: 'NF' },
+//   { id: 5, name: 'LOL' },
+
+// ])
 //方法
 function changePrice(){ 
 shirt.price += 10;
 }
-function changeGameName(){
-  games[0].name = '绝区零'
+//修改游戏名字方法
+// function changeGameName(){
+//   games.value[0].name = '绝区零'
+// }
+function changeSum(){
+  sum.value += 1;
+}
+function changeShirt() {
+  //注意这个，reactive的对象修改要用这种方法
+  Object.assign(shirt, { brand: '耐克', price: 200 })
+  //但是ref的对象修改要用这种方法
+  // shirt.value = { brand: '耐克(用ref改的)', price: 250 }
 }
 </script>
 
