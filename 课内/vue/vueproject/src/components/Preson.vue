@@ -50,7 +50,13 @@
  <h1>情况一：监视【ref】定义的【基本类型】数据</h1>
  <h2>当前求和为：{{sum}}</h2>
  <button @click="changeSum">点我sum+1</button>
-
+<!-- 18.watch_情况二 -->
+ <h1>情况二：监视【ref】定义的【对象类型】数据</h1>
+ <h2>姓名：{{ person.name }}</h2>
+  <h2>年龄：{{person.age}}</h2>
+  <button @click="changeName">修改名字</button>
+  <button @click="changeAge">修改年龄</button>
+    <button @click="changePerson">修改整个人</button>
   </div>
 
 
@@ -290,7 +296,7 @@ import { reactive } from "vue";
 //   // 这个函数的作用是调用fullName里的set方法,相当与传了一个参数为newValue
 // }
 
-//17.*********watch()监视——情况一《《《重要
+//17.*********watch()监视【ref】定义的【基本类型】响应式数据——情况一
 // 只能监视以下四种数据
 //1.ref 定义的数据
 //2.reactive 定义的数据
@@ -325,6 +331,30 @@ if (newValue >= 10) {
 })
 
 //18.*********watch()监视——情况二
+let person = ref({ name: '张三', age: 25 })
+function changeName() {
+  person.value.name += '嬷嬷'
+}
+function changeAge() {
+  person.value.age += 1
+}
+function changePerson() {
+  person.value = { name: '王五', age: 19 }
+}
+
+//Shift + Alt + A------->多行注释
+
+/* 监视情况二：监视【ref】定义的【对象类型】数据，监视的是对象的地址值
+watch的第一个参数是：被监视的数据->person
+watch的第二个参数是：回调函数-> (newValue, oldValue) =>
+watch的第三个参数是：配置项, { deep: true }
+若想监视对象内部属性的变化，需要手动开启深度监视
+加上第三个shang:true配置项，这样改变对象内部属性的值，也会触发回调函数（深度监视）
+immediate:true,表示一开启直接执行监视，不管数据变没变。 */
+//注意：如果改的是对象的属性值，newValue, oldValue会相等，因为对象内部属性值改变，对象地址值没有变
+watch(person, (newValue, oldValue) => {
+  console.log('person被修改了', newValue, oldValue);
+}, { deep: true })
 
 </script>
 
