@@ -30,20 +30,32 @@
     </ul>
     <button @click="changeGameName">修改第一个游戏名字</button> -->
 
-    <div class="person">
+    <!-- <div class="person">
       <h2>名字：{{person.name}}</h2>
       <h2>年龄：{{person.age}}</h2>
       <button @click="changeName">修改名字</button>
-      <button @click="changeAge">修改年龄</button>
+      <button @click="changeAge">修改年龄</button> -->
       <!-- 注：按Alt键可以选择多个东西 -->
-    </div>
+    <!-- </div> -->
+
+    <!-- 16.computed 计算属性 -->
+     <!-- <div class="person">
+      姓：<input type="text" v-model="firstName">
+      名：<input type="text" v-model="lastName">
+      <button @click="changeFullName">将全名改为li-si</button>
+      全名：<span>{{fullName}}</span>
+      
+    </div> -->
+<!-- 17.watch_情况一 -->
+ <h1>情况一：监视【ref】定义的【基本类型】数据</h1>
+ <h2>当前求和为：{{sum}}</h2>
+ <button @click="changeSum">点我sum+1</button>
 
   </div>
 
 
 </template>
 <!-------------- -------- 写一个组件 ----------------------->
-<!-- 到10 -->
 <!-- <script  lang="ts">
 export default {
     name: 'PersonH', // 修改组件名称
@@ -116,6 +128,8 @@ export default {
  } 
  </script>
  -->
+
+
 <script setup lang="ts" name="bagubi">
 // 在这里写JS或TS
 // 有了 setup 这个语法糖可以不用写 setup 和 return 了
@@ -126,6 +140,7 @@ export default {
 //  <!-- VUE3有两个可以定义响应式数据 ref & reactive
 //  ref() 函数可以定义一个响应式数据、对象
 //  reactive() 函数可以定义一个对象，对象中的属性也可以是响应式数据 -->
+// import { get } from "http";
 import { ref } from "vue";
 // //哪个是基本类型响应式就给哪个加 ref() 就完事了
 
@@ -191,17 +206,19 @@ import { reactive } from "vue";
 //   //但是ref的对象修改要用这种方法
 //   // shirt.value = { brand: '耐克(用ref改的)', price: 250 }
 // }
+
 //15.数据
-let person = reactive({
-  name: '张三',
-  age: 25,
-})
-//15
-import { toRefs } from "vue";
-//知道就好:toRefs()一个一个取
-import { toRef } from "vue";
-let nl = toRef(person, 'name');
-console.log(nl);
+// let person = reactive({
+//   name: '张三',
+//   age: 25,
+// })
+
+// //15
+// import { toRefs } from "vue";
+// //知道就好:toRefs()一个一个取
+// import { toRef } from "vue";
+// let nl = toRef(person, 'name');
+// console.log(nl);
 
 
 // 《《《《《《《《在外面写这个
@@ -212,30 +229,106 @@ console.log(nl);
 // let age = person.age;
 
 //要用toRefs()包裹,里面的name和age是ref响应式数据,他顺便把person.name和person.age也改了
-let { name, age } = toRefs(person);
+// let { name, age } = toRefs(person);
+// //方法
+// function changeName() {
+//   //直接修改 reactive 对象属性 → 响应式更新
+//   person.name = '李四'
+
+//   //里面写这个，是没用的》》》》》》》
+//   // name = '王五'
+
+//   //用toRefs()包裹的，修改 toRefs 解构出的 ref → 同步更新 person.name
+//   name.value = '王五'
+
+//   console.log(name, person.name, name.value);
+//   // 输出是：
+//   // RefImpl {value: "王五", __v_isRef: true}
+//   // "王五"
+//   // "王五"
+//   // 他顺便把person.name也改了
+// }
+// function changeAge() {
+//   person.age += 1
+//   console.log(age,person.age, age.value);
+// }
+
+//16.computed计算属性
+// let firstName = ref('张');
+// let lastName = ref('五');
+//16.回顾VUE2怎么写计算属性
+//需求：第一个字母大写
+
+// import { computed } from "vue";
+//    let firstName = ref('张');
+// let lastName = ref('五');
+
+//computed()计算属性有缓存,多次调用这个属性，不会重复计算，而是那着同样的计算结果返回。
+//方法是没有缓存的
+//像这样定义的fullName是<--只读的
+// let fullName = computed(() => {
+//   console.log('计算属性被调用了');
+//   //slice(0, 1)取第一个字符
+//   //slice(1) 取除第一个字符外的其余部分
+//   return firstName.value.slice(0,1).toUpperCase() + firstName.value.slice(1)+lastName.value;
+// })
+
+//16.写一个可读可写的计算属性
+// let fullName = computed({
+//   //get()是获取属性值的方法
+//   get() {
+//     return firstName.value.slice(0, 1).toUpperCase() + firstName.value.slice(1) + lastName.value;
+//   },//set()是设置属性值
+//   set(newValue) {
+//     const [str1, str2] = newValue.split('-');
+//     firstName.value = str1;
+//     lastName.value = str2;
+//   }
+// });
+// function changeFullName() {
+//   firstName.value = '花花';
+//   // 这个函数的作用是调用fullName里的set方法,相当与传了一个参数为newValue
+// }
+
+//17.*********watch()监视——情况一《《《重要
+// 只能监视以下四种数据
+//1.ref 定义的数据
+//2.reactive 定义的数据
+//3.函数返回一个值（getter函数）
+//4.一个包含上述内容的数组
+import { watch } from "vue";
+//数据
+let sum = ref(0)
 //方法
-function changeName() {
-  //直接修改 reactive 对象属性 → 响应式更新
-  person.name = '李四'
-
-  //里面写这个，是没用的》》》》》》》
-  // name = '王五'
-
-  //用toRefs()包裹的，修改 toRefs 解构出的 ref → 同步更新 person.name
-  name.value = '王五'
-
-  console.log(name, person.name, name.value);
-  // 输出是：
-  // RefImpl {value: "王五", __v_isRef: true}
-  // "王五"
-  // "王五"
-  // 他顺便把person.name也改了
+function changeSum() {
+  sum.value += 1;
 }
-function changeAge() {
-  person.age += 1
-  console.log(age,person.age, age.value);
+//监视
+// 格式：
+// watch(谁？, (回调函数) => {
+
+// })
+
+// （不能用this,所以这里用箭头函数）
+//这里的sum不能.value,加了就不是那1.ref 定义的数据
+// watch(sum, (newValue, oldValue) => {
+// console.log('sum被修改了',newValue, oldValue);
+// })
+
+//怎么结束监视
+//需求：当sum的值大于等于10时，结束监视
+const stopWatch = watch(sum, (newValue, oldValue) => {
+  console.log('sum被修改了', newValue, oldValue);
+if (newValue >= 10) {
+  stopWatch();
 }
+})
+
+//18.*********watch()监视——情况二
+
 </script>
+
+
 
 
 
@@ -244,6 +337,7 @@ function changeAge() {
 /* CSS 样式 */
 .Person {
   background-color: sandybrown;
+  padding: 10px;
 }
 li{
   font-size: 20px;
