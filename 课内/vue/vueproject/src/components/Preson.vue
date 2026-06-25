@@ -47,18 +47,26 @@
       
     </div> -->
 <!-- 17.watch_情况一 -->
- <h1>情况一：监视【ref】定义的【基本类型】数据</h1>
- <h2>当前求和为：{{sum}}</h2>
- <button @click="changeSum">点我sum+1</button>
+    <h1>情况一：监视【ref】定义的【基本类型】数据</h1>
+    <h2>当前求和为：{{sum}}</h2>
+    <button @click="changeSum">点我sum+1</button>
+
 <!-- 18.watch_情况二 -->
- <h1>情况二：监视【ref】定义的【对象类型】数据</h1>
- <h2>姓名：{{ person.name }}</h2>
-  <h2>年龄：{{person.age}}</h2>
-  <button @click="changeName">修改名字</button>
-  <button @click="changeAge">修改年龄</button>
+    <!-- <h1>情况二：监视【ref】定义的【对象类型】数据</h1>
+    <h2>姓名：{{ person.name }}</h2>
+    <h2>年龄：{{person.age}}</h2>
+    <button @click="changeName">修改名字</button>
+    <button @click="changeAge">修改年龄</button>
+    <button @click="changePerson">修改整个人</button> -->
+
+    <!-- 19.情况三 -->
+    <h1>情况三：监视【ref】定义的【对象类型】数据</h1>
+    <h2>姓名：{{ person.name }}</h2>
+    <h2>年龄：{{person.age}}</h2>
+    <button @click="changeName">修改名字</button>
+    <button @click="changeAge">修改年龄</button>
     <button @click="changePerson">修改整个人</button>
   </div>
-
 
 </template>
 <!-------------- -------- 写一个组件 ----------------------->
@@ -323,25 +331,47 @@ function changeSum() {
 
 //怎么结束监视
 //需求：当sum的值大于等于10时，结束监视
-const stopWatch = watch(sum, (newValue, oldValue) => {
-  console.log('sum被修改了', newValue, oldValue);
-if (newValue >= 10) {
-  stopWatch();
-}
-})
+// const stopWatch = watch(sum, (newValue, oldValue) => {
+//   console.log('sum被修改了', newValue, oldValue);
+// if (newValue >= 10) {
+//   stopWatch();
+// }
+// })
 
-//18.*********watch()监视——情况二
-let person = ref({ name: '张三', age: 25 })
+//18.*********watch()监视——情况二（19注
+// let person = ref({ name: '张三', age: 25 })
+// function changeName() {
+//   person.value.name += '嬷嬷'
+// }
+// function changeAge() {
+//   person.value.age += 1
+// }
+// function changePerson() {
+//   person.value = { name: '王五', age: 19 }
+// }
+
+
+// 19.*********watch()监视——情况三
+let person = reactive({ name: '张三', age: 25 })
 function changeName() {
-  person.value.name += '嬷嬷'
+  person.name += '嬷嬷'
 }
 function changeAge() {
-  person.value.age += 1
-}
-function changePerson() {
-  person.value = { name: '王五', age: 19 }
+  person.age += 1
 }
 
+function changePerson() {
+  //reactive定义的数据不可整体修改（下面这个是不可实现的）
+  // person = { name: '王五', age: 19 }
+  Object.assign(person, { name: '王五', age: 650 })
+  //Object.assign()：将一个或多个源对象的属性复制到目标对象中，并返回这个被修改后的目标对象
+}
+// 监视，情况三：监视【reactive】定义的【对象类型】数据,且默认是开启深度监视，不可关闭的
+//这个时候的person是reactive定义的响应式对象
+//地址值没变，输出newValue, oldValue都一样
+watch(person, (newValue, oldValue) => { 
+  console.log('person被修改了', newValue, oldValue);
+})
 //Shift + Alt + A------->多行注释
 
 /* 监视情况二：监视【ref】定义的【对象类型】数据，监视的是对象的地址值
@@ -352,9 +382,12 @@ watch的第三个参数是：配置项, { deep: true }
 加上第三个shang:true配置项，这样改变对象内部属性的值，也会触发回调函数（深度监视）
 immediate:true,表示一开启直接执行监视，不管数据变没变。 */
 //注意：如果改的是对象的属性值，newValue, oldValue会相等，因为对象内部属性值改变，对象地址值没有变
-watch(person, (newValue, oldValue) => {
-  console.log('person被修改了', newValue, oldValue);
-}, { deep: true })
+// watch(person, (newValue, oldValue) => {
+//   console.log('person被修改了', newValue, oldValue);
+// }, { deep: true })
+
+
+//情况三：监视【reactive】定义的【对象类型】数据
 
 </script>
 
