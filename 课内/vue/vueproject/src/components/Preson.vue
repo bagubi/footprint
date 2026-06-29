@@ -47,9 +47,9 @@
       
     </div> -->
 <!-- 17.watch_情况一 -->
-    <h1>情况一：监视【ref】定义的【基本类型】数据</h1>
+    <!-- <h1>情况一：监视【ref】定义的【基本类型】数据</h1>
     <h2>当前求和为：{{sum}}</h2>
-    <button @click="changeSum">点我sum+1</button>
+    <button @click="changeSum">点我sum+1</button> -->
 
 <!-- 18.watch_情况二 -->
     <!-- <h1>情况二：监视【ref】定义的【对象类型】数据</h1>
@@ -60,15 +60,27 @@
     <button @click="changePerson">修改整个人</button> -->
 
     <!-- 19.情况三 -->
-    <h1>情况三：监视【ref】定义的【对象类型】数据</h1>
+    <!-- <h1>情况三：监视【ref】定义的【对象类型】数据</h1>
     <h2>姓名：{{ person.name }}</h2>
     <h2>年龄：{{person.age}}</h2>
     <button @click="changeName">修改名字</button>
     <button @click="changeAge">修改年龄</button>
-    <button @click="changePerson">修改整个人</button>
+    <button @click="changePerson">修改整个人</button> -->
+
+    <!-- 20.watch-情况四 -->
+<h2>姓名：{{person.name}}</h2>
+<h2>年龄：{{person.age}}</h2>
+<h2>工作:{{person.job.name}} 工资：{{person.job.salary}}</h2>
+<button @click="changeName">修改名字</button>
+<button @click="changeAge">修改年龄</button>
+<button @click="changeJobName">修改工作</button>
+<button @click="changeJobSalary">修改工资</button>
+<button @click="changeJob">修改整个工作</button>
   </div>
 
 </template>
+
+
 <!-------------- -------- 写一个组件 ----------------------->
 <!-- <script  lang="ts">
 export default {
@@ -312,11 +324,11 @@ import { reactive } from "vue";
 //4.一个包含上述内容的数组
 import { watch } from "vue";
 //数据
-let sum = ref(0)
+//let sum = ref(0)
 //方法
-function changeSum() {
-  sum.value += 1;
-}
+// function changeSum() {
+//   sum.value += 1;
+// }
 //监视
 // 格式：
 // watch(谁？, (回调函数) => {
@@ -352,7 +364,7 @@ function changeSum() {
 
 
 // 19.*********watch()监视——情况三
-let person = reactive({ name: '张三', age: 25 })
+/* let person = reactive({ name: '张三', age: 25 })
 function changeName() {
   person.name += '嬷嬷'
 }
@@ -365,13 +377,13 @@ function changePerson() {
   // person = { name: '王五', age: 19 }
   Object.assign(person, { name: '王五', age: 650 })
   //Object.assign()：将一个或多个源对象的属性复制到目标对象中，并返回这个被修改后的目标对象
-}
+} */
 // 监视，情况三：监视【reactive】定义的【对象类型】数据,且默认是开启深度监视，不可关闭的
 //这个时候的person是reactive定义的响应式对象
 //地址值没变，输出newValue, oldValue都一样
-watch(person, (newValue, oldValue) => { 
+/* watch(person, (newValue, oldValue) => { 
   console.log('person被修改了', newValue, oldValue);
-})
+}) */
 //Shift + Alt + A------->多行注释
 
 /* 监视情况二：监视【ref】定义的【对象类型】数据，监视的是对象的地址值
@@ -389,6 +401,73 @@ immediate:true,表示一开启直接执行监视，不管数据变没变。 */
 
 //情况三：监视【reactive】定义的【对象类型】数据
 
+
+// 情况四：监视【ref】或【reactinw】定义的【对象类型】数据中的某个数据，注意点如下：
+/* 
+1.若该属性值 不是【对象类型】，需要写成函数形式。
+2.若该属性值是依然是【对象类型】，可直接编，也可写成函数，不过建议写成函数。 
+*/
+//数据
+let person = reactive({
+  name: '张三',
+  age: 25,
+  job: {
+    name: '前端',
+    salary: 5000
+    
+  }
+})
+//方法
+function changeName() {
+  person.name += '嬷嬷'
+}
+function changeAge() {
+  person.age += 1
+}
+function changeJobName() {
+  person.job.name ='厨师'
+}
+function changeJobSalary() {
+  person.job.salary += 500
+}
+function changeJob() {
+  person.job = { name: '王五', salary: 50 }
+}
+
+//要求：只监视人名
+
+//错的：
+// watch(person.name, (newValue, oldValue) => {
+//   console.log('person.name被修改了', newValue, oldValue);
+// }())《《《错的
+// 注意这里报错，因为person.name是一个字符串，不能用person.name()
+//要给它改成getter函数(就是能返回一个值的函数)
+
+//因为要求要
+// 只能监视以下四种数据（重复）
+//1.ref 定义的数据
+//2.reactive 定义的数据
+//3.函数返回一个值（getter函数）
+//4.一个包含上述内容的数组
+
+
+//对的
+//情况四：监视响应式对象中的某个属性，且该属性是基本类型的，要写成函数式
+// 复杂的时候用{ return person.name};一般写person.names
+// watch(() => {return person.name }, (newValue, oldValue) => {
+//   console.log('person.name被修改了', newValue, oldValue)
+// })
+
+//修改整个工作的时候没监视（person.job是对象，可以直接写
+watch(person.job, (newValue, oldValue) => { 
+  console.log('person.job被修改了', newValue, oldValue)
+})
+
+//只监视修改整个工作(---推荐：把person.job这个对象写成函数
+//但是可以加上{deep:true},这样就都能监视到了
+watch(()=>person.job, (newValue, oldValue) => { 
+  console.log('person.job被修改了', newValue, oldValue)
+}, {deep:true} )
 </script>
 
 
