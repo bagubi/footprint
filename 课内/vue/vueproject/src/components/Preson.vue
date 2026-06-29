@@ -67,7 +67,9 @@
     <button @click="changeAge">修改年龄</button>
     <button @click="changePerson">修改整个人</button> -->
 
-    <!-- 20.watch-情况四 -->
+    <!-- 20.watch-情况四 --> & <!-- 21.watch_情况五 -->
+     <h2>情况四：监视【ref】或【reactive】定义的【对象类型】数据中的某个属性</h2>
+     <h2>情况五：监视上述多个数据</h2>
 <h2>姓名：{{person.name}}</h2>
 <h2>年龄：{{person.age}}</h2>
 <h2>工作:{{person.job.name}} 工资：{{person.job.salary}}</h2>
@@ -431,7 +433,7 @@ function changeJobSalary() {
   person.job.salary += 500
 }
 function changeJob() {
-  person.job = { name: '王五', salary: 50 }
+  person.job = { name: '环卫工人', salary: 50 }
 }
 
 //要求：只监视人名
@@ -459,7 +461,7 @@ function changeJob() {
 // })
 
 //修改整个工作的时候没监视（person.job是对象，可以直接写
-watch(person.job, (newValue, oldValue) => { 
+/* watch(person.job, (newValue, oldValue) => { 
   console.log('person.job被修改了', newValue, oldValue)
 })
 
@@ -467,7 +469,16 @@ watch(person.job, (newValue, oldValue) => {
 //但是可以加上{deep:true},这样就都能监视到了
 watch(()=>person.job, (newValue, oldValue) => { 
   console.log('person.job被修改了', newValue, oldValue)
-}, {deep:true} )
+}, { deep: true })
+ */
+/* 情况五:监视上述多个数据
+
+  要求：只监视人的名字和第一台车
+*/
+watch([() => person.name,person.job], (newValue, oldValue) => { 
+  console.log('person.job.name被修改了', newValue, oldValue)
+}, { deep: true })
+
 </script>
 
 
