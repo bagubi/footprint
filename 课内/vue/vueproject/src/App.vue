@@ -6,7 +6,6 @@
 import bagubi from "./components/Preson.vue";
 
 //是根组件
-
 export default {
   //组件名
   name: "AppTitle",
