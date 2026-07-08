@@ -60,7 +60,7 @@ function changeWaterLevel(){
 // })
 // 23：标签的ref属性
 //需要创建一个容器title2，来存储ref标记的内容-->h2这个元素
-let title2 = ref();
+/* let title2 = ref();
 function showLog() {
   console.log(title2.value);
   //这里会拿到dom元素，dom元素是一个对象，里面有很多属性和方法
@@ -69,7 +69,30 @@ function showLog() {
 //写defineExpose（{}）就可以在父组件看子组件的变量和方法
 defineExpose({
   title2,
-});
+}); */
+
+//24:回顾TS中的_接口_泛型_自定义类型
+// 引入PersonInter
+import { type PersonInter } from "@/types";
+//因为PersonInter是一个接口（一个规范），告诉编译器我只导入类型，不导入值
+// let person: PersonInter = { id: "asyud7asfd01", name: "张三", age: 18 }; //意思是定义的person变量，它要符合PersonInter这个接口的规范
+
+// 方法一：使用接口
+/* let personList: Array<PersonInter> = [
+  { id: "asyud7asfd01", name: "张三", age: 18 },
+  { id: "asyud7asfd02", name: "张四", age: 180 },
+  { id: "asyud7asfd03", name: "张五", age: 1 },
+];//意思是定义的personList变量，它是一个数组，数组里面的每一项都要符合PersonInter这个接口的规范 */
+
+// 方法二：使用自定义类型
+import { type Persons } from "@/types";
+// Persons 是一个自定义类型（type alias），它等价于 PersonInter[]
+// 所以 personList 必须是一个数组，且每一项符合 PersonInter 规范
+let personList: Persons = [
+  { id: "asyud7asfd1", name: "张三", age: 18 },
+  { id: "asyud7asfd2", name: "张四", age: 180 },
+  { id: "asyud7asfd3", name: "张五", age: 1 },
+];
 </script>
 
 <!-- 加了sccoped 属性，表示这个样式只对当前组件有效 -->
