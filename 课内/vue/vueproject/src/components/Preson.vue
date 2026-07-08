@@ -5,16 +5,16 @@
     <h2>{{ name }}</h2>
     <h2>{{ age }}</h2>
     <h2>{{ addroute }}</h2> -->
-    <!-- 
+  <!-- 
     @：是 v-on: 的简写
     click：DOM 的点击事件
     ="..."：事件触发时要执行的代码 
     -->
-    <!-- <button @click="changeName">修改名字</button>
+  <!-- <button @click="changeName">修改名字</button>
     <button @click="changeAge">修改年龄</button>
     <button @click="showTel">查看联系方式</button>
   </div> -->
-  <div class="Person"> 
+  <div class="Person">
     <!-- 这里是在14课后注释掉 -->
     <!-- <h2>一件{{shirt.brand}}衬衫的价格是{{shirt.price}}镑</h2>
     <button @click="changePrice">修改衣服的价格</button>
@@ -22,11 +22,11 @@
     <br>
     <h2>当前求和为：{{ sum }}</h2>
     <button @click="changeSum">点我sum+1</button> -->
-    
+
     <!-- <h2>游戏列表：</h2>
     <ul> -->
-       <!-- v-for="变量 in 数组" -->
-      <!-- <li v-for="game in games" :key="game.id">{{game.name}}</li>
+    <!-- v-for="变量 in 数组" -->
+    <!-- <li v-for="game in games" :key="game.id">{{game.name}}</li>
     </ul>
     <button @click="changeGameName">修改第一个游戏名字</button> -->
 
@@ -35,23 +35,23 @@
       <h2>年龄：{{person.age}}</h2>
       <button @click="changeName">修改名字</button>
       <button @click="changeAge">修改年龄</button> -->
-      <!-- 注：按Alt键可以选择多个东西 -->
+    <!-- 注：按Alt键可以选择多个东西 -->
     <!-- </div> -->
 
     <!-- 16.computed 计算属性 -->
-     <!-- <div class="person">
+    <!-- <div class="person">
       姓：<input type="text" v-model="firstName">
       名：<input type="text" v-model="lastName">
       <button @click="changeFullName">将全名改为li-si</button>
       全名：<span>{{fullName}}</span>
       
     </div> -->
-<!-- 17.watch_情况一 -->
+    <!-- 17.watch_情况一 -->
     <!-- <h1>情况一：监视【ref】定义的【基本类型】数据</h1>
     <h2>当前求和为：{{sum}}</h2>
     <button @click="changeSum">点我sum+1</button> -->
 
-<!-- 18.watch_情况二 -->
+    <!-- 18.watch_情况二 -->
     <!-- <h1>情况二：监视【ref】定义的【对象类型】数据</h1>
     <h2>姓名：{{ person.name }}</h2>
     <h2>年龄：{{person.age}}</h2>
@@ -67,21 +67,21 @@
     <button @click="changeAge">修改年龄</button>
     <button @click="changePerson">修改整个人</button> -->
 
-    <!-- 20.watch-情况四 --> & <!-- 21.watch_情况五 -->
-     <h2>情况四：监视【ref】或【reactive】定义的【对象类型】数据中的某个属性</h2>
-     <h2>情况五：监视上述多个数据</h2>
-<h2>姓名：{{person.name}}</h2>
-<h2>年龄：{{person.age}}</h2>
-<h2>工作:{{person.job.name}} 工资：{{person.job.salary}}</h2>
-<button @click="changeName">修改名字</button>
-<button @click="changeAge">修改年龄</button>
-<button @click="changeJobName">修改工作</button>
-<button @click="changeJobSalary">修改工资</button>
-<button @click="changeJob">修改整个工作</button>
+    <!-- 20.watch-情况四 -->
+    &
+    <!-- 21.watch_情况五 -->
+    <h2>情况四：监视【ref】或【reactive】定义的【对象类型】数据中的某个属性</h2>
+    <h2>情况五：监视上述多个数据</h2>
+    <h2>姓名：{{ person.name }}</h2>
+    <h2>年龄：{{ person.age }}</h2>
+    <h2>工作:{{ person.job.name }} 工资：{{ person.job.salary }}</h2>
+    <button @click="changeName">修改名字</button>
+    <button @click="changeAge">修改年龄</button>
+    <button @click="changeJobName">修改工作</button>
+    <button @click="changeJobSalary">修改工资</button>
+    <button @click="changeJob">修改整个工作</button>
   </div>
-
 </template>
-
 
 <!-------------- -------- 写一个组件 ----------------------->
 <!-- <script  lang="ts">
@@ -146,9 +146,8 @@ export default {
 };
 </script> -->
 
-
 <!-- 一个插件便于组件命名npm i vite-plugin-vue-setup-extend -D -->
- <!-- 原本要写---用来定义组件名字,用了上面这个就不用了
+<!-- 原本要写---用来定义组件名字,用了上面这个就不用了
  <script>
   export default {
     name: "bagubi",
@@ -157,12 +156,10 @@ export default {
  </script>
  -->
 
-
 <script setup lang="ts" name="bagubi">
 // 在这里写JS或TS
 // 有了 setup 这个语法糖可以不用写 setup 和 return 了
 // VUE3组合式API
-
 
 // <!-- 11.基本类型的响应式数据 -->
 //  <!-- VUE3有两个可以定义响应式数据 ref & reactive
@@ -171,7 +168,6 @@ export default {
 // import { get } from "http";
 import { ref } from "vue";
 // //哪个是基本类型响应式就给哪个加 ref() 就完事了
-
 
 // let name = ref("张三");
 // let age = ref(25);
@@ -247,7 +243,6 @@ import { reactive } from "vue";
 // import { toRef } from "vue";
 // let nl = toRef(person, 'name');
 // console.log(nl);
-
 
 // 《《《《《《《《在外面写这个
 // let { name, age } = person;
@@ -364,7 +359,6 @@ import { watch } from "vue";
 //   person.value = { name: '王五', age: 19 }
 // }
 
-
 // 19.*********watch()监视——情况三
 /* let person = reactive({ name: '张三', age: 25 })
 function changeName() {
@@ -400,9 +394,7 @@ immediate:true,表示一开启直接执行监视，不管数据变没变。 */
 //   console.log('person被修改了', newValue, oldValue);
 // }, { deep: true })
 
-
 //情况三：监视【reactive】定义的【对象类型】数据
-
 
 // 情况四：监视【ref】或【reactinw】定义的【对象类型】数据中的某个数据，注意点如下：
 /* 
@@ -411,29 +403,28 @@ immediate:true,表示一开启直接执行监视，不管数据变没变。 */
 */
 //数据
 let person = reactive({
-  name: '张三',
+  name: "张三",
   age: 25,
   job: {
-    name: '前端',
-    salary: 5000
-    
-  }
-})
+    name: "前端",
+    salary: 5000,
+  },
+});
 //方法
 function changeName() {
-  person.name += '嬷嬷'
+  person.name += "嬷嬷";
 }
 function changeAge() {
-  person.age += 1
+  person.age += 1;
 }
 function changeJobName() {
-  person.job.name ='厨师'
+  person.job.name = "厨师";
 }
 function changeJobSalary() {
-  person.job.salary += 500
+  person.job.salary += 500;
 }
 function changeJob() {
-  person.job = { name: '环卫工人', salary: 50 }
+  person.job = { name: "环卫工人", salary: 50 };
 }
 
 //要求：只监视人名
@@ -451,7 +442,6 @@ function changeJob() {
 //2.reactive 定义的数据
 //3.函数返回一个值（getter函数）
 //4.一个包含上述内容的数组
-
 
 //对的
 //情况四：监视响应式对象中的某个属性，且该属性是基本类型的，要写成函数式
@@ -475,16 +465,14 @@ watch(()=>person.job, (newValue, oldValue) => {
 
   要求：只监视人的名字和第一台车
 */
-watch([() => person.name,person.job], (newValue, oldValue) => { 
-  console.log('person.job.name被修改了', newValue, oldValue)
-}, { deep: true })
-
+watch(
+  [() => person.name, person.job],
+  (newValue, oldValue) => {
+    console.log("person.job.name被修改了", newValue, oldValue);
+  },
+  { deep: true },
+);
 </script>
-
-
-
-
-
 
 <style scoped>
 /* CSS 样式 */
@@ -492,7 +480,7 @@ watch([() => person.name,person.job], (newValue, oldValue) => {
   background-color: sandybrown;
   padding: 10px;
 }
-li{
+li {
   font-size: 20px;
 }
 </style>

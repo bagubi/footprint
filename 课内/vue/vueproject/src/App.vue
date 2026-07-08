@@ -11,7 +11,7 @@ export default {
   name: "AppTitle",
   //注册组件
   // components: { PersonH},
-  components: { bagubi},
+  components: { bagubi },
 };
 </script>
 
@@ -24,7 +24,6 @@ export default {
 
   <!-- vue3 -->
   <bagubi />
-  
 </template>
 
 <style scoped>
