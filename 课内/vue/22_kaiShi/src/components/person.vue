@@ -11,6 +11,17 @@
     <h2 ref="title2">广西</h2>
     <h3>南宁</h3>
     <button @click="showLog">点击输出h2这个元素</button> -->
+
+    <!-- 25.props的使用 -->
+    <p>接收到的属性值a：{{ a }}</p>
+    <!-- <p>接收到的属性值list：{{ list }}</p> -->
+    <ul>
+      <!-- v-for="数据源的每一项（自由命名） in 数据源" -->
+      <li v-for="item in list" :key="item.id">
+        <!-- 没有key时，索引值会成为key，如果更新数据会报错 -->
+        {{ item.name }}--{{ item.age }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -85,14 +96,40 @@ import { type PersonInter } from "@/types";
 ];//意思是定义的personList变量，它是一个数组，数组里面的每一项都要符合PersonInter这个接口的规范 */
 
 // 方法二：使用自定义类型
-import { type Persons } from "@/types";
+/* import { type Persons } from "@/types";
 // Persons 是一个自定义类型（type alias），它等价于 PersonInter[]
 // 所以 personList 必须是一个数组，且每一项符合 PersonInter 规范
 let personList: Persons = [
   { id: "asyud7asfd1", name: "张三", age: 18 },
   { id: "asyud7asfd2", name: "张四", age: 180 },
   { id: "asyud7asfd3", name: "张五", age: 1 },
-];
+]; */
+
+//25.props（父组件给子组件递东西的通道）的使用：
+// import { defineProps } from "vue";// 直接使用，不需要导入
+import { type Persons } from "@/types"; //在index.ts传出的规范
+// import { withDefaults } from 'vue'
+//with是伴随，Defaults是默认值，意思是给props设置默认值（直接使用，不需要导入）
+
+//接收a
+// defineProps(["a", "list"]); //接收一个参数，参数是一个数组，数组里面放的是属性名
+
+//接收a同时将props保存起来
+// let x = defineProps(["a", "b"]);
+// 想要a
+// console.log(x.a);
+
+//接收list + 限制类型
+// defineProps<{ list: Persons }>();
+
+/* 终极写法！！！核心 */
+//接收list
+// + 限制类型
+// + 限制必要性（在list【属性名】后面加一个？）
+// + 指定默认值(用withDefaults包裹后写：，{})
+withDefaults(defineProps<{ list?: Persons }>(), {
+  list: () => [{ id: "ausydgyu01", name: "王刚•瑞欣•特仑苏", age: 18 }],
+});
 </script>
 
 <!-- 加了sccoped 属性，表示这个样式只对当前组件有效 -->

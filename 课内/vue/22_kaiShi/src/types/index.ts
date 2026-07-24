@@ -2,9 +2,11 @@
 // 第一种暴露方式：分别暴露（在前面加export）
 export interface PersonInter {
   // interface:是接口
-  id: string;
+  id: string; //字符串
   name: string;
   age: number;
+  //这样这个x属性就是可选的了，意思是这个属性可有可无
+  x?: number;
 }
 // 有3种暴露方式
 // 第二种暴露方式：默认暴露
