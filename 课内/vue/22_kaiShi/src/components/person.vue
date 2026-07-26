@@ -127,9 +127,16 @@ import { type Persons } from "@/types"; //在index.ts传出的规范
 // + 限制类型
 // + 限制必要性（在list【属性名】后面加一个？）
 // + 指定默认值(用withDefaults包裹后写：，{})
-withDefaults(defineProps<{ list?: Persons }>(), {
-  list: () => [{ id: "ausydgyu01", name: "王刚•瑞欣•特仑苏", age: 18 }],
-});
+withDefaults(
+  defineProps<{
+    list?: Persons;
+    a: string; // 没有 ?，表示必传
+    b?: number;
+  }>(),
+  {
+    list: () => [{ id: "ausydgyu01", name: "王刚•瑞欣•特仑苏", age: 18 }],
+  },
+);
 </script>
 
 <!-- 加了sccoped 属性，表示这个样式只对当前组件有效 -->
