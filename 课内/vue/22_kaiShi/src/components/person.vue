@@ -131,7 +131,7 @@ withDefaults(
   defineProps<{
     list?: Persons;
     a: string; // 没有 ?，表示必传
-    b?: number;
+    b?: string;
   }>(),
   {
     list: () => [{ id: "ausydgyu01", name: "王刚•瑞欣•特仑苏", age: 18 }],
