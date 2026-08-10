@@ -1,11 +1,16 @@
 <template>
   <div class="person">
-    <h2>当前求和为：{{ sum }}</h2>
-    <button @click="add">+</button>
+    <!-- <h2>当前求和为：{{ sum }}</h2>
+    <button @click="add">+</button> -->
+    <h2>当前求和为：{{ sum }}，放大10倍为：{{ bigSum }}</h2>
+    <button @click="add">点我sum+1</button>
+    <hr />
+    <img v-for="(dog, index) in dogList" :src="dog" :key="index" />
+    <button @click="getDog">点我加一只狗狗</button>
   </div>
 </template>
 <script setup lang="ts">
-import {
+/* import {
   ref,
   onBeforeMount,
   onMounted,
@@ -47,5 +52,22 @@ onBeforeUnmount(() => {
 //卸载完毕onUnmounted
 onUnmounted(() => {
   console.log("卸载完毕");
-});
+}); */
+import useSum from "../hooke/useSum";
+import useDog from "../hooke/useDog";
+const { sum, add, bigSum } = useSum();
+const { dogList, getDog } = useDog();
 </script>
+<style scoped>
+.person {
+  padding: 20px;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin: 10px;
+  border-radius: 8px;
+}
+</style>
