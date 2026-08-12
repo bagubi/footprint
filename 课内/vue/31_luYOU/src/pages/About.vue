@@ -1,3 +1,4 @@
+<!-- 是个路由组件 -->
 <template>
   <div class="about-container">
     <!-- 顶部横幅 -->
@@ -90,7 +91,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 // ========== 公司信息 ==========
 const companyInfo = {
@@ -172,6 +173,15 @@ const contacts = ref([
   { icon: "📞", label: "电话", value: "010-8888-8888" },
   { icon: "🕐", label: "工作时间", value: "周一至周五 9:00-18:00" },
 ]);
+
+//挂载时
+onMounted(() => {
+  console.log("About.vue 已挂载");
+});
+//卸载时
+onUnmounted(() => {
+  console.log("About.vue 已卸载");
+});
 </script>
 
 <style scoped>

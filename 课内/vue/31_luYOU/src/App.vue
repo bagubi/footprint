@@ -1,6 +1,8 @@
 <template>
   <div class="app">
-    <h1>🌐 VUE路由测试</h1>
+    <!-- 一般组件 -->
+    <Header /><!-- 是个标题 -->
+
     <!-- 导航区 -->
     <div class="navigate">
       <RouterLink to="/" class="nav-link" active-class="active"
@@ -44,6 +46,7 @@ const routes = [
   { path: '/', component: Home },
   { path: '/about', component: About }
 ] */
+import Header from "./components/Header.vue";
 </script>
 <style scoped>
 /* ========== 全局重置 ========== */
@@ -65,19 +68,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px 20px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-/* ========== 标题 ========== */
-.app h1 {
-  text-align: center;
-  color: #ffffff;
-  font-size: 2.5rem;
-  font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  margin-bottom: 30px;
-  letter-spacing: 2px;
 }
 
 /* ========== 导航区 ========== */
@@ -127,7 +119,7 @@ body {
   transition: left 0.5s ease;
 }
 
-.nav-link:hover::before {
+.nav -link:hover::before {
   left: 100%;
 }
 

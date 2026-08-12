@@ -1,3 +1,4 @@
+<!-- 是个路由组件 -->
 <template>
   <div class="news-list-simple">
     <h2>📰 新闻列表</h2>

@@ -1,3 +1,4 @@
+<!-- 是个路由组件 -->
 <template>
   <div class="home-container">
     <!-- ====== 顶部轮播/横幅 ====== -->
