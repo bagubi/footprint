@@ -1,4 +1,4 @@
-import { ref, reactive, onMounted } from "vue";
+import { reactive, onMounted } from "vue";
 // ref - 适用于基本类型（数字、字符串、布尔值、null、undefined）、也能包对象/数组（但不推荐）
 // reactive - 适用于对象/数组
 //*不能整体重新赋值...解决：使用 toRefs
@@ -13,7 +13,7 @@ export default function () {
   //方法
   async function getDog() {
     /*【复习】   axios.get(url, config)
-//              ↓        ↓      ↓
+//              ↓        ↓      ↓ 
 //            方法      地址   配置（可选） */
 
     /* 方法一 ：then/catch */
