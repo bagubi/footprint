@@ -28,14 +28,17 @@ const router = createRouter({
     //   component: 组件,
     // }
     {
+      name: "home-zhuye",
       path: "/",
       component: Home,
     },
     {
+      name: "about-guanyv",
       path: "/about",
       component: About,
     },
     {
+      name: "news-xinwen",
       path: "/news",
       component: News,
     },

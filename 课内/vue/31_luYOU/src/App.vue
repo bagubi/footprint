@@ -5,10 +5,15 @@
 
     <!-- 导航区 -->
     <div class="navigate">
+      <!-- to的第一种写法 -->
       <RouterLink to="/" class="nav-link" active-class="active"
         >🏠 首页</RouterLink
       >
-      <RouterLink to="/about" class="nav-link" active-class="active"
+      <!-- to的第二种写法（下面两种工作用的比较多） -->
+      <RouterLink
+        :to="{ name: 'about-guanyv' }"
+        class="nav-link"
+        active-class="active"
         >📖 关于</RouterLink
       >
       <!-- 这里的to都是字符串，to后面还可以跟对象(如下)。 -->
