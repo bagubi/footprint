@@ -11,7 +11,8 @@
       <RouterLink to="/about" class="nav-link" active-class="active"
         >📖 关于</RouterLink
       >
-      <RouterLink to="/news" class="nav-link" active-class="active"
+      <!-- 这里的to都是字符串，to后面还可以跟对象(如下)。 -->
+      <RouterLink :to="{ path: '/news' }" class="nav-link" active-class="active"
         >📰 新闻</RouterLink
       >
     </div>
