@@ -14,6 +14,10 @@ import {
 import Home from "@/pages/Home.vue";
 import About from "@/pages/About.vue";
 import News from "@/pages/News.vue";
+// 需要嵌套的详情组件
+import NewsDetail from "@/components/NewsDetail.vue";
+//老师的新闻子组件
+import Detail from "@/components/Detail.vue";
 
 // 第二步：创建路由器对象
 const router = createRouter({
@@ -38,9 +42,19 @@ const router = createRouter({
       component: About,
     },
     {
-      name: "news-xinwen",
       path: "/news",
-      component: News,
+      component: News, // 父级路由
+      // 下面写嵌套路由
+      children: [
+        {
+          path: ":id", // 动态参数，如 /news/001（不需要写/）
+          component: NewsDetail,
+        },
+        {
+          path: "/news/:id/detail", // 老师的新闻子组件
+          component: Detail,
+        },
+      ],
     },
   ],
 });

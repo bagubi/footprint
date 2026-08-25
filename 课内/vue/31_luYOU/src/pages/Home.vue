@@ -59,6 +59,8 @@
           :key="news.id"
           @click="handleNewsClick(news)"
         >
+          <!-- v-for="news in latestNews"遍历 latestNews 数组，每次循环取其中一个元素命名为 news，生成多个 div -->
+
           <span class="news-tag">{{ news.tag }}</span>
           <span class="news-title">{{ news.title }}</span>
           <span class="news-date">{{ news.date }}</span>
@@ -139,8 +141,8 @@ const latestNews = ref([
 const quickLinks = ref([
   { icon: "📖", label: "关于我们", path: "/about" },
   { icon: "📰", label: "新闻中心", path: "/news" },
-  { icon: "💼", label: "产品服务", path: "/services" },
-  { icon: "📞", label: "联系我们", path: "/contact" },
+  // { icon: "💼", label: "产品服务", path: "/services" },
+  // { icon: "📞", label: "联系我们", path: "/contact" },
 ]);
 
 // ========== 方法 ==========
