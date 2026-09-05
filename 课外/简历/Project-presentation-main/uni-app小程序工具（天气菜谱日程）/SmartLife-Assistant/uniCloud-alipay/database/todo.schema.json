@@ -1,0 +1,40 @@
+{
+  "bsonType": "object",
+  "required": ["title", "createTime"],
+  "properties": {
+    "_id": {
+      "bsonType": "string",
+      "description": "存储文档ID，系统自动生成"
+    },
+    "title": {
+      "bsonType": "string",
+      "description": "待办标题",
+      "maxLength": 100
+    },
+    "time": {
+      "bsonType": "date",
+      "description": "待办时间"
+    },
+    "priority": {
+      "bsonType": "string",
+      "description": "优先级",
+      "enum": ["high", "normal", "low"],
+      "defaultValue": "normal"
+    },
+    "status": {
+      "bsonType": "string",
+      "description": "状态",
+      "enum": ["pending", "completed"],
+      "defaultValue": "pending"
+    },
+    "createTime": {
+      "bsonType": "date",
+      "description": "创建时间",
+      "defaultValue": "new Date()"
+    },
+    "userId": {
+      "bsonType": "string",
+      "description": "用户ID"
+    }
+  }
+}

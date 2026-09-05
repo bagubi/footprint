@@ -1,0 +1,7 @@
+{
+  "name": "parseTodo",
+  "version": "1.0.0",
+  "description": "AI自然语言解析待办",
+  "main": "index.js",
+  "dependencies": {}
+}

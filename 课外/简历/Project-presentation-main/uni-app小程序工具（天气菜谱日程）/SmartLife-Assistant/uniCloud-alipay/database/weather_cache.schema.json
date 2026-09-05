@@ -1,0 +1,10 @@
+{
+  "bsonType": "object",
+  "required": ["city", "data", "updateTime"],
+  "properties": {
+    "_id": { "bsonType": "string" },
+    "city": { "bsonType": "string" },
+    "data": { "bsonType": "object" },
+    "updateTime": { "bsonType": "date" }
+  }
+}

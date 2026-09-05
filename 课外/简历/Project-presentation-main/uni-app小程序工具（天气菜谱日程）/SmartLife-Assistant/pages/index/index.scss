@@ -1,0 +1,104 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f0f5ff 0%, #e8f0fe 100%);
+  padding: 0 30rpx 40rpx;
+  box-sizing: border-box;
+}
+
+/* ========== 顶部头部 ========== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40rpx 0 30rpx;
+}
+
+.city-selector {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 12rpx 28rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.city-name {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #1a2a3a;
+}
+
+.city-arrow {
+  font-size: 22rpx;
+  color: #8899aa;
+  margin-left: 10rpx;
+}
+
+.update-time {
+  font-size: 24rpx;
+  color: #8899aa;
+}
+
+/* ========== 区块标题 ========== */
+.section-title {
+  display: flex;
+  align-items: center;
+  margin: 40rpx 0 24rpx;
+  padding: 0 10rpx;
+}
+
+.title-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+}
+
+.title-text {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #1a2a3a;
+}
+
+.title-tip {
+  font-size: 24rpx;
+  color: #8899aa;
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 4rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+/* ========== 快捷入口 ========== */
+.quick-actions {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 40rpx;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 28rpx 0;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(10rpx);
+  transition: all 0.3s ease;
+}
+
+.action-btn:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.action-icon {
+  font-size: 36rpx;
+}
+
+.action-text {
+  font-size: 28rpx;
+  color: #1a2a3a;
+  font-weight: 500;
+}

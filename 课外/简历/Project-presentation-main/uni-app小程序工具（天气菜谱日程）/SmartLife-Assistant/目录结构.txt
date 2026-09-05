@@ -1,0 +1,67 @@
+项目根目录/
+├── uniCloud-alipay/                    # ⭐ uniCloud 云函数目录
+│   ├── cloudfunctions/                 # 云函数根目录
+│   │   ├── getWeather/                 # 天气数据中转云函数
+│   │   │   ├── index.js
+│   │   │   ├── package.json
+│   │   │   └── config.json
+│   │   ├── parseTodo/                  # AI自然语言解析云函数
+│   │   │   ├── index.js
+│   │   │   ├── package.json
+│   │   │   └── config.json
+│   │   └── common/                     # 云函数公共模块(需要再创建)
+│   │       └── utils.js
+│   ├── database/                       # 云数据库集合定义
+│   │   ├── todo.schema.json            # 待办集合
+│   │   └── weather_cache.schema.json   # 天气缓存集合
+│   └── jql/                            # JQL扩展
+│       └── todo.jql
+│
+├── pages/                              # 页面目录
+│   ├── index/                          # 首页（天气+菜谱推荐）
+│   │   ├── index.vue
+│   │   └── index.scss
+│   └── todo/                           # 待办管理页
+│       ├── todo.vue
+│       └── todo.scss
+│
+├── static/                             # 静态资源
+│   ├── icons/
+│   └── images/
+│
+├── components/                         # 组件化模块
+│   ├── weather-card/
+│   │   ├── weather-card.vue
+│   │   └── weather-card.scss
+│   ├── recipe-list/
+│   │   ├── recipe-list.vue
+│   │   └── recipe-list.scss
+│   └── todo-list/
+│       ├── todo-list.vue
+│       └── todo-list.scss
+│
+├── utils/                              # 工具函数
+│   ├── request.js                      # 网络请求封装
+│   ├── storage.js                      # 缓存工具
+│   └── weather-helper.js               # 天气数据处理
+│
+├── api/                                # 前端API调用层
+│   ├── weather.js                      # 调用云函数获取天气
+│   └── todo.js                         # 待办相关云函数调用
+│
+├── store/                              # 状态管理
+│   └── index.js
+│
+├── uni_modules/                        # uni模块（Vant Weapp）
+│   └── vant-weapp/
+│
+├── unpackage/                          # 编译输出（自动生成，不提交）
+│   └── dist/
+│       ├── dev/
+│       └── build/
+├── .gitignore                          # 忽略 unpackage/
+├── App.vue
+├── main.js
+├── manifest.json
+├── pages.json
+└── uni.scss                         # 全局样式
