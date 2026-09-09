@@ -5,16 +5,34 @@
       <div class="news-list-area">
         <h2>📰 新闻列表</h2>
         <div class="news-items">
-          <RouterLink
+          <!-- <RouterLink
             v-for="item in newsData"
             :key="item.id"
             class="news-item"
             :class="{ active: currentNewsId === item.id }"
             @click="handleClick(item)"
             :to="`/news/${item.id}?like=加尔可爱捏&game=洛克王国`"
+            > -->
+          <!-- 管跳转,生成可点击的链接 -->
+          <!-- 37.query参数 -->
+          <!-- 这里的?like=加尔可爱捏&game=洛克王国可以被handleClick覆盖，所以这里可以不写 -->
+          <!-- <span class="news-id">{{ item.id }}</span>
+            <span class="news-title">{{ item.title }}</span>
+            <span class="news-date">{{ item.date }}</span>
+            <span class="news-arrow">›</span>
+          </RouterLink> -->
+
+          <RouterLink
+            v-for="item in newsData"
+            :key="item.id"
+            class="news-item"
+            :class="{ active: currentNewsId === item.id }"
+            @click="handleClick(item)"
+            to="/news/001/detail/呃呃/你好/嘿嘿"
             ><!-- 管跳转,生成可点击的链接 -->
-            <!-- 37.query参数 -->
-            <!-- 这里的?like=加尔可爱捏&game=洛克王国可以被handleClick覆盖，所以这里可以不写 -->
+            <!-- 38.params参数 -->
+            <!-- 传递params参数时,若使用to的对象写法,必须使用name配置项,不能用path -->
+            <!-- 这里的to已经被onMounted()覆盖了,写什么都一样 -->
             <span class="news-id">{{ item.id }}</span>
             <span class="news-title">{{ item.title }}</span>
             <span class="news-date">{{ item.date }}</span>
@@ -25,8 +43,8 @@
 
       <!-- 右侧：详情区域（路由出口） -->
       <div class="news-detail-area">
-        <RouterView /><!-- 管显示，路由出口，占位 -->
-        <!-- 测试老师写的 -->
+        <RouterView /><!-- 管显示，路由出口，占位,可以控制NewsDetail、Detail -->
+        <!-- 测试老师写的 不由路由控制-->
         <Detail title="点击查看详情" />
       </div>
     </div>
@@ -39,6 +57,8 @@ import { useRouter, useRoute } from "vue-router";
 // 这种use开头的，是hooks（钩子函数）的命名规范。
 // useRouter()：拿到路由实例，用于跳转路由(路由器)
 // useRoute()：拿到当前路由对象，用于获取路由参数（路由）
+
+// (为了写死才引入, 不然一般是路由控制不用引入
 import Detail from "@/components/Detail.vue";
 
 //创捷一个路由器对象（控制跳转）
@@ -65,12 +85,32 @@ const newsData = ref([
 const handleClick = (item: any) => {
   currentNewsId.value = item.id;
   // router.push(`/news/${item.id}`);
-  //37.跳转时带上 query 参数
+
+  //跳转时带上 query或params 参数
   router.push({
-    path: `/news/${item.id}`,
+    // 38:params
+    // 点击以后会显示详情页
+    name: "newsDetail",
+
+    // 37:query
+    // path: `/news/${item.id}`,
+    // 注意：name + (params+query) 和 path + query 不能同时使用
+
+    // 37.
     query: {
       like: "加尔可爱捏",
       game: "洛克王国",
+      content: "嘿嘿",
+    },
+
+    // 38.传递params参数时,若使用to的对象写法,必须使用name配置项,不能用path
+    // params在这里必须要和name配合使用
+    //而且params不能传对象和数组
+    params: {
+      id: item.id,
+      id6: "呃呃",
+      title: "你好",
+      // content: "嘿嘿",
     },
   });
 };
@@ -90,7 +130,7 @@ watch(
   { immediate: true }, // ③ 额外配置
 );
 
-// 组件挂载时，默认显示第一条新闻
+// 组件挂载时，默认显示老师的Detail组件。
 onMounted(() => {
   // 如果当前没有选中任何新闻（即访问 /news 而不是 /news/001）
   // if (!route.params.id && newsData.value.length > 0) {
@@ -98,8 +138,22 @@ onMounted(() => {
   if (firstNews) {
     currentNewsId.value = firstNews.id;
     // router.replace(`/news/${firstNews.id}`);
-    //37.这里 这里也可以携带 query 参数，但是会被handleClick覆盖
-    router.replace(`/news/${firstNews.id}?like=加尔可爱捏&game=洛克王国`);
+
+    // 点击前默认状态，覆盖to和:to
+    //37.38.这里 这里也可以携带 query 参数，但是点击会被handleClick覆盖
+    router.replace({
+      name: "detail", // 使用路由名称
+      params: {
+        id: firstNews.id,
+        id6: "呃呃",
+        title: "你好",
+        // content: "嘿嘿",
+      },
+      query: {
+        like: "加尔可爱捏",
+        game: "洛克王国",
+      },
+    });
   }
   // }
 });

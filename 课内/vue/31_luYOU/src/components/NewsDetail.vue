@@ -41,6 +41,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
+// useRoute():返回当前路由信息对象，包含 query、params、path 等
 //37.接收参数
 const route = useRoute();
 console.log("当前路由对象：", route);

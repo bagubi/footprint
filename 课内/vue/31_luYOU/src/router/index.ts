@@ -47,11 +47,16 @@ const router = createRouter({
       // 下面写嵌套路由
       children: [
         {
+          // 点击后
           path: ":id", // 动态参数，如 /news/001（不需要写/）
+          name: "newsDetail",
           component: NewsDetail,
         },
         {
-          path: "/news/:id/detail", // 老师的新闻子组件
+          // 点击前(content参数非必传的)
+          path: "detail/:id6/:title/:content?", // 老师的新闻子组件
+          //传递params参数时,需要提前在规则中占位
+          name: "detail",
           component: Detail,
         },
       ],
