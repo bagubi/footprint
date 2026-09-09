@@ -48,7 +48,8 @@ const router = createRouter({
       children: [
         {
           // 点击后
-          path: ":id", // 动态参数，如 /news/001（不需要写/）
+          path: ":id/:id6/:title/:content",
+          //这里的/:id6/:title/:content?是接收params的,query不需要接收
           name: "newsDetail",
           component: NewsDetail,
         },
@@ -57,7 +58,41 @@ const router = createRouter({
           path: "detail/:id6/:title/:content?", // 老师的新闻子组件
           //传递params参数时,需要提前在规则中占位
           name: "detail",
+          //显示Detail路由组件
           component: Detail,
+          // 29.路由的props配置
+
+          // 第一种写法:props会把接收到的params参数作为props传给路由组件
+          // props: true,
+
+          //第二种写法:函数写法, 可以自己决定将什么作为props给路由组件
+          props(route) {
+            console.log("~~~", route);
+            // return {
+            //   x: 100,
+            //   y: 200,
+            //   z: 300,
+            // };
+            /* 一般决定是query */
+            // return route.query;
+            //我自己拼合的笔记需要用params和query
+            return {
+              // 从 params 提取
+              id6: route.params.id6,
+              title: route.params.title,
+
+              // 从 query 提取
+              like: route.query.like,
+              game: route.query.game,
+              content: route.query.content,
+            };
+          },
+          //第三种写法:对象写法,同样可以自己决定将什么作为props给路由组件
+          // props: {
+          //   a: 100,
+          //   b: 200,
+          //   c: 300,
+          // },
         },
       ],
     },

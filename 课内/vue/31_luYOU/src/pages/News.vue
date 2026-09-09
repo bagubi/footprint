@@ -28,7 +28,7 @@
             class="news-item"
             :class="{ active: currentNewsId === item.id }"
             @click="handleClick(item)"
-            to="/news/001/detail/呃呃/你好/嘿嘿"
+            to="/news/detail/呃呃/你好/嘿嘿"
             ><!-- 管跳转,生成可点击的链接 -->
             <!-- 38.params参数 -->
             <!-- 传递params参数时,若使用to的对象写法,必须使用name配置项,不能用path -->
@@ -44,8 +44,10 @@
       <!-- 右侧：详情区域（路由出口） -->
       <div class="news-detail-area">
         <RouterView /><!-- 管显示，路由出口，占位,可以控制NewsDetail、Detail -->
-        <!-- 测试老师写的 不由路由控制-->
-        <Detail title="点击查看详情" />
+        <!-- 测试老师写的 不由路由控制,不接收路由参数-->
+        这是写死的:<Detail />
+        <!-- 写死在这里的组件用 路由的props配置第二种的 函数写法 只能这样传-->
+        <!-- <Detail :id6="id6" :title="title" :content="content || ''" /> -->
       </div>
     </div>
   </div>
@@ -65,6 +67,11 @@ import Detail from "@/components/Detail.vue";
 const router = useRouter();
 //获取当前路由对象（获取信息）
 const route = useRoute();
+console.log("新闻页的路由对象", route);
+// 从路由中取出参数
+// const id6 = route.params.id6; // "呃呃"
+// const title = route.params.title; // "你好"
+// const content = "";
 //创建响应式数据
 const currentNewsId = ref<string>("");
 
@@ -144,7 +151,7 @@ onMounted(() => {
     router.replace({
       name: "detail", // 使用路由名称
       params: {
-        id: firstNews.id,
+        // id: firstNews.id,
         id6: "呃呃",
         title: "你好",
         // content: "嘿嘿",

@@ -69,6 +69,7 @@ function changeWaterLevel(){
 //         console.log('水温达到60度，或水位达到80cm，给服务器发请求')
 //     }
 // })
+
 // 23：标签的ref属性
 //需要创建一个容器title2，来存储ref标记的内容-->h2这个元素
 /* let title2 = ref();
