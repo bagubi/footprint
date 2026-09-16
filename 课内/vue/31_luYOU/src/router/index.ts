@@ -96,6 +96,12 @@ const router = createRouter({
         },
       ],
     },
+    // 42.重定向
+    {
+      path: "/home",
+      redirect: "/home",
+      // redirect 优先级高于 component
+    },
   ],
 });
 //暴露出去router
