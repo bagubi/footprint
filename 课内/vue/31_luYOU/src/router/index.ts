@@ -48,7 +48,7 @@ const router = createRouter({
       children: [
         {
           // 点击后
-          path: ":id/:id6/:title/:content",
+          path: ":id/:id6/:title/:content?",
           //这里的/:id6/:title/:content?是接收params的,query不需要接收
           name: "newsDetail",
           component: NewsDetail,

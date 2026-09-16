@@ -6,7 +6,7 @@
     <!-- 导航区 -->
     <div class="navigate">
       <!-- to的第一种写法 -->
-      <RouterLink to="/" class="nav-link" active-class="active"
+      <RouterLink replace to="/" class="nav-link" active-class="active"
         >🏠 首页</RouterLink
       >
       <!-- to的第二种写法（下面两种工作用的比较多） -->
@@ -20,7 +20,13 @@
       <RouterLink :to="{ path: '/news' }" class="nav-link" active-class="active"
         >📰 新闻</RouterLink
       >
+
+      <!-- 40.replace属性（替换属性） 
+       在RouterLink里加上replace，在浏览器就不能倒退到上次点击的页,
+       默认是可倒退的push
+       -->
     </div>
+
     <!-- 展示区 -->
     <div class="main-content">
       <div class="content-wrapper">

@@ -21,6 +21,7 @@
             <span class="news-date">{{ item.date }}</span>
             <span class="news-arrow">›</span>
           </RouterLink> -->
+          <!-- 41.要求：在每条新闻前加个按钮 -->
 
           <RouterLink
             v-for="item in newsData"
@@ -29,10 +30,15 @@
             :class="{ active: currentNewsId === item.id }"
             @click="handleClick(item)"
             to="/news/detail/呃呃/你好/嘿嘿"
-            ><!-- 管跳转,生成可点击的链接 -->
+          >
+            <!-- 管跳转,生成可点击的链接 -->
             <!-- 38.params参数 -->
             <!-- 传递params参数时,若使用to的对象写法,必须使用name配置项,不能用path -->
             <!-- 这里的to已经被onMounted()覆盖了,写什么都一样 -->
+
+            <button @click.stop.prevent="showNewsDetail(item)">查看新闻</button>
+            <!-- 加.stop阻止冒泡，加.prevent阻止默认行为，
+             就不会被RouterLink拦截，showNewsDetail(item)才能生效 -->
             <span class="news-id">{{ item.id }}</span>
             <span class="news-title">{{ item.title }}</span>
             <span class="news-date">{{ item.date }}</span>
@@ -55,6 +61,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
+// 41.用到useRoute
 import { useRouter, useRoute } from "vue-router";
 // 这种use开头的，是hooks（钩子函数）的命名规范。
 // useRouter()：拿到路由实例，用于跳转路由(路由器)
@@ -94,7 +101,7 @@ const handleClick = (item: any) => {
   // router.push(`/news/${item.id}`);
 
   //跳转时带上 query或params 参数
-  router.push({
+  /* router.push({
     // 38:params
     // 点击以后会显示详情页
     name: "newsDetail",
@@ -119,17 +126,30 @@ const handleClick = (item: any) => {
       title: "你好",
       // content: "嘿嘿",
     },
-  });
+  }); */
 };
 
+// 笔记：认识watch()
+/*
+watch(
+    监听源,           // 第1个参数：监听谁
+    (newVal, oldVal) => {  // 第2个参数：变化时执行的回调
+      // newVal: 新值（Vue 自动传给你）
+      // oldVal: 旧值（Vue 自动传给你）
+    },
+    配置项            // 第3个参数：额外配置
+)
+*/
 // 监听路由变化，更新当前选中的新闻ID
 watch(
   () => route.params.id, // ① 监听谁？
+  // route.params.id 是当前路由中的新闻 ID
+  // 例如 /news/001 => newId === '001'
   (newId) => {
     // ② 变了之后做什么？
-    // route.params.id 是当前路由中的新闻 ID
-    // 例如 /news/001 => newId === '001'
+    //这里的newId 就是你回调函数的参数名，名字可以随便取
     if (newId) {
+      // 为什么加if判断，因为 newId 可能是 undefined，不加判断会出错！
       currentNewsId.value = newId as string;
     }
   },
@@ -140,30 +160,52 @@ watch(
 // 组件挂载时，默认显示老师的Detail组件。
 onMounted(() => {
   // 如果当前没有选中任何新闻（即访问 /news 而不是 /news/001）
-  // if (!route.params.id && newsData.value.length > 0) {
-  const firstNews = newsData.value[0];
-  if (firstNews) {
-    currentNewsId.value = firstNews.id;
-    // router.replace(`/news/${firstNews.id}`);
+  if (!route.params.id && newsData.value.length > 0) {
+    // 如果当前没有选中任何新闻（路由里没有 id），并且新闻列表有数据，就……
+    const firstNews = newsData.value[0];
+    if (firstNews) {
+      currentNewsId.value = firstNews.id;
+      // router.replace(`/news/${firstNews.id}`);
 
-    // 点击前默认状态，覆盖to和:to
-    //37.38.这里 这里也可以携带 query 参数，但是点击会被handleClick覆盖
-    router.replace({
-      name: "detail", // 使用路由名称
-      params: {
-        // id: firstNews.id,
-        id6: "呃呃",
-        title: "你好",
-        // content: "嘿嘿",
-      },
-      query: {
-        like: "加尔可爱捏",
-        game: "洛克王国",
-      },
-    });
+      // 点击前默认状态，覆盖to和:to
+      //37.38.这里 这里也可以携带 query 参数，但是点击会被handleClick覆盖
+      router.replace({
+        name: "detail", // 使用路由名称
+        params: {
+          // id: firstNews.id,
+          id6: "呃呃",
+          title: "你好",
+          // content: "嘿嘿",
+        },
+        query: {
+          like: "加尔可爱捏",
+          game: "洛克王国",
+        },
+      });
+    }
   }
-  // }
 });
+// 41.NewSInter接口用于限制showNewsDetail函数参数item的属性和类型
+interface NewSInter {
+  id: string;
+  title: string;
+  date: string;
+}
+// 41.
+function showNewsDetail(item: NewSInter) {
+  // 这里的（item: ） 图简单就填any，要是想限制就interface一个限制接口
+  currentNewsId.value = item.id;
+  // 编程式跳转路由（为了让用户有条件的跳转，不是只是a标签跳转）
+  //如：到10点自动跳转到秒杀路由，登录后自动跳转到个人中心
+  router.push({
+    //这里的push浏览器可以回退，改为replace就回退不了了
+    name: "newsDetail",
+    params: { id: item.id, id6: "呃呃", title: "你好" },
+    query: { like: "加尔可爱捏", game: "洛克王国" },
+  });
+  //router.push（）的括号里，to能怎么写他就能怎么写
+  //这里我写的是to的对象写法
+}
 </script>
 
 <style scoped>

@@ -92,10 +92,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
+// import { ref, onMounted } from "vue";
+import { ref } from "vue";
+// import { useRouter } from "vue-router";
 
+// 41.1路由_编程式路由导航
+// 生命周期钩子:组件首次渲染完成、DOM 已经存在时，只执行一次
+import { onMounted } from "vue";
+// 返回路由器实例，用来控制跳转
+import { useRouter } from "vue-router";
 const router = useRouter();
+// 用useRouter（）函数等于把一个路由器握在手里
 
 // ========== 功能特点 ==========
 const features = ref([
@@ -164,9 +171,15 @@ const handleNewsClick = (news: any) => {
 };
 
 // ========== 生命周期 ==========
+//组件首次渲染完成、DOM 已经存在时，只执行一次
 onMounted(() => {
-  console.log("Home 组件已挂载");
   // 可以在这里获取首页数据
+  console.log("Home 组件已挂载");
+  // 41.2 要求：看首页3秒后跳到新闻
+  setTimeout(() => {
+    // 开发中常用的 编程式路由导航
+    router.push("/news");
+  }, 3000);
 });
 </script>
 
