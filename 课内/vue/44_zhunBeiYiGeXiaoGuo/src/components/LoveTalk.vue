@@ -28,7 +28,22 @@ const { talkList } = storeToRefs(loveTalkStore);
 //此处数据是笑话，46的时候删了
 
 // ]);
-
+// 50.$subscribe的使用
+loveTalkStore.$subscribe((mutate, state) => {
+  // $subscribe接收两个信息，mutate：本次修改的信息，state：数据
+  console.log(
+    "loveTalkStore里面保存的数据发生了变化",
+    "mutate：",
+    mutate,
+    "state：",
+    state,
+  );
+  //使用场景假设：
+  localStorage.setItem("talkList", JSON.stringify(state.talkList));
+  // 上面这是个浏览器本地存储,localStorage里必须存字符串,如果不是字符串，底层会调用toString(),
+  //对象和数组直接存进去会变成无意义的字符串,如：{ a: 1 }  ==toString()==>>	 "[object Object]"
+  //JSON.stringify()把对象/数组转成字符串
+});
 //方法
 async function getLoveTalk() {
   // //发情求,下面这个的写法是连续解构覅赋值+重命名
