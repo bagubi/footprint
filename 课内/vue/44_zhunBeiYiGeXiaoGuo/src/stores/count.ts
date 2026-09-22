@@ -26,8 +26,29 @@ export const useCountStore = defineStore("count", {
       sum: 6,
       caffeineLevel: 60,
       bugCount: 99,
-      moodLevel: "飞升了",
+      moodLevel: "good",
     };
+  },
+  //49.getters的使用(对数据不满意的时候可以加工一下)
+  getters: {
+    // 第一种写法
+    // bigSum(state) {
+    //   return state.sum * 10;
+    // },
+    // 第一种写法简便版(就不用写this)
+    bigSum: (state) => state.sum * 10,
+
+    // 第二种写法
+    uppermoodLevel(state) {
+      return state.moodLevel.toUpperCase();
+      // 第三种写法(功能和上面一样)
+      // return this.moodLevel.toUpperCase();
+    },
+
+    // 注意：如果不写(state)，就写个: string或者其他的
+    // uppermoodLevel(): string {
+    //   return this.moodLevel.toUpperCase();
+    // },
   },
 });
 //这里就是一个仓库，统计相关的和、差、开根号的结果，都可以存这里
