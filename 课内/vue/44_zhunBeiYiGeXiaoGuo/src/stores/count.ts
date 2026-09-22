@@ -5,10 +5,28 @@ import { defineStore } from "pinia";
 export const useCountStore = defineStore("count", {
   // 这个花括号里是配置对象
 
+  //47.pinia第三种修改数据的方法(可以限定极限值)
+  actions: {
+    //里面放动作函数（一个一个的方法，用于响应组件中的"动作"）
+    //方便写逻辑复用
+    increment(value: number) {
+      // 这里填value是接收Count组件传来的
+      console.log("increment被调用了", value);
+      //修改数据(this是当前的store)
+      console.log(this.sum);
+      //限制：大于15就不给加了
+      if (this.sum < 15) {
+        this.sum += value;
+      }
+    },
+  },
   // 配置项state:状态&数据（写成函数）真正存储数据的地方
   state() {
     return {
       sum: 6,
+      caffeineLevel: 60,
+      bugCount: 99,
+      moodLevel: "飞升了",
     };
   },
 });
