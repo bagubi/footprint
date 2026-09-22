@@ -1,10 +1,10 @@
 <template>
   <div class="count">
-    <h2>当前求和为: {{ countStore.sum }}</h2>
+    <h2>当前求和为: {{ sum }}</h2>
     <h3>
-      欢迎查看！血液中咖啡浓度：{{ countStore.caffeineLevel }},代码bug剩余：{{
-        countStore.bugCount
-      }}，程序员心情等级：{{ countStore.moodLevel }}
+      欢迎查看！血液中咖啡浓度：{{ caffeineLevel }},代码bug剩余：{{
+        bugCount
+      }}，程序员心情等级：{{ moodLevel }}
     </h3>
     <select v-model.number="selected">
       <!-- 把下拉框选中的值双向绑定到 selected，并且自动转成数字（而不是字符串） -->
@@ -17,11 +17,20 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, toRefs } from "vue";
+//48.除了toRefs还能用storeToRefs解构
+import { storeToRefs } from "pinia";
+
 // 46.引入useCountStore
 import { useCountStore } from "@/stores/count";
 //使用useCountStore,得到一个专门保存count相关的store
 const countStore = useCountStore();
+
+// 48.解构出来(这里用了toRefs，但是代价会大，它把不需要修改的也进行ref包裹)
+// const { sum, caffeineLevel, bugCount, moodLevel } = toRefs(countStore);
+//这里用storeToRefs，它只关注sotre中的数据
+const { sum, caffeineLevel, bugCount, moodLevel } = storeToRefs(countStore);
+
 //46.以下两种方式都可以拿到state中的数据
 console.log("这是countStore：", countStore.sum);
 // 麻烦方法
@@ -68,6 +77,7 @@ function add() {
 }
 function sub() {
   // sum.value -= selected.value;
+  countStore.sum -= selected.value;
 }
 </script>
 <style scoped>
