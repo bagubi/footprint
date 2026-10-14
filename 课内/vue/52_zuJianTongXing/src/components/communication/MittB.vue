@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <h4>组件 B（接收方）</h4>
-    <p>收到的消息：{{ msg }}</p>
+    <p>收到的消息：{{ msgB }}</p>
   </div>
 </template>
 
@@ -9,18 +9,21 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import emitter from "@/utils/emitter";
 
-const msg = ref("");
+const msgB = ref("");
+// 如果没有上面这行就会改了，但页面不会更新
 
 function handler(data: any) {
-  msg.value = data;
+  msgB.value = data;
 }
-
+// 组件挂载到页面后
 onMounted(() => {
-  emitter.on("msg", handler);
+  // 绑定某一个事件(必要的)
+  emitter.on("msgA", handler);
 });
-
+// 组件从页面卸载后
 onUnmounted(() => {
-  emitter.off("msg", handler);
+  // 解绑某一个事件
+  emitter.off("msgA", handler);
 });
 </script>
 

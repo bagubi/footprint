@@ -7,6 +7,8 @@
 </template>
 
 <script setup lang="ts">
+// 安装mitt
+// npm i mitt
 import A from "./communication/MittA.vue";
 import B from "./communication/MittB.vue";
 </script>
