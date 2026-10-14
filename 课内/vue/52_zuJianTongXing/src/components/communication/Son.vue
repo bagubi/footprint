@@ -14,6 +14,12 @@ defineProps([`fatherMsg`]);
 //   msg: string;
 //   count: number;
 // }>();
+
+// 1. props 的本质：单向数据流
+// 2. 但 props 可以传一个"函数"下去
+// 关键点：props 传的不只是数据，还可以传函数。
+// 父组件把一个函数作为 prop 传给子组件，
+// 子组件调用这个函数，就把数据"送"回父组件了。
 </script>
 
 <style scoped>
