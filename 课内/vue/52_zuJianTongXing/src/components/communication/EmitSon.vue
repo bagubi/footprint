@@ -2,6 +2,7 @@
   <div class="box">
     <h4>子组件</h4>
     <button @click="send(2, 3, $event)">发送消息给父组件</button>
+    触发点击事件就会自动创建$event
   </div>
 </template>
 
@@ -29,6 +30,7 @@ function send(a: number, b: number, c: MouseEvent) {
 └── ... */
   emit("send-msg", "我是子组件的数据");
   console.log("test", a, b, c);
+  // c就是event
 }
 
 // 老师教用生命周期函数触发
