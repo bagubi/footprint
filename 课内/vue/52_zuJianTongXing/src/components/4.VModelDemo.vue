@@ -10,6 +10,7 @@
     <!-- 修改model-value 和 update:model-value-->
     <!-- 方法一: -->
     <Son v-model:WQ="text" v-model:FL="eee" />
+    <!-- 这里 WQ 和 FL 是起名 -->
     <!-- 方法二: -->
     <!-- <Son
       :model-value2="username"
