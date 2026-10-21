@@ -20,8 +20,8 @@
         >5. attrs 透传</RouterLink
       >
       <RouterLink to="/ref" class="nav-link" active-class="active"
-        >6. ref 父取子</RouterLink
-      >
+        >6. ref 父取子& $parent子取父
+      </RouterLink>
       <RouterLink to="/provide" class="nav-link" active-class="active"
         >7. provide/inject</RouterLink
       >

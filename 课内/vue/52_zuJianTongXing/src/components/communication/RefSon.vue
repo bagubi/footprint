@@ -14,6 +14,6 @@ function sonMethod() {
   console.log("子组件的方法被调用了");
 }
 
-// 必须暴露出去，父组件才能访问
+// 第 2 步：子组件用 defineExpose 暴露
 defineExpose({ sonMsg, sonMethod });
 </script>

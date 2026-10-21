@@ -47,8 +47,8 @@ console.log("这是countStore：", countStore.$state.sum);
 
 // let x = ref(9);
 // console.log(x.value);
-//46.注意：自己定义的ref要.value拆包
-//但是在reactive里面的不用.value
+//46.注意：自己定义的ref要.value拆包,什么时候不用.value呢？
+//=================================但是在reactive里面的不用.value
 
 //数据
 // let sum = ref(1); //当前求和

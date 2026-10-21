@@ -7,7 +7,6 @@
 
 <script setup lang="ts">
 import { provide, ref } from "vue";
-// ✅ 正确
 import Son from "./ProvideSon.vue";
 
 const msg = ref("我是 provide 的数据");
