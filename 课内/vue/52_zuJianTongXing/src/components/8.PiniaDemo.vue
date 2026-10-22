@@ -1,7 +1,7 @@
 <template>
   <div class="demo">
     <h2>8. pinia 全局状态管理</h2>
-
+    <!-- 直接参考之前45集的pinia -->
     <h3>当前求和：{{ sum }}，放大 10 倍：{{ bigSum }}</h3>
     <h3>
       咖啡因浓度：{{ caffeineLevel }}，bug 剩余：{{ bugCount }}，心情等级：{{
