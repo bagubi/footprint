@@ -15,18 +15,20 @@
     </Game>
 
     <Game>
-      <template v-slot="a233">
+      <template v-slot:www="a233">
+        <!-- 放在 www 槽里 -->
         <!-- 一般不叫a233，叫params -->
+
         <ol>
-          <li v-for="y in a233.youxi" :key="y.id">{{ y.name }}</li>
+          <li v-for="y in a233.youxi2" :key="y.id">{{ y.name }}</li>
         </ol>
       </template>
     </Game>
 
     <Game>
-      <template v-slot="{ youxi }">
+      <template v-slot="{ youxi1 }">
         <!-- 解构出youxi -->
-        <h3 v-for="p in youxi" :key="p.id">{{ p.name }}</h3>
+        <h3 v-for="p in youxi1" :key="p.id">{{ p.name }}</h3>
       </template>
     </Game>
   </div>

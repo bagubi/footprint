@@ -3,8 +3,10 @@
     <!-- 
     作用域插槽---子
     -->
-    <slot :youxi="games" x="哈哈" y="凯亚"></slot>
+    <slot :youxi1="games" x="哈哈" y="凯亚"></slot>
     <!-- 传递games、x、y,他们三都被打包成一个对象 -->
+
+    <slot :youxi2="games" name="www"></slot>
   </div>
 </template>
 
