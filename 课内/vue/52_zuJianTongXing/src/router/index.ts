@@ -8,7 +8,8 @@ import AttrsDemo from "@/components/5.AttrsDemo.vue";
 import RefDemo from "@/components/6.RefDemo.vue";
 import ProvideDemo from "@/components/7.ProvideDemo.vue";
 import PiniaDemo from "@/components/8.PiniaDemo.vue"; // ← 新增
-import SlotDemo from "@/components/9.SlotDemo.vue";
+import SlotDemo1 from "@/components/9.1-SlotDemo_默认、具名插槽.vue";
+import SlotDemo2 from "@/components/9.2-SlotDemo_作用域插槽.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -22,7 +23,8 @@ const router = createRouter({
     { path: "/ref", component: RefDemo },
     { path: "/provide", component: ProvideDemo },
     { path: "/pinia", component: PiniaDemo }, // ← 新增
-    { path: "/slot", component: SlotDemo },
+    { path: "/slot1", component: SlotDemo1 },
+    { path: "/slot2", component: SlotDemo2 },
   ],
 });
 

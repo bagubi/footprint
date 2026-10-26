@@ -28,8 +28,11 @@
       <RouterLink to="/pinia" class="nav-link" active-class="active"
         >8. pinia 全局状态</RouterLink
       >
-      <RouterLink to="/slot" class="nav-link" active-class="active"
-        >9. slot 插槽</RouterLink
+      <RouterLink to="/slot1" class="nav-link" active-class="active"
+        >9. slot 默认、具名插槽</RouterLink
+      >
+      <RouterLink to="/slot2" class="nav-link" active-class="active"
+        >9. slot 作用域插槽</RouterLink
       >
     </nav>
 
