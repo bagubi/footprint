@@ -8,7 +8,8 @@
     <Game>
       <template>
         <ul>
-          <li v-for="g in games" :key="g.id">{{ g.name }}</li>
+          <!-- 错误演示 -->
+          <!-- <li v-for="g in games" :key="g.id">{{ g.name }}</li> -->
           <!-- 此时games访问不到-> 作用域问题 -->
         </ul>
       </template>
