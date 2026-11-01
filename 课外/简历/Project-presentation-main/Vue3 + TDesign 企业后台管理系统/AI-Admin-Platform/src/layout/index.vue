@@ -9,7 +9,8 @@
     <t-layout>
       <!-- 顶栏 -->
       <t-header class="app-header">
-        <HeaderBar :collapsed="collapsed" @toggle="collapsed = !collapsed" />
+        <!-- <HeaderBar :collapsed="collapsed" @toggle="collapsed = !collapsed" /> -->
+        <HeaderBar :collapsed="collapsed" @toggle="onToggle" />
       </t-header>
 
       <!-- 内容区 -->
@@ -26,9 +27,19 @@ import SideMenu from "./SideMenu.vue";
 import HeaderBar from "./HeaderBar.vue";
 
 const collapsed = ref(false);
+
+function onToggle() {
+  console.log("[layout] 收到 toggle，当前 collapsed:", collapsed.value);
+  collapsed.value = !collapsed.value;
+}
 </script>
 
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .app-layout {
   height: 100vh;
 }
@@ -52,6 +63,6 @@ const collapsed = ref(false);
 .app-content {
   padding: 16px;
   background: #f5f6f7;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 </style>

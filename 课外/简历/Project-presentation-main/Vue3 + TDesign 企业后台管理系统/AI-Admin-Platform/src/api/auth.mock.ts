@@ -1,4 +1,4 @@
-// api/auth.mock.ts 思路
+// api/auth.mock.ts 按角色返回不同菜单的 mock
 const MENU_BY_ROLE = {
   admin: [
     {
@@ -31,6 +31,7 @@ const MENU_BY_ROLE = {
 };
 
 export function getMenuApi() {
-  const role = localStorage.getItem("mock_role") || "admin";
-  return Promise.resolve(MENU_BY_ROLE[role]);
+  const role = (localStorage.getItem("mock_role") ||
+    "admin") as keyof typeof MENU_BY_ROLE;
+  return Promise.resolve(MENU_BY_ROLE[role] ?? MENU_BY_ROLE.admin);
 }

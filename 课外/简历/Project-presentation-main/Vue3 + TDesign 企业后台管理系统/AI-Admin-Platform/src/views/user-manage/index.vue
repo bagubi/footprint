@@ -121,3 +121,8 @@ function handleDelete(id: number) {
   // 实际调用 api 删除
 }
 </script>
+<style scoped>
+body {
+  margin: 0px;
+}
+</style>

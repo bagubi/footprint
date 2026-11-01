@@ -1,4 +1,6 @@
 // src/api/dashboard.ts
+// 数据看板的 mock 接口层，给 views/dashboard/index.vue 提供三类图表数据
+// 接真实后端时把 Promise.resolve(...) 换成 Axios 请求即可，页面代码不用改。
 export interface OrderTrendItem {
   date: string;
   orderCount: number;

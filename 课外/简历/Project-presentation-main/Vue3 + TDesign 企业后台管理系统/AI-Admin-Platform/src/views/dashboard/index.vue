@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard-page">
-    <div style="color: red; font-size: 32px">DASHBOARD 已渲染</div>
     <!-- 指标卡片 -->
     <t-row :gutter="16" class="stat-row">
       <t-col :span="3" v-for="card in statCards" :key="card.label">
@@ -277,6 +276,13 @@ onMounted(loadData);
 </script>
 
 <style scoped>
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 .dashboard-page {
   padding: 16px;
 }

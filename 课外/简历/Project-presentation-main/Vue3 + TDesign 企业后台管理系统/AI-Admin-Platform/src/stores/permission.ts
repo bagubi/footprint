@@ -11,14 +11,10 @@ export const usePermissionStore = defineStore("permission", () => {
   const isRoutesLoaded = ref(false);
 
   async function buildRoutes() {
-    console.log("[buildRoutes] 开始");
     const menus = await getMenuApi();
-    console.log("[buildRoutes] menus =", menus);
     menuTree.value = menus;
     dynamicRoutes.value = formatAsyncRoutes(menus);
-    console.log("[buildRoutes] dynamicRoutes =", dynamicRoutes.value);
     isRoutesLoaded.value = true;
-    console.log("[buildRoutes] 完成");
     return dynamicRoutes.value;
   }
 

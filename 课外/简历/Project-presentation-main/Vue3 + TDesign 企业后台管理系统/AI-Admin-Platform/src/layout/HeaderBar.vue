@@ -2,7 +2,12 @@
 <template>
   <div class="header-bar">
     <!-- 左侧：折叠按钮 -->
-    <t-button variant="text" shape="square" @click="$emit('toggle')">
+    <!-- <t-button variant="text" shape="square" @click="$emit('toggle')">
+      <template #icon>
+        <t-icon :name="collapsed ? 'menu-fold' : 'menu-unfold'" />
+      </template>
+    </t-button> -->
+    <t-button variant="text" shape="square" @click="onToggle">
       <template #icon>
         <t-icon :name="collapsed ? 'menu-fold' : 'menu-unfold'" />
       </template>
@@ -29,7 +34,8 @@ import { useUserStore } from "@/stores/user";
 import { usePermissionStore } from "@/stores/permission";
 
 defineProps<{ collapsed: boolean }>();
-defineEmits<{ (e: "toggle"): void }>();
+
+const emit = defineEmits<{ (e: "toggle"): void }>();
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -48,9 +54,21 @@ function onDropdownClick(data: { value: string }) {
     router.replace("/login");
   }
 }
+
+function onToggle() {
+  console.log("[HeaderBar] toggle 被点击");
+  emit("toggle");
+}
 </script>
 
 <style scoped>
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 .header-bar {
   width: 100%;
   display: flex;

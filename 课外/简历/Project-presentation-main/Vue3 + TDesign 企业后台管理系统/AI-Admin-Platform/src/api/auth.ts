@@ -1,4 +1,5 @@
-// src/api/auth.ts
+// src/api/auth.ts  mock 认证接口
+// 登录
 export function loginApi(params: { username: string; password: string }) {
   // mock 登录
   return Promise.resolve({
@@ -10,6 +11,7 @@ export function loginApi(params: { username: string; password: string }) {
   });
 }
 
+// 获取用户信息
 export function getUserInfoApi() {
   return Promise.resolve({
     name: "admin",
@@ -17,7 +19,7 @@ export function getUserInfoApi() {
   });
 }
 
-// ↓ 补这个，permission.ts 要用的
+// 按角色返回菜单，permission.ts 要用的
 export function getMenuApi() {
   const role = localStorage.getItem("mock_role") || "admin";
 
