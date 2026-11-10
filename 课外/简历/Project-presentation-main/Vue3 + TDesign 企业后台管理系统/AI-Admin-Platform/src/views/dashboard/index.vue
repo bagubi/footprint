@@ -15,7 +15,7 @@
 
     <!-- 图表区 -->
     <t-row :gutter="16" class="chart-row">
-      <t-col :span="8">
+      <t-col :span="12" class="stat-row">
         <t-card title="订单趋势" :bordered="false">
           <template #actions>
             <t-radio-group
@@ -30,13 +30,13 @@
           <ChartWrapper :option="orderTrendOption" />
         </t-card>
       </t-col>
-      <t-col :span="8">
+      <t-col :span="6">
         <t-card title="分类销售占比" :bordered="false">
           <ChartWrapper :option="categoryOption" />
         </t-card>
       </t-col>
-      <t-col :span="8">
-        <t-card title="退款率趋势" :bordered="false">
+      <t-col :span="6">
+        <t-card title="退款率趋势" :bordered="false" class="">
           <ChartWrapper :option="refundOption" />
         </t-card>
       </t-col>
@@ -271,7 +271,7 @@ function exportReport() {
   a.click();
   URL.revokeObjectURL(a.href);
 }
-
+document.querySelector(".app-layout");
 onMounted(loadData);
 </script>
 
@@ -336,4 +336,7 @@ body,
   display: flex;
   gap: 8px;
 }
+/* .stat-card {
+  margin: 8px 0;
+} */
 </style>

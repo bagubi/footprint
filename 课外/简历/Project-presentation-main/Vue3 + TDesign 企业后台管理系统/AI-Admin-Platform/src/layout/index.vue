@@ -2,7 +2,7 @@
 <template>
   <t-layout class="app-layout">
     <!-- 侧边栏 -->
-    <t-aside :width="collapsed ? '64px' : '232px'" class="app-aside">
+    <t-aside :class="['app-aside', { 'is-collapsed': collapsed }]">
       <SideMenu :collapsed="collapsed" />
     </t-aside>
 
@@ -35,11 +35,6 @@ function onToggle() {
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 .app-layout {
   height: 100vh;
 }
@@ -49,8 +44,11 @@ function onToggle() {
   border-right: 1px solid #e7e7e7;
   background: #fff;
   overflow: hidden;
+  flex-shrink: 0; /* 关键：防止被内容区挤压 */
 }
-
+.app-aside.is-collapsed {
+  width: 64px;
+}
 .app-header {
   height: 56px;
   padding: 0 16px;

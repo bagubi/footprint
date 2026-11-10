@@ -122,7 +122,4 @@ function handleDelete(id: number) {
 }
 </script>
 <style scoped>
-body {
-  margin: 0px;
-}
 </style>

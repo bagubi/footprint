@@ -62,13 +62,7 @@ function onToggle() {
 </script>
 
 <style scoped>
-html,
-body,
-#app {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
+
 .header-bar {
   width: 100%;
   display: flex;
