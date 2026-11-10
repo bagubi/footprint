@@ -42,6 +42,12 @@ export function getMenuApi() {
       component: "role-manage/index",
       meta: { title: "角色管理", icon: "setting" },
     },
+    {
+      path: "product-manage",
+      name: "ProductManage",
+      component: "product-manage/index",
+      meta: { title: "商品管理", icon: "shop" },
+    },
   ];
 
   if (role === "operator") {
