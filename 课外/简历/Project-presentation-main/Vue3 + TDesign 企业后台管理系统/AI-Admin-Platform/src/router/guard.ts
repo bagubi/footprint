@@ -36,21 +36,6 @@ router.beforeEach(async (to) => {
       });
 
       return { ...to, replace: true };
-
-      console.log(
-        "[guard] 注入后路由表:",
-        router.getRoutes().map((r) => r.path),
-      );
-      router.getRoutes().forEach((r) => {
-        console.log(
-          "[route]",
-          r.path,
-          "->",
-          r.components?.default?.toString().slice(0, 80),
-        );
-      });
-      // 返回值形式：重新导航到当前目标
-      return { ...to, replace: true };
     } catch (e) {
       console.error("[guard] 加载动态路由失败", e);
       userStore.logout();

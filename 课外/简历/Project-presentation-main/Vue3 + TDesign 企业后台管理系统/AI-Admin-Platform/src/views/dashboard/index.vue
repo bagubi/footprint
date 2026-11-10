@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-page">
+  <div>
     <!-- 指标卡片 -->
     <t-row :gutter="16" class="stat-row">
       <t-col :span="3" v-for="card in statCards" :key="card.label">
@@ -14,46 +14,24 @@
     </t-row>
 
     <!-- 图表区 -->
-    <t-row :gutter="16" class="chart-row">
-      <t-col :span="12" class="stat-row">
-        <t-card title="订单趋势" :bordered="false">
-          <template #actions>
-            <t-radio-group
-              v-model="range"
-              variant="default-filled"
-              size="small"
-            >
-              <t-radio-button value="7d">近 7 天</t-radio-button>
-              <t-radio-button value="30d">近 30 天</t-radio-button>
-            </t-radio-group>
-          </template>
-          <ChartWrapper :option="orderTrendOption" />
-        </t-card>
-      </t-col>
-      <t-col :span="6">
-        <t-card title="分类销售占比" :bordered="false">
-          <ChartWrapper :option="categoryOption" />
-        </t-card>
-      </t-col>
-      <t-col :span="6">
-        <t-card title="退款率趋势" :bordered="false" class="">
-          <ChartWrapper :option="refundOption" />
-        </t-card>
-      </t-col>
+    <t-row :gutter="13" class="chart-row">
+      <t-col :span="12" class="stat-row"><OrderTrendChart /></t-col>
+      <t-col :span="6" class="stat-row"><CategoryPieChart /></t-col>
+      <t-col :span="6" class="stat-row"><RefundRateChart /></t-col>
+      <t-col :span="12"><AovChart /></t-col>
     </t-row>
 
     <!-- AI 区 -->
-    <t-row :gutter="16" class="ai-row">
-      <t-col :span="12">
+    <t-row :gutter="13" class="ai-row">
+      <t-col :span="12" class="stat-row">
         <t-card title="AI 经营周报" :bordered="false">
           <template #actions>
             <t-button
               theme="primary"
               :loading="aiLoading"
               @click="generateReport"
+              >生成周报</t-button
             >
-              生成周报
-            </t-button>
           </template>
           <t-textarea
             v-model="reportText"
@@ -107,7 +85,10 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { MessagePlugin } from "tdesign-vue-next";
-import ChartWrapper from "@/components/ChartWrapper.vue";
+import OrderTrendChart from "./components/OrderTrendChart.vue";
+import CategoryPieChart from "./components/CategoryPieChart.vue";
+import RefundRateChart from "./components/RefundRateChart.vue";
+import AovChart from "./components/AovChart.vue";
 import { useAI } from "@/composables/useAI";
 import { useAiStore } from "@/stores/ai";
 import {
@@ -118,12 +99,11 @@ import {
   type CategoryItem,
   type RefundItem,
 } from "@/api/dashboard";
-import type { EChartsOption } from "echarts";
 
 const aiStore = useAiStore();
 const { loading: aiLoading, call } = useAI();
 
-const range = ref<"7d" | "30d">("7d");
+// 主页面保留一份取数，给 AI 上下文用
 const orderTrend = ref<OrderTrendItem[]>([]);
 const categories = ref<CategoryItem[]>([]);
 const refunds = ref<RefundItem[]>([]);
@@ -134,7 +114,6 @@ const reportText = computed({
   set: (v: string) => aiStore.setWeeklyReport(v),
 });
 
-// 指标卡片（由数据推导）
 const statCards = computed(() => {
   const totalOrders = orderTrend.value.reduce((s, i) => s + i.orderCount, 0);
   const totalAmount = orderTrend.value.reduce((s, i) => s + i.amount, 0);
@@ -151,67 +130,9 @@ const statCards = computed(() => {
   ];
 });
 
-// 订单趋势图
-const orderTrendOption = computed<EChartsOption>(() => ({
-  tooltip: { trigger: "axis" },
-  legend: { data: ["订单量", "销售额"] },
-  xAxis: { type: "category", data: orderTrend.value.map((i) => i.date) },
-  yAxis: [
-    { type: "value", name: "订单量" },
-    { type: "value", name: "销售额" },
-  ],
-  series: [
-    {
-      name: "订单量",
-      type: "line",
-      smooth: true,
-      data: orderTrend.value.map((i) => i.orderCount),
-    },
-    {
-      name: "销售额",
-      type: "line",
-      smooth: true,
-      yAxisIndex: 1,
-      data: orderTrend.value.map((i) => i.amount),
-    },
-  ],
-}));
-
-// 分类占比饼图
-const categoryOption = computed<EChartsOption>(() => ({
-  tooltip: { trigger: "item" },
-  legend: { bottom: 0 },
-  series: [
-    {
-      type: "pie",
-      radius: ["40%", "65%"],
-      data: categories.value.map((i) => ({
-        name: i.categoryName,
-        value: i.amount,
-      })),
-    },
-  ],
-}));
-
-// 退款率趋势
-const refundOption = computed<EChartsOption>(() => ({
-  tooltip: { trigger: "axis" },
-  xAxis: { type: "category", data: refunds.value.map((i) => i.date) },
-  yAxis: { type: "value", name: "退款率(%)" },
-  series: [
-    {
-      type: "line",
-      smooth: true,
-      data: refunds.value.map((i) => i.refundRate),
-      areaStyle: {},
-    },
-  ],
-}));
-
-// 加载看板数据
 async function loadData() {
   const [o, c, r] = await Promise.all([
-    getOrderTrendApi(range.value),
+    getOrderTrendApi("7d"),
     getCategoryApi(),
     getRefundRateApi(),
   ]);
@@ -220,7 +141,6 @@ async function loadData() {
   refunds.value = r;
 }
 
-// 生成周报
 async function generateReport() {
   const context = {
     orderTrend: orderTrend.value,
@@ -239,7 +159,6 @@ async function generateReport() {
   }
 }
 
-// 归因问答
 async function askQuestion() {
   const q = question.value.trim();
   if (!q) return;
@@ -271,21 +190,11 @@ function exportReport() {
   a.click();
   URL.revokeObjectURL(a.href);
 }
-document.querySelector(".app-layout");
+
 onMounted(loadData);
 </script>
 
 <style scoped>
-html,
-body,
-#app {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-.dashboard-page {
-  padding: 16px;
-}
 .stat-row,
 .chart-row,
 .ai-row {
@@ -336,7 +245,4 @@ body,
   display: flex;
   gap: 8px;
 }
-/* .stat-card {
-  margin: 8px 0;
-} */
 </style>

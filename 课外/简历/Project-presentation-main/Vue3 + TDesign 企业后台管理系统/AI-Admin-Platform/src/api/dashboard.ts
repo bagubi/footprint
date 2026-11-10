@@ -16,12 +16,27 @@ export interface RefundItem {
 }
 
 const DAYS_7 = ["10-23", "10-24", "10-25", "10-26", "10-27", "10-28", "10-29"];
+const ORDER_COUNTS_7 = [120, 132, 101, 134, 90, 230, 210];
+const AMOUNTS_7 = [8200, 9320, 7010, 9340, 6900, 15300, 14200];
+const REFUND_RATES_7 = [2.1, 2.3, 2.0, 2.8, 8.1, 2.5, 2.2];
 
 export function getOrderTrendApi(range: "7d" | "30d" = "7d") {
+  if (range === "30d") {
+    const days = Array.from(
+      { length: 30 },
+      (_, i) => `10-${String((i % 30) + 1).padStart(2, "0")}`,
+    );
+    const data: OrderTrendItem[] = days.map((date, i) => ({
+      date,
+      orderCount: ORDER_COUNTS_7[i % 7]! + (i % 5) * 6,
+      amount: AMOUNTS_7[i % 7]! + (i % 5) * 400,
+    }));
+    return Promise.resolve(data);
+  }
   const data: OrderTrendItem[] = DAYS_7.map((date, i) => ({
     date,
-    orderCount: [120, 132, 101, 134, 90, 230, 210][i]!,
-    amount: [8200, 9320, 7010, 9340, 6900, 15300, 14200][i]!,
+    orderCount: ORDER_COUNTS_7[i]!,
+    amount: AMOUNTS_7[i]!,
   }));
   return Promise.resolve(data);
 }
@@ -39,7 +54,7 @@ export function getCategoryApi() {
 export function getRefundRateApi() {
   const data: RefundItem[] = DAYS_7.map((date, i) => ({
     date,
-    refundRate: [2.1, 2.3, 2.0, 2.8, 8.1, 2.5, 2.2][i]!,
+    refundRate: REFUND_RATES_7[i]!,
   }));
   return Promise.resolve(data);
 }
